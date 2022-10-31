@@ -1,0 +1,21 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Tue Oct 11 19:51:32 2022
+# Process ID: 14732
+# Current directory: D:/Projects/Vivado_Projects/5-3-Clock
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent16872 D:\Projects\Vivado_Projects\5-3-Clock\5-3-Clock.xpr
+# Log file: D:/Projects/Vivado_Projects/5-3-Clock/vivado.log
+# Journal file: D:/Projects/Vivado_Projects/5-3-Clock\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Projects/Vivado_Projects/5-3-Clock/5-3-Clock.xpr
+reset_run synth_1
+update_compile_order -fileset sources_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+open_run synth_1 -name synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_run impl_1

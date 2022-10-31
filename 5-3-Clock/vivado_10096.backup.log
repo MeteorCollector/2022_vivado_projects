@@ -1,0 +1,44 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Tue Oct 11 11:13:20 2022
+# Process ID: 10096
+# Current directory: D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/5-3-Clock
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent7244 D:\NJU诸项\2022.3\数电实验\211240036 邵钰乾 第五次实验\5-3-Clock\5-3-Clock.xpr
+# Log file: D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/5-3-Clock/vivado.log
+# Journal file: D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/5-3-Clock\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project {D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/5-3-Clock/5-3-Clock.xpr}
+INFO: [Project 1-313] Project file moved from 'D:/Projects/Vivado_Projects/5-3-Clock' since last save.
+WARNING: [filemgmt 56-2] Default IP Output Path : Could not find the directory 'D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/5-3-Clock/5-3-Clock.gen/sources_1', nor could it be found using path 'D:/Projects/Vivado_Projects/5-3-Clock/5-3-Clock.gen/sources_1'.
+WARNING: [Project 1-312] File not found as 'D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/2-STUID/2-STUID.srcs/sources_1/new/STUID.v'; using path 'D:/Projects/Vivado_Projects/2-STUID/2-STUID.srcs/sources_1/new/STUID.v' instead.
+Scanning sources...
+Finished scanning sources
+WARNING: [Project 1-312] File not found as 'D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/2-STUID/2-STUID.srcs/sources_1/new/STUID.v'; using path 'D:/Projects/Vivado_Projects/2-STUID/2-STUID.srcs/sources_1/new/STUID.v' instead.
+WARNING: [Project 1-312] File not found as 'D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/2-STUID/2-STUID.srcs/sources_1/new/STUID.v'; using path 'D:/Projects/Vivado_Projects/2-STUID/2-STUID.srcs/sources_1/new/STUID.v' instead.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
+open_project: Time (s): cpu = 00:01:18 ; elapsed = 00:00:48 . Memory (MB): peak = 1071.242 ; gain = 0.000
+update_compile_order -fileset sources_1
+open_hw_manager
+open_hw_manager: Time (s): cpu = 00:00:21 ; elapsed = 00:00:06 . Memory (MB): peak = 1071.242 ; gain = 0.000
+close_hw_manager
+set_property is_enabled true [get_files  D:/Projects/Vivado_Projects/2-STUID/2-STUID.srcs/sources_1/new/STUID.v]
+update_compile_order -fileset sources_1
+set_property is_enabled false [get_files  D:/Projects/Vivado_Projects/2-STUID/2-STUID.srcs/sources_1/new/STUID.v]
+close [ open {D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/5-3-Clock/5-3-Clock.srcs/sources_1/new/real_digital_clk.v} w ]
+add_files {{D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/5-3-Clock/5-3-Clock.srcs/sources_1/new/real_digital_clk.v}}
+update_compile_order -fileset sources_1
+set_property is_enabled false [get_files  {{D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/5-3-Clock/5-3-Clock.srcs/sources_1/new/digitalclk.v}}]
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+reset_run synth_1
+update_compile_order -fileset sources_1
+launch_runs synth_1 -jobs 4
+[Tue Oct 11 19:45:49 2022] Launched synth_1...
+Run output will be captured here: D:/NJU诸项/2022.3/数电实验/211240036 邵钰乾 第五次实验/5-3-Clock/5-3-Clock.runs/synth_1/runme.log
+exit
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 11 19:49:11 2022...
