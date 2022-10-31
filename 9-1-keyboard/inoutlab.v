@@ -44,6 +44,7 @@ reg [7:0] key_currentdata;
 reg ignore_next;   //忽略扫描码
 reg pressing;    //键按下标志位
 reg endflag;
+reg reset;
 
 reg Is_Caps;
 reg Is_Num;
@@ -65,7 +66,7 @@ PS2Receiver kbscancode (
 );
 
 //扫描码识别处理流程
-always @(posedge PS2_CLK) begin
+always @(posedge PS2_CLK, posedge BTNC) begin
     //pressing = ready && (key_data != 8'H00) && (key_data != 8'HF0);
     //ignore_next = (~pressing) || (ready && (key_data == key_currentdata) && (key_data != 8'HF0));
     if (BTNC) begin
@@ -73,36 +74,56 @@ always @(posedge PS2_CLK) begin
         key_currentdata = 8'H00;
         key_count = 8'H00;
         pressing = 1'b0;
+        ignore_next = 1'b0;
+        
+        seg7_data[3:0] = key_count == 8'H00 ? 8'H00 : key_ascii[3:0];
+        seg7_data[7:4] = key_count == 8'H00 ? 8'H00 : key_ascii[7:4];
+        seg7_data[11:8] = key_currentdata[3:0];
+        seg7_data[15:12] = key_currentdata[7:4];
+        seg7_data[19:16] = key_prevdata[3:0];
+        seg7_data[23:20] = key_prevdata[7:4];
+        seg7_data[27:24] = key_count[3:0];
+        seg7_data[31:28] = key_count[7:4];
+        Is_Shift = (key_data == 8'H12 || key_data == 8'H59) && pressing;
+        Is_Num = key_data == 8'H77 && pressing;
+        Is_Ctrl = key_data == 8'H14 && pressing;
+        Is_Alt = key_data == 8'H11 && pressing;
+        Is_Caps = key_data == 8'H58 && pressing;
     end
-    if (ready) begin
-        if (ignore_next == 1'b0 && key_data != 8'HF0) begin
-            key_prevdata = key_currentdata;
-            key_currentdata = key_data;
-            key_count = key_count + 1;
-            //ignore_next = 1'b0;
-            pressing = 1'b1;
+    else begin
+        if (ready) begin
+            if (ignore_next == 1'b0 && key_data != 8'HF0) begin
+                key_prevdata = key_currentdata;
+                key_currentdata = key_data;
+                key_count = key_count + 1;
+                //ignore_next = 1'b0;
+                pressing = 1'b1;
+            end
+            if (ignore_next == 1'b1) begin ignore_next = 1'b0; end
+            if (key_data == 8'HF0) begin pressing = 1'b0; ignore_next = 1'b1; endflag = 1'b1; end
+            else if (key_data == key_currentdata) begin
+                if (endflag == 1'b1) begin ignore_next = 1'b0; endflag = 1'b0; end
+                else begin ignore_next = 1'b1; end
+            end
+        //else begin ignore_next = 1'b0; end
         end
-        if (ignore_next == 1'b1) begin ignore_next = 1'b0; end
-        if (key_data == 8'HF0) begin pressing = 1'b0; ignore_next = 1'b1; endflag = 1'b1; end
-        else if (key_data == key_currentdata) begin
-            if (endflag == 1'b1) begin ignore_next = 1'b0; endflag = 1'b0; end
-            else begin ignore_next = 1'b1; end
-        end
+        
+        seg7_data[3:0] = key_count == 8'H00 ? 8'H00 : key_ascii[3:0];
+        seg7_data[7:4] = key_count == 8'H00 ? 8'H00 : key_ascii[7:4];
+        seg7_data[11:8] = key_currentdata[3:0];
+        seg7_data[15:12] = key_currentdata[7:4];
+        seg7_data[19:16] = key_prevdata[3:0];
+        seg7_data[23:20] = key_prevdata[7:4];
+        seg7_data[27:24] = key_count[3:0];
+        seg7_data[31:28] = key_count[7:4];
+        Is_Shift = (key_data == 8'H12 || key_data == 8'H59) && pressing;
+        Is_Num = key_data == 8'H77 && pressing;
+        Is_Ctrl = key_data == 8'H14 && pressing;
+        Is_Alt = key_data == 8'H11 && pressing;
+        Is_Caps = key_data == 8'H58 && pressing;
         //else begin ignore_next = 1'b0; end
     end
-    seg7_data[3:0] = key_ascii[3:0];
-    seg7_data[7:4] = key_ascii[7:4];
-    seg7_data[11:8] = key_currentdata[3:0];
-    seg7_data[15:12] = key_currentdata[7:4];
-    seg7_data[19:16] = key_prevdata[3:0];
-    seg7_data[23:20] = key_prevdata[7:4];
-    seg7_data[27:24] = key_count[3:0];
-    seg7_data[31:28] = key_count[7:4];
-    Is_Shift = (key_data == 8'H12 || key_data == 8'H59);
-    Is_Num = key_data == 8'H77;
-    Is_Ctrl = key_data == 8'H14;
-    Is_Alt = key_data == 8'H11;
-    Is_Caps = key_data == 8'H58;
+    
 end
 
 scancode_to_ascii key_asc(key_currentdata,key_ascii);
