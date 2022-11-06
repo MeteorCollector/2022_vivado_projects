@@ -77,7 +77,7 @@ always @(posedge PS2_CLK, posedge BTNC) begin
         ignore_next = 1'b0;
         
         seg7_data[3:0] = key_count == 8'H00 ? 8'H00 : key_ascii[3:0];
-        seg7_data[7:4] = key_count == 8'H00 ? 8'H00 : key_ascii[7:4];
+        seg7_data[7:4] = key_count == 8'H00 ? 8'H00 : key_ascii[7:4];;
         seg7_data[11:8] = key_currentdata[3:0];
         seg7_data[15:12] = key_currentdata[7:4];
         seg7_data[19:16] = key_prevdata[3:0];
