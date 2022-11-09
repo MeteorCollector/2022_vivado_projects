@@ -23,7 +23,7 @@
 module vga_ctrl(
     input           pclk,
     input           reset,
-    input  [11:0]   vga_data,
+    input  [23:0]   vga_data, // 12 or 24?
     output [9:0]    h_addr,
     output [9:0]    v_addr,
     output          hsync,

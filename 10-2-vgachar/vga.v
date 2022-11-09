@@ -53,7 +53,7 @@ wire ready;
 reg endflag;
 wire [7:0] keydata;
 
-wire [7:0] hexbuf0, hexbuf1, hexbuf2, hexbuf3;
+//wire [7:0] hexbuf0, hexbuf1, hexbuf2, hexbuf3;
 
 reg [7:0] key_count;
 reg pressing;
@@ -92,7 +92,7 @@ reg  [4:0]  line_offset;
 reg  [6:0]  clear_point;
 
 // led
-reg [31:0] seg7_data;
+wire [31:0] seg7_data;
 
 seg7decimal sevenSeg (
 .x(seg7_data[31:0]),
@@ -105,22 +105,24 @@ seg7decimal sevenSeg (
 
 // keyboard part
 
-//ps2_keyboard mykey(clk_50m, KEY[0], PS2_CLK, PS2_DAT, keydata, ready, nextdata_n);
+ps2_keyboard mykey(clk_50m, BTNC, PS2_CLK, PS2_DATA, keydata, ready, nextdata_n, LED[6:4], LED[3]);
 
 //scancode_ram myram(clk_50m, current_key, key_ascii);// not implemented
 
-/*
-assign seg7_data [3:0] = current_key[3:0];
-assign seg7_data [7:4] = current_key[7:4];
+
+assign seg7_data [3:0] = key_currentdata[3:0];
+assign seg7_data [7:4] = key_currentdata[7:4];
 assign seg7_data [11:8] = key_ascii[3:0];
 assign seg7_data [15:12] = key_ascii[7:4];
 assign seg7_data [19:16] = key_count[3:0];
 assign seg7_data [23:20] = key_count[7:4];
-*/
-assign LED[15:9] = pressing ? 8'hff : 8'h00;
+assign seg7_data [27:24] = keydata[3:0];
+assign seg7_data [31:28] = keydata[7:4];
 
+assign LED[15:8] = ready ? 8'hff : 8'h00;
+assign LED[7] = BTNC;
 //
-
+/*
 PS2Receiver kbscancode (
 .clk(clk_50m),
 .kclk(PS2_CLK),
@@ -128,22 +130,22 @@ PS2Receiver kbscancode (
 .keycodeout(keydata),
 .ready(ready)
 );
-
+*/
 always @(posedge(clk_50m))begin
     clk_25m <= ~clk_25m;
 end
 
-/*
+
 always @(posedge clk_50m)
 begin
-    //if(ready == 1'b1 && nextdata_n == 1'b1)
-    if(ready == 1'b1)
+    if(ready == 1'b1 && nextdata_n == 1'b1)
+    //if(ready == 1'b1)
     begin
         if(keydata == 8'hF0)
         begin
             ignore_next <= 1'b1;
             pressing <= 1'b0;
-            current_key <= 8'b0;
+            key_currentdata <= 8'b0;
         end
         else if (keydata == 8'hE0) // special key
         begin
@@ -156,101 +158,89 @@ begin
         else // normal key
         begin
             pressing <= 1'b1;
-            //new_key <= 1'b1;
-            if (keydata != current_key) // not continous
+            new_key <= 1'b1;
+            if (keydata != key_currentdata) // not continous
             begin
                 key_count <= key_count + 8'd1;
-                current_key <= keydata;
+                key_currentdata <= keydata;
             end
         end
-        //nextdata_n <= 1'b0;
+        nextdata_n <= 1'b0;
     end
-    //else begin nextdata_n <= 1'b1; new_key <= 1'b0; end
-    if (BTNC == 1'b0) // reset
+    else begin nextdata_n <= 1'b1; new_key <= 1'b0; end
+    if (BTNC == 1'b1) // reset, flipped from negative trigger /////////////////////////////
     begin
         key_count <= 8'h0;
-        current_key <= 8'h0;
+        key_currentdata <= 8'h0;
         pressing <= 1'b0;
         ignore_next <= 1'b0;
-        //new_key <= 1'b0;
+        new_key <= 1'b0;
     end
 end
-*/
 
-always @(posedge PS2_CLK, posedge BTNC) begin
+/*
+always @(posedge clk_50m) begin
     //pressing = ready && (key_data != 8'H00) && (key_data != 8'HF0);
     //ignore_next = (~pressing) || (ready && (key_data == key_currentdata) && (key_data != 8'HF0));
     if (BTNC) begin
-        key_prevdata = 8'H00;
-        key_currentdata = 8'H00;
-        key_count = 8'H00;
-        pressing = 1'b0;
-        ignore_next = 1'b0;
-        new_key = 1'b0;
+        key_prevdata <= 8'H00;
+        key_currentdata <= 8'H00;
+        key_count <= 8'H00;
+        pressing <= 1'b0;
+        ignore_next <= 1'b0;
+        new_key <= 1'b0;
         
-        seg7_data[3:0] = key_count == 8'H00 ? 8'H00 : key_ascii[3:0];
-        seg7_data[7:4] = key_count == 8'H00 ? 8'H00 : key_ascii[7:4];
-        seg7_data[11:8] = key_currentdata[3:0];
-        seg7_data[15:12] = key_currentdata[7:4];
-        seg7_data[19:16] = key_prevdata[3:0];
-        seg7_data[23:20] = key_prevdata[7:4];
-        seg7_data[27:24] = key_count[3:0];
-        seg7_data[31:28] = key_count[7:4];
-        /*
-        Is_Shift = (keydata == 8'H12 || keydata == 8'H59) && pressing;
-        Is_Num = keydata == 8'H77 && pressing;
-        Is_Ctrl = keydata == 8'H14 && pressing;
-        Is_Alt = keydata == 8'H11 && pressing;
-        Is_Caps = keydata == 8'H58 && pressing;
-        */
+        seg7_data[3:0] <= key_count == 8'H00 ? 8'H00 : key_ascii[3:0];
+        seg7_data[7:4] <= key_count == 8'H00 ? 8'H00 : key_ascii[7:4];
+        seg7_data[11:8] <= key_currentdata[3:0];
+        seg7_data[15:12] <= key_currentdata[7:4];
+        seg7_data[19:16] <= key_prevdata[3:0];
+        seg7_data[23:20] <= key_prevdata[7:4];
+        seg7_data[27:24] <= key_count[3:0];
+        seg7_data[31:28] <= key_count[7:4];
+
     end
     else begin
         if (ready) begin
             if (ignore_next == 1'b0 && keydata != 8'HF0) begin
-                key_prevdata = key_currentdata;
-                key_currentdata = keydata;
-                key_count = key_count + 1;
-                new_key = 1'b1;
+                key_prevdata <= key_currentdata;
+                key_currentdata <= keydata;
+                key_count <= key_count + 1;
+                new_key <= 1'b1;
                 //ignore_next = 1'b0;
-                pressing = 1'b1;
+                pressing <= 1'b1;
             end
-            if (ignore_next == 1'b1) begin ignore_next = 1'b0; end
-            if (keydata == 8'HF0) begin pressing = 1'b0; ignore_next = 1'b1; endflag = 1'b1; end
+            if (ignore_next == 1'b1) begin ignore_next <= 1'b0; end
+            if (keydata == 8'HF0) begin pressing <= 1'b0; ignore_next <= 1'b1; endflag <= 1'b1; end
             else begin
-                new_key = 1'b0;
+                new_key <= 1'b0;
                 if (keydata == key_currentdata) begin
-                    if (endflag == 1'b1) begin ignore_next = 1'b0; endflag = 1'b0; end
-                    else begin ignore_next = 1'b1; end
+                    if (endflag == 1'b1) begin ignore_next <= 1'b0; endflag <= 1'b0; end
+                    else begin ignore_next <= 1'b1; end
                 end
             end
         //else begin ignore_next = 1'b0; end
         end
         
-        seg7_data[3:0] = key_count == 8'H00 ? 8'H00 : key_ascii[3:0];
-        seg7_data[7:4] = key_count == 8'H00 ? 8'H00 : key_ascii[7:4];
-        seg7_data[11:8] = key_currentdata[3:0];
-        seg7_data[15:12] = key_currentdata[7:4];
-        seg7_data[19:16] = key_prevdata[3:0];
-        seg7_data[23:20] = key_prevdata[7:4];
-        seg7_data[27:24] = key_count[3:0];
-        seg7_data[31:28] = key_count[7:4];
-        /*
-        Is_Shift = (key_data == 8'H12 || key_data == 8'H59) && pressing;
-        Is_Num = key_data == 8'H77 && pressing;
-        Is_Ctrl = key_data == 8'H14 && pressing;
-        Is_Alt = key_data == 8'H11 && pressing;
-        Is_Caps = key_data == 8'H58 && pressing;
-        */
+        seg7_data[3:0] <= key_count == 8'H00 ? 8'H00 : key_ascii[3:0];
+        seg7_data[7:4] <= key_count == 8'H00 ? 8'H00 : key_ascii[7:4];
+        seg7_data[11:8] <= key_currentdata[3:0];
+        seg7_data[15:12] <= key_currentdata[7:4];
+        seg7_data[19:16] <= key_prevdata[3:0];
+        seg7_data[23:20] <= key_prevdata[7:4];
+        seg7_data[27:24] <= key_count[3:0];
+        seg7_data[31:28] <= key_count[7:4];
+
         //else begin ignore_next = 1'b0; end
     end
     
 end
-
+*/
 scancode_to_ascii key_asc(key_currentdata, key_ascii);
 
 always @(posedge clk_50m)
 begin
-    if (BTNC == 1'b0) // reset
+    if (BTNC == 1'b1) // reset ////////////////////////////////////////
     begin
         h_cur <= 7'h0;
         v_cur <= 6'h0;
@@ -344,10 +334,10 @@ clk_wiz_1 my50m_clk(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(
 //assign LED=16'h0;
 
 
-vga_ctrl my_vga(clk_25m, SW[0], vga_data, h_addr, v_addr, VGA_HS, VGA_VS, valid, VGA_R, VGA_G, VGA_B, h_char, v_char, h_font, v_font);
+vga_ctrl my_vga(clk_25m, SW[0], vga_data, h_addr, v_addr, VGA_HS, VGA_VS, ~valid, VGA_R, VGA_G, VGA_B, h_char, v_char, h_font, v_font);
 //vga_ram myram(.addra({h_addr,v_addr[8:0]}),.clka(clk),.ena(1'b1),.wea(1'b0),.dina(12'd0),.douta(vga_data));
 assign VGA_SYNC_N = 1'b0;
-vga_ascii ascii(clk_50m, SW[0], valid, vga_data, m_char, h_font, v_font, cursor);
+vga_ascii ascii(clk_50m, SW[0], ~valid, vga_data, m_char, h_font, v_font, cursor);
 char_buf mybuf(char_addr, ~clk_50m, char_buf_data, clk_25m, char_out);
 
 assign char_addr = (clk_25m) ? char_wr_addr : char_rd_addr;
