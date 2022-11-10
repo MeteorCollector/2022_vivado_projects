@@ -20,14 +20,15 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module scancode_to_ascii(addr,outdata);
+module scancode_to_ascii(addr,outdata,capslock);
 input [7:0] addr;
-output  [7:0] outdata;
+input capslock;
+output [7:0] outdata;
 reg [7:0] kbscantoasc[255:0];
 initial
 begin
     $readmemh("D:/Projects/Vivado_Projects/10-2-vgachar/scancode.txt", kbscantoasc, 0, 255);
 end
-assign   outdata = kbscantoasc[addr];
+assign   outdata = (capslock && kbscantoasc[addr] > 8'H60) ? kbscantoasc[addr] - 8'H20 : kbscantoasc[addr];
 
 endmodule

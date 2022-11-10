@@ -37,9 +37,17 @@ module vga(
     output  VGA_VS
     );
     
-    
+/* flags */
+
+reg capslock;
+
+
+
+//////////////
 wire clk;
 wire clk_1m;
+reg [26:0] tick;
+reg clk_1s;
 reg clk_25m = 1'b0;
 wire clk_50m;
 //wire [11:0] vga_data;
@@ -119,7 +127,7 @@ assign seg7_data [23:20] = key_count[7:4];
 assign seg7_data [27:24] = char_buf_data[3:0];
 assign seg7_data [31:28] = char_buf_data[7:4];
 
-assign LED[15:8] = ready ? 8'hff : 8'h00;
+assign LED[15] = capslock;
 assign LED[7] = BTNC;
 assign LED[1] = in_state == 2'd1;
 assign LED[2] = new_key;
@@ -140,6 +148,8 @@ end
 
 always @(posedge clk_50m)
 begin
+    if (tick >= 27'd30000000) begin clk_1s <= ~clk_1s; tick <= 27'd0; end
+    else begin tick <= tick + 1'b1; end
     if(ready == 1'b1 && nextdata_n == 1'b1)
     //if(ready == 1'b1)
     begin
@@ -238,7 +248,7 @@ always @(posedge clk_50m) begin
     
 end
 */
-scancode_to_ascii key_asc(key_currentdata, key_ascii);
+scancode_to_ascii key_asc(key_currentdata, key_ascii, capslock);
 
 
 always @(posedge clk_50m)
@@ -271,7 +281,16 @@ begin
             2'd1: begin
                 in_state <= 2'd3;
                 //in_state <= 2'd0;
-                if (key_currentdata == 8'h66) // backspace
+                if (key_currentdata == 8'h0d) begin end // tab
+                else if (key_currentdata == 8'h58) 
+                begin 
+                    capslock <= ~capslock;
+                end // caps
+                else if (key_currentdata == 8'h12) begin end // shift
+                else if (key_currentdata == 8'h14) begin end // ctrl
+                else if (key_currentdata == 8'h11) begin end // alt
+                else if (key_currentdata == 8'h77) begin end // numlock
+                else if (key_currentdata == 8'h66) // backspace
                 begin
                     char_buf_data <= 8'h00;
                     char_wr <= 1'b1;
@@ -287,8 +306,8 @@ begin
                         begin
                             h_cur <= line_end[v_cur - 5'd1 + line_offset]; // h_cur set to last end of line
                             v_cur <= v_cur - 5'd1; // v_cur decreases by 1
-                            char_wr_addr <= { h_cur, (v_cur - 5'd1 + line_offset)}; // {69, v_cur}
-                            //char_wr_addr <= {7'd69, (v_cur - 5'd1 + line_offset)}; // {69, v_cur}
+                            //char_wr_addr <= { line_end[v_cur - 5'd1 + line_offset], (v_cur - 5'd1 + line_offset)}; // {69, v_cur}
+                            char_wr_addr <= {7'd69, (v_cur - 5'd1 + line_offset)}; // {69, v_cur}
                         end
                     end
                     else
@@ -428,7 +447,7 @@ clk_wiz_1 my50m_clk(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(
 vga_ctrl my_vga(clk_25m, SW[0], vga_data, h_addr, v_addr, VGA_HS, VGA_VS, valid, VGA_R, VGA_G, VGA_B, h_char, v_char, h_font, v_font);
 //vga_ram myram(.addra({h_addr,v_addr[8:0]}),.clka(clk),.ena(1'b1),.wea(1'b0),.dina(12'd0),.douta(vga_data));
 assign VGA_SYNC_N = 1'b0;
-vga_ascii ascii(clk_50m, SW[0], valid, vga_data, m_char, h_font, v_font, cursor);// checkout if valid is flipped
+vga_ascii ascii(clk_50m, SW[0], valid, vga_data, m_char, h_font, v_font, cursor, clk_1s);// checkout if valid is flipped
 char_buf mybuf(.addra(char_addr),.clka(~clk_50m),.ena(1'b1),.dina(char_buf_data),.wea(char_wr),.douta(char_out));// should clk flip? wea = 1, write; otherwise read
 
 assign char_addr = (char_wr) ? char_wr_addr : char_rd_addr;

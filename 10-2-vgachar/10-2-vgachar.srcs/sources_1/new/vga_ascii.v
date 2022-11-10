@@ -28,7 +28,8 @@ module vga_ascii(
     input [7:0] char,
     input [3:0] h_font,
     input [3:0] v_font,
-    input cursor
+    input cursor,
+    input clk_1s
     );
     reg [11:0] myfont[4095:0];
     wire [11:0] line;
@@ -45,7 +46,7 @@ module vga_ascii(
     assign frontcolor = 24'hFFFFFF;
     assign backcolor = 24'h000000;
     
-    assign out_data = (line[h_font] == 1'b1 | cursorline) ? frontcolor : backcolor;
+    assign out_data = (line[h_font] == 1'b1 | (cursorline & clk_1s)) ? frontcolor : backcolor;
     assign line = myfont[{char, v_font}];
     
     assign cursorline = cursor & (h_font == 4'd0);
