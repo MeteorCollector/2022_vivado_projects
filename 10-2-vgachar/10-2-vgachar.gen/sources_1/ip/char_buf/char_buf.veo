@@ -58,9 +58,9 @@ char_buf your_instance_name (
   .clka(clka),    // input wire clka
   .ena(ena),      // input wire ena
   .wea(wea),      // input wire [0 : 0] wea
-  .addra(addra),  // input wire [18 : 0] addra
-  .dina(dina),    // input wire [11 : 0] dina
-  .douta(douta)  // output wire [11 : 0] douta
+  .addra(addra),  // input wire [12 : 0] addra
+  .dina(dina),    // input wire [7 : 0] dina
+  .douta(douta)  // output wire [7 : 0] douta
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 

@@ -1,7 +1,7 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Sat Nov  5 22:28:41 2022
+// Date        : Thu Nov 10 20:47:14 2022
 // Host        : MSI running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               d:/Projects/Vivado_Projects/10-2-vgachar/10-2-vgachar.gen/sources_1/ip/char_buf/char_buf_stub.v
@@ -15,11 +15,11 @@
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
 (* x_core_info = "blk_mem_gen_v8_4_4,Vivado 2020.2" *)
 module char_buf(clka, ena, wea, addra, dina, douta)
-/* synthesis syn_black_box black_box_pad_pin="clka,ena,wea[0:0],addra[18:0],dina[11:0],douta[11:0]" */;
+/* synthesis syn_black_box black_box_pad_pin="clka,ena,wea[0:0],addra[12:0],dina[7:0],douta[7:0]" */;
   input clka;
   input ena;
   input [0:0]wea;
-  input [18:0]addra;
-  input [11:0]dina;
-  output [11:0]douta;
+  input [12:0]addra;
+  input [7:0]dina;
+  output [7:0]douta;
 endmodule

@@ -116,8 +116,8 @@ assign seg7_data [11:8] = key_ascii[3:0];
 assign seg7_data [15:12] = key_ascii[7:4];
 assign seg7_data [19:16] = key_count[3:0];
 assign seg7_data [23:20] = key_count[7:4];
-assign seg7_data [27:24] = {2'b0, in_state[1:0]};
-assign seg7_data [31:28] = new_key == 1'b1 ? 4'hf : 4'h0;
+assign seg7_data [27:24] = char_buf_data[3:0];
+assign seg7_data [31:28] = char_buf_data[7:4];
 
 assign LED[15:8] = ready ? 8'hff : 8'h00;
 assign LED[7] = BTNC;
@@ -258,7 +258,7 @@ begin
         case (new_key) // original: in_state
             2'd0: begin // state 0: wait for new key
                 //if (new_key == 1'b1) in_state <= 2'd1;
-                char_wr <= 1'b0 | ~clk_25m;
+                char_wr <= 1'b0;// | ~clk_25m;
                 if (~char_wr)
                 begin
                     char_buf_data <= 8'h00; // clean the unused lines
@@ -429,9 +429,9 @@ vga_ctrl my_vga(clk_25m, SW[0], vga_data, h_addr, v_addr, VGA_HS, VGA_VS, valid,
 //vga_ram myram(.addra({h_addr,v_addr[8:0]}),.clka(clk),.ena(1'b1),.wea(1'b0),.dina(12'd0),.douta(vga_data));
 assign VGA_SYNC_N = 1'b0;
 vga_ascii ascii(clk_50m, SW[0], valid, vga_data, m_char, h_font, v_font, cursor);// checkout if valid is flipped
-char_buf mybuf(char_addr, ~clk_50m, char_buf_data, clk_25m, char_out);
+char_buf mybuf(.addra(char_addr),.clka(~clk_50m),.ena(1'b1),.dina(char_buf_data),.wea(char_wr),.douta(char_out));// should clk flip? wea = 1, write; otherwise read
 
-assign char_addr = (clk_25m) ? char_wr_addr : char_rd_addr;
+assign char_addr = (char_wr) ? char_wr_addr : char_rd_addr;
 assign char_rd_addr = {h_char, (v_char + line_offset)};
 
 assign cursor = (h_char == h_cur) & (v_char == v_cur);// & clk_cur;
