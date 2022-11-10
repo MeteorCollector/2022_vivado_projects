@@ -116,11 +116,13 @@ assign seg7_data [11:8] = key_ascii[3:0];
 assign seg7_data [15:12] = key_ascii[7:4];
 assign seg7_data [19:16] = key_count[3:0];
 assign seg7_data [23:20] = key_count[7:4];
-assign seg7_data [27:24] = keydata[3:0];
-assign seg7_data [31:28] = keydata[7:4];
+assign seg7_data [27:24] = {2'b0, in_state[1:0]};
+assign seg7_data [31:28] = new_key == 1'b1 ? 4'hf : 4'h0;
 
 assign LED[15:8] = ready ? 8'hff : 8'h00;
 assign LED[7] = BTNC;
+assign LED[1] = in_state == 2'd1;
+assign LED[2] = new_key;
 //
 /*
 PS2Receiver kbscancode (
@@ -145,7 +147,7 @@ begin
         begin
             ignore_next <= 1'b1;
             pressing <= 1'b0;
-            key_currentdata <= 8'b0;
+            //key_currentdata <= 8'b0;
         end
         else if (keydata == 8'hE0) // special key
         begin
@@ -238,6 +240,95 @@ end
 */
 scancode_to_ascii key_asc(key_currentdata, key_ascii);
 
+
+always @(posedge clk_50m)
+begin
+    if (BTNC == 1'b1) // reset ////////////////////////////////////////
+    begin
+        h_cur <= 7'h0;
+        v_cur <= 6'h0;
+        in_state <= 2'd0;
+        line_offset <= 5'd0;
+        clear_point = 7'd0;
+        char_buf_data <= 8'h00;
+        char_wr_addr <= {clear_point, 5'd31};
+    end
+    else
+    begin
+        case (new_key) // original: in_state
+            2'd0: begin // state 0: wait for new key
+                //if (new_key == 1'b1) in_state <= 2'd1;
+                char_wr <= 1'b0 | ~clk_25m;
+                if (~char_wr)
+                begin
+                    char_buf_data <= 8'h00; // clean the unused lines
+                    clear_point <= clear_point + 1'd1;
+                    char_wr_addr <= {clear_point, (5'd30 + line_offset)}; // after line 30, no more lines.
+                    //char_wr_addr <= {clear_point, (5'd31 + line_offset)}; // after line 30, no more lines.
+                    line_end[5'd31 + line_offset] = 7'd0; // line_end array records the length of each line.
+                end
+            end
+            2'd1: begin
+                in_state <= 2'd3;
+                //in_state <= 2'd0;
+                if (key_currentdata == 8'h66) // backspace
+                begin
+                    char_buf_data <= 8'h00;
+                    char_wr <= 1'b1;
+                    if (h_cur == 7'd0) // first column
+                    begin
+                        if (v_cur == 5'd0) // first line
+                        begin
+                            h_cur <= 7'd0; // nothing happens, align to (0, 0)
+                            v_cur <= 5'd0;
+                            char_wr_addr <= 12'd0 + {7'd0, line_offset}; // {0, v_cur}
+                        end
+                        else
+                        begin
+                            h_cur <= line_end[v_cur - 5'd1 + line_offset]; // h_cur set to last end of line
+                            v_cur <= v_cur - 5'd1; // v_cur decreases by 1
+                            char_wr_addr <= { h_cur, (v_cur - 5'd1 + line_offset)}; // {69, v_cur}
+                            //char_wr_addr <= {7'd69, (v_cur - 5'd1 + line_offset)}; // {69, v_cur}
+                        end
+                    end
+                    else
+                    begin
+                        char_wr_addr <= { (h_cur - 7'd1), v_cur + line_offset }; // only h_cur decreases by 1
+                        h_cur <= h_cur - 7'd1;
+                    end
+                end
+                else if (key_currentdata == 8'h5A) // enter
+                begin
+                    if (v_cur == 5'd29) // has reached the bottom of screen vertically
+                        line_offset <= line_offset + 1'd1; // roll screen
+                    else
+                        v_cur <= v_cur + 5'd1; // new line
+                    line_end[v_cur + line_offset] <= h_cur; // this line has been fixed
+                    h_cur <= 7'd0; // new line begins
+                end
+                else // normal situation
+                begin
+                   char_buf_data <= key_ascii;
+                   char_wr_addr <= {h_cur, (v_cur + line_offset)};
+                   char_wr <= 1'b1;
+                   h_cur <= h_cur + 7'd1;
+                   // after the insertion of this char, judge the situation
+                   if (h_cur >= 7'd69) // new line
+                   begin
+                        if (v_cur == 5'd29) // line full
+                            line_offset <= line_offset + 1'd1; // roll screen
+                        else
+                            v_cur <= v_cur + 5'd1; // new line
+                        line_end[v_cur + line_offset] <= h_cur; // record the end of last line
+                        h_cur <= 7'd0; // new line starts
+                   end
+                end
+            end
+        endcase
+        m_char <= char_out; // always lock the readings
+    end
+end
+/*
 always @(posedge clk_50m)
 begin
     if (BTNC == 1'b1) // reset ////////////////////////////////////////
@@ -253,7 +344,7 @@ begin
     else
     begin
         case (in_state)
-            2'd0: begin
+            2'd0: begin // state 0: wait for new key
                 if (new_key == 1'b1) in_state <= 2'd3;
                 char_wr <= 1'b0 | ~clk_25m;
                 if (~char_wr)
@@ -287,7 +378,7 @@ begin
                     end
                     else
                     begin
-                        char_wr_addr <= { (h_cur-7'd1), v_cur + line_offset };
+                        char_wr_addr <= { (h_cur - 7'd1), v_cur + line_offset };
                         h_cur <= h_cur - 7'd1;
                     end
                 end
@@ -323,7 +414,7 @@ begin
         m_char <= char_out; // always lock the readings
     end
 end
-
+*/
 //clkgen #(1000000) my1m_clk(CLK100MHZ,SW[0],1'b1,clk_1m);
 //clkgen #(25000000) my25m_clk(CLK100MHZ,SW[0],1'b1,clk_25m);
 assign clk=CLK100MHZ;
@@ -334,15 +425,15 @@ clk_wiz_1 my50m_clk(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(
 //assign LED=16'h0;
 
 
-vga_ctrl my_vga(clk_25m, SW[0], vga_data, h_addr, v_addr, VGA_HS, VGA_VS, ~valid, VGA_R, VGA_G, VGA_B, h_char, v_char, h_font, v_font);
+vga_ctrl my_vga(clk_25m, SW[0], vga_data, h_addr, v_addr, VGA_HS, VGA_VS, valid, VGA_R, VGA_G, VGA_B, h_char, v_char, h_font, v_font);
 //vga_ram myram(.addra({h_addr,v_addr[8:0]}),.clka(clk),.ena(1'b1),.wea(1'b0),.dina(12'd0),.douta(vga_data));
 assign VGA_SYNC_N = 1'b0;
-vga_ascii ascii(clk_50m, SW[0], ~valid, vga_data, m_char, h_font, v_font, cursor);
+vga_ascii ascii(clk_50m, SW[0], valid, vga_data, m_char, h_font, v_font, cursor);// checkout if valid is flipped
 char_buf mybuf(char_addr, ~clk_50m, char_buf_data, clk_25m, char_out);
 
 assign char_addr = (clk_25m) ? char_wr_addr : char_rd_addr;
 assign char_rd_addr = {h_char, (v_char + line_offset)};
 
-assign cursor = (h_char == h_cur) & (v_char == v_cur) & clk_cur;
+assign cursor = (h_char == h_cur) & (v_char == v_cur);// & clk_cur;
 
 endmodule
