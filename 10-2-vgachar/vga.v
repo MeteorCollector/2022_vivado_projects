@@ -447,7 +447,7 @@ clk_wiz_1 my50m_clk(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(
 vga_ctrl my_vga(clk_25m, SW[0], vga_data, h_addr, v_addr, VGA_HS, VGA_VS, valid, VGA_R, VGA_G, VGA_B, h_char, v_char, h_font, v_font);
 //vga_ram myram(.addra({h_addr,v_addr[8:0]}),.clka(clk),.ena(1'b1),.wea(1'b0),.dina(12'd0),.douta(vga_data));
 assign VGA_SYNC_N = 1'b0;
-vga_ascii ascii(clk_50m, SW[0], valid, vga_data, m_char, h_font, v_font, cursor, clk_1s);// checkout if valid is flipped
+vga_ascii ascii(clk_50m, SW[0], valid, vga_data, m_char, h_font, v_font, cursor, clk_1s, SW[1], h_char, v_char);// checkout if valid is flipped
 char_buf mybuf(.addra(char_addr),.clka(~clk_50m),.ena(1'b1),.dina(char_buf_data),.wea(char_wr),.douta(char_out));// should clk flip? wea = 1, write; otherwise read
 
 assign char_addr = (char_wr) ? char_wr_addr : char_rd_addr;

@@ -51,7 +51,7 @@ begin
     endcase
 end
 
-Adder32 addr(adderout,OF,SF,zftmp,CF,cout,x,y,SUBctr,1'b0);
+ADDER_32 addr(adderout,OF,SF,zftmp,CF,cout,x,y,SUBctr);
 
 assign ZF = (f == 32'h00000000);
 assign sig = SIGctr==1'b1 ? OF^SF : CF;

@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sun Dec  4 19:40:50 2022
+# Process ID: 21956
+# Current directory: D:/Projects/Vivado_Projects/4-3-register-file
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18084 D:\Projects\Vivado_Projects\4-3-register-file\4-3-register-file.xpr
+# Log file: D:/Projects/Vivado_Projects/4-3-register-file/vivado.log
+# Journal file: D:/Projects/Vivado_Projects/4-3-register-file\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Projects/Vivado_Projects/4-3-register-file/4-3-register-file.xpr
+update_compile_order -fileset sources_1

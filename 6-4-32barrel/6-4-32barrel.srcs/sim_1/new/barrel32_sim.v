@@ -23,7 +23,7 @@
 module barrelsft8_tst();
 wire [31:0] dout;
 reg [31:0] din;
-reg [2:0] shamt; //移动位数
+reg [4:0] shamt; //移动位数
 reg LR; // LR=1时右移， LR=0时左移
 reg AL; // AL=1时算术右移， AR=0时逻辑右移
 barrelsft32 barrelsft32_inst(dout,din,shamt,LR,AL);
@@ -32,14 +32,20 @@ initial begin
 #20 shamt=3'b011;
 #20 shamt=3'b101;
 #20 shamt=3'b111;
+#20 shamt=4'b1000;
+#20 shamt=5'b10000;
 #20 begin LR=0; AL=0; shamt=3'b1;end
 #20 shamt=3'b010;
 #20 shamt=3'b100;
 #20 shamt=3'b111;
+#20 shamt=4'b1000;
+#20 shamt=5'b10000;
 #20 begin LR=0; AL=1; shamt=3'b1;end
 #20 shamt=3'b010;
 #20 shamt=3'b100;
 #20 shamt=3'b111;
+#20 shamt=4'b1000;
+#20 shamt=5'b10000;
 #20 $stop;
 end
 endmodule
