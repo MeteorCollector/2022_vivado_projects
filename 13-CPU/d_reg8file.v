@@ -49,7 +49,12 @@ initial begin regs[0] = 32'h00000000; end
 always@(posedge clk)
 begin
     case({we})
-     1'b1: begin if (rw != 5'b00000) begin regs[rw] = busw; $display("wrote %h to register %h", busw, rw); end end // $0 always 0.
+     1'b1: begin if (rw != 5'b00000) 
+                 begin 
+                    regs[rw] = busw; 
+                    //$display("wrote %h to register %h", busw, rw); 
+                 end 
+           end // $0 always 0.
      1'b0: begin end
     endcase
 end
