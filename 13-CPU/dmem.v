@@ -29,12 +29,20 @@ module mymem( // without ip
     input [15:0] addrb, // rdclk
     input clkb,
     output [31:0] doutb,
-    input enb
+    input enb,
+    
+    output [31:0] m0,
+    output [31:0] m1,
+    output [31:0] m2
 );
 
 reg [31:0] ram [32767:0];
 reg [31:0] outtmp;
 wire [31:0] intmp;
+
+assign m0 = ram[0];
+assign m1 = ram[5'b11110];
+assign m2 = ram[5'b11111];
 
 assign doutb = outtmp;
 
@@ -45,19 +53,21 @@ assign intmp[31:24] = wea[3] ? dina[31:24] : outtmp[31:24];
 
 always @(posedge clkb)
 begin
-    if (wea) begin outtmp <= ram[addra]; end
+    if (ena) begin outtmp <= ram[addra]; end
     else begin outtmp <= ram[addrb]; end
 end
 
 always @(posedge clka)
 begin
-    if (wea) begin ram[addrb] <= intmp; end
+    if (ena) begin ram[addrb] <= intmp; end
 end
 
 endmodule
 
 
-module dmem(addr, dataout, datain, rdclk, wrclk, memop, we);
+
+
+module dmem(addr, dataout, datain, rdclk, wrclk, memop, we, m0, m1, m2);
 	input  [31:0] addr;
 	output reg [31:0] dataout;
 	input  [31:0] datain;
@@ -65,6 +75,10 @@ module dmem(addr, dataout, datain, rdclk, wrclk, memop, we);
 	input  wrclk;
 	input [2:0] memop;
 	input we;
+	
+	output [31:0] m0;
+	output [31:0] m1;
+	output [31:0] m2;
 	
 	wire [31:0] memin;
 	reg  [3:0] wmask;
@@ -80,6 +94,7 @@ assign memin = (memop[1:0]==2'b00)?{4{datain[7:0]}}:((memop[1:0]==2'b10)?datain:
 mymem memblk(
     .addra({2'b00, addr[15:2]}),.clka(wrclk),.dina(memin),.ena(we),.wea(wmask),
     .addrb({2'b00, addr[15:2]}),.clkb(rdclk),.doutb(dwordout),.enb(~we)
+    ,.m0(m0),.m1(m1),.m2(m2)
     );
 //wmask,addr[16:2]
 assign wordout = (addr[1]==1'b1)? dwordout[31:16]:dwordout[15:0];

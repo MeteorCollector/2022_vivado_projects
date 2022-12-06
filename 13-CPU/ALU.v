@@ -50,9 +50,9 @@ wire [31:0] ADD_b;
 always @(*)
 begin
     case(aluctr)
-        4'b0000: begin SUBctr = 1'b0;                                             OPctr = 3'b000; end
-        4'b0001: begin                               ALctr = 1'b0; SFTctr = 1'b0; OPctr = 3'b100; end
-        4'b0010: begin SUBctr = 1'b1; SIGctr = 1'b1;                              OPctr = 3'b110; end
+        4'b0000: begin SUBctr = 1'b0;                                             OPctr = 3'b000; end // add
+        4'b0001: begin                               ALctr = 1'b0; SFTctr = 1'b0; OPctr = 3'b100; end // shift
+        4'b0010: begin SUBctr = 1'b1; SIGctr = 1'b1;                              OPctr = 3'b110; end // 
         4'b0011: begin SUBctr = 1'b1; SIGctr = 1'b0;                              OPctr = 3'b110; end
         4'b0100: begin                                                            OPctr = 3'b011; end
         4'b0101: begin                               ALctr = 1'b0; SFTctr = 1'b1; OPctr = 3'b100; end

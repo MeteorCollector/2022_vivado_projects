@@ -19,16 +19,55 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 module PCreg(
+    input reset,
     input clk,
     input [31:0] NextPC,
     output reg [31:0] PC
 );
 
-always @(posedge clk) begin PC <= NextPC; end // '<=' or '=' ?
+initial begin PC = 32'h00000000; end
+
+always @(negedge clk) begin 
+    if (reset) begin PC <= 32'h00000000; end
+    else begin PC <= NextPC; end 
+end // '<=' or '=' ?
 endmodule
 
-module CPU(
-    input CLK100MHZ
+module rv32is(
+    input clock,
+    input reset,
+    output [31:0] imemaddr,
+    output [31:0] imemdataout,
+    output        imemclk,
+    output [31:0] dmemaddr,
+    output [31:0] dmemdataout,
+    output [31:0] dmemdatain,
+    output        dmemrdclk,
+    output        dmemwrclk,
+    output [2:0]  dmemop,
+    output        dmemwe,
+    output [31:0] dbgdata,
+    output [31:0] dbgresult,
+    output [31:0] dpc,
+    output [31:0] dnextpc,
+    
+    output [31:0] PCA,
+    output [31:0] PCB,
+    output [31:0] PCASRC,
+    output [31:0] PCBSRC,
+    
+    output [31:0] x1,
+    output [31:0] x2,
+    output [31:0] x3,
+    output [31:0] x4,
+    
+    output [31:0] imem0,
+    output [31:0] imem1,
+    output [31:0] imem2,
+    
+    output [31:0] dmem0,
+    output [31:0] dmem1,
+    output [31:0] dmem2
     );
 
 integer tick;
@@ -47,7 +86,7 @@ wire [3:0]  ALUctr;
 wire [2:0]  Branch;
 wire        MemtoReg;
 wire        MemWr;
-wire        MemOp;
+wire [2:0]  MemOp;
 wire        PCAsrc;
 wire        PCBsrc;
 
@@ -63,7 +102,7 @@ wire        Less;
 wire        Zero;
 wire [31:0] Result;
 
-assign clk = CLK100MHZ; // single step. to be mmodified in real application.
+assign clk = clock; // single step. to be mmodified in real application.
 assign rdclk = clk;
 assign wrclk = ~clk;
 
@@ -72,31 +111,58 @@ begin
     CLK50MHZ = 1'b0; CLK25MHZ = 1'b0;
 end
 
-always @(posedge CLK100MHZ) begin CLK50MHZ = ~CLK50MHZ; end
-always @(posedge  CLK50MHZ) begin CLK25MHZ = ~CLK25MHZ; end
+always @(posedge    clock) begin CLK50MHZ = ~CLK50MHZ; end
+always @(posedge CLK50MHZ) begin CLK25MHZ = ~CLK25MHZ; end
 
-dmem InstrMem(.addr(NextPC),.dataout(Instr),.datain(),.rdclk(rdclk),.wrclk(),.memop(3'b010),.we(1'b0));
-d_reg32file RegFile(.busa(rs1),.busb(rs2),.busw(busW),.ra(Instr[19:15]),.rb(Instr[24:20]),.rw(Instr[11:7]),.clk(wrclk),.we(RegWr));
-InstrToImm(.instr(Instr),.ExtOp(ExtOp),.imm(imm));
-ContrGen(.instr(instr),.ExtOp(ExtOp),.RegWr(RegWr),.ALUAsrc(ALUAsrc),.ALUBsrc(ALUBsrc),.ALUctr(ALUctr),.Branch(Branch),.MemtoReg(MemtoReg),.MemWr(MemWr),.MemOp(MemOp));
-PCreg(.clk(clk),.NextPC(NextPC),.PC(PC));
+dmem instructions(.addr(PC),.dataout(Instr),.datain(32'h0),.rdclk(rdclk),.wrclk(1'b0),.memop(3'b010),.we(1'b0)
+              ,.m0(imem0),.m1(imem1),.m2(imem2)
+              );
+
+assign imemaddr = PC;
+assign imemdataout = Instr;
+assign imemclk = rdclk;
+
+d_reg32file myregfile(.busa(rs1),.busb(rs2),.busw(busW),.ra(Instr[19:15]),.rb(Instr[24:20]),.rw(Instr[11:7]),.clk(wrclk),.we(RegWr)
+                      ,.x1(x1),.x2(x2),.x3(x3),.x4(x4)
+                      );
+InstrToImm InToTmm(.instr(Instr),.ExtOp(ExtOp),.imm(imm));
+ContrGen CGen(.instr(Instr),.ExtOp(ExtOp),.RegWr(RegWr),.ALUAsrc(ALUAsrc),.ALUBsrc(ALUBsrc),.ALUctr(ALUctr),.Branch(Branch),.MemtoReg(MemtoReg),.MemWr(MemWr),.MemOp(MemOp));
+PCreg PCR(.reset(reset),.clk(clk),.NextPC(NextPC),.PC(PC));
 
 wire [31:0] PCadderA;
 wire [31:0] PCadderB;
 assign PCadderA = PCAsrc ? imm : 32'h00000004;
-assign PCadderB = PCBsrc ? PC  : rs1;
+assign PCadderB = PCBsrc ? rs1 : PC;
 Adder32 PCAdder(.f(NextPC),.OF(),.SF(),.ZF(),.CF(),.cout(),.x(PCadderA),.y(PCadderB),.sub(1'b0),.cin(1'b0));
 
 wire [31:0] ALUA;
 wire [31:0] ALUB;
-assign ALUA = ALUAsrc ? rs1 : PC;
-assign ALUB = ALUBsrc == 4'b0000 ? rs2 : ALUBsrc == 4'b0001 ? imm : 32'h00000004;
+assign ALUA = ALUAsrc ? PC : rs1;
+assign ALUB = ALUBsrc == 2'b00 ? rs2 : ALUBsrc == 2'b01 ? imm : 32'h00000004;
 ALU myALU(.dataa(ALUA),.datab(ALUB),.aluctr(ALUctr),.less(Less),.zero(Zero),.result(Result));
 
 BranchCond BrCond(.Branch(Branch),.Less(Less),.Zero(Zero),.PCAsrc(PCAsrc),.PCBsrc(PCBsrc));
 
 wire [31:0] DataOut;
-dmem DataMem(.addr(Result),.dataout(DataOut),.datain(rs2),.rdclk(clk),.wrclk(~clk),.memop(MemOp),.we(MemWr));
+dmem datamem(.addr(Result),.dataout(DataOut),.datain(rs2),.rdclk(clk),.wrclk(~clk),.memop(MemOp),.we(MemWr)
+          ,.m0(dmem0),.m1(dmem1),.m2(dmem2)
+           );
 assign busW = MemtoReg ? DataOut : Result;
+
+assign dmemaddr = Result;
+assign dmemdataout = DataOut;
+assign dmemdatain = rs2;
+assign dmemrdclk = clk;
+assign dmemwrclk = ~clk;
+assign dmemop = MemOp;
+assign dmemwe = MemWr;
+assign dbgdata = imm; //{Instr[31:4], 1'b0, clk, rdclk, wrclk};
+assign dpc = PC;
+assign dnextpc = NextPC;
+assign PCA = ALUA;
+assign PCB = ALUB;
+assign PCASRC = ALUAsrc;
+assign PCBSRC = ALUBsrc; // mixed use
+assign dbgresult = Result;
 
 endmodule
