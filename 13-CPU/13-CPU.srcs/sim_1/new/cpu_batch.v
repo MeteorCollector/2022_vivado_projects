@@ -199,6 +199,7 @@ endtask
 initial begin:TestBench
       #80
       // output the state of every instruction
+        
         testcase = "rv32ui-p-simple";
 		run_riscv_test();
 		testcase = "rv32ui-p-add";
@@ -209,7 +210,7 @@ initial begin:TestBench
 		run_riscv_test();
 		testcase = "rv32ui-p-andi";
 		run_riscv_test();
-	   testcase = "rv32ui-p-auipc";
+	    testcase = "rv32ui-p-auipc";
 		run_riscv_test();
 		testcase = "rv32ui-p-beq";
 		run_riscv_test();
@@ -243,10 +244,12 @@ initial begin:TestBench
 		run_riscv_test();
 		testcase = "rv32ui-p-ori";
 		run_riscv_test();
+		
 		testcase = "rv32ui-p-sb";
 		run_riscv_test();
 		testcase = "rv32ui-p-sh";
 		run_riscv_test();
+		
 		testcase = "rv32ui-p-sll";
 		run_riscv_test();
 		testcase = "rv32ui-p-slli";
@@ -269,12 +272,15 @@ initial begin:TestBench
 		run_riscv_test();
 		testcase = "rv32ui-p-sub";
 		run_riscv_test();
+		
 		testcase = "rv32ui-p-sw";
 		run_riscv_test();
+		
 		testcase = "rv32ui-p-xor";
 		run_riscv_test();
 		testcase = "rv32ui-p-xori";
 		run_riscv_test();	
+		
 		$stop;
 		
 end

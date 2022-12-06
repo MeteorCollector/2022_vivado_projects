@@ -28,6 +28,7 @@ module PCreg(
 initial begin PC = 32'h00000000; end
 
 always @(negedge clk) begin 
+    $display("pc = 0x%h", PC);
     if (reset) begin PC <= 32'h00000000; end
     else begin PC <= NextPC; end 
 end // '<=' or '=' ?

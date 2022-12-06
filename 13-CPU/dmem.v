@@ -51,7 +51,7 @@ assign intmp[15:8]  = wea[1] ? dina[15:8]  : outtmp[15:8];
 assign intmp[23:16] = wea[2] ? dina[23:16] : outtmp[23:16];
 assign intmp[31:24] = wea[3] ? dina[31:24] : outtmp[31:24];
 
-always @(posedge clkb)
+always @(*)
 begin
     if (ena) begin outtmp <= ram[addra]; end
     else begin outtmp <= ram[addrb]; end

@@ -64,7 +64,7 @@ module ContrGen(
                     3'b010:       begin ALUctr = 4'b0010; $display("instr = %h, ra = %h, rb = %h, rw = %h, slti", instr, ra, rb, rw); end // slti
                     3'b011:       begin ALUctr = 4'b0011; $display("instr = %h, ra = %h, rb = %h, rw = %h, sltiu", instr, ra, rb, rw); end // sltiu
                     3'b100:       begin ALUctr = 4'b0100; $display("instr = %h, ra = %h, rb = %h, rw = %h, xori", instr, ra, rb, rw); end // xori
-                    3'b110:       begin ALUctr = 4'b0100; $display("instr = %h, ra = %h, rb = %h, rw = %h, ori", instr, ra, rb, rw); end // ori
+                    3'b110:       begin ALUctr = 4'b0110; $display("instr = %h, ra = %h, rb = %h, rw = %h, ori", instr, ra, rb, rw); end // ori
                     3'b111:       begin ALUctr = 4'b0111; $display("instr = %h, ra = %h, rb = %h, rw = %h, andi", instr, ra, rb, rw); end // andi
                     3'b001:       begin 
                         case (s7)

@@ -50,17 +50,17 @@ wire [31:0] ADD_b;
 always @(*)
 begin
     case(aluctr)
-        4'b0000: begin SUBctr = 1'b0;                                             OPctr = 3'b000; end // add
-        4'b0001: begin                               ALctr = 1'b0; SFTctr = 1'b0; OPctr = 3'b100; end // shift
-        4'b0010: begin SUBctr = 1'b1; SIGctr = 1'b1;                              OPctr = 3'b110; end // 
-        4'b0011: begin SUBctr = 1'b1; SIGctr = 1'b0;                              OPctr = 3'b110; end
-        4'b0100: begin                                                            OPctr = 3'b011; end
-        4'b0101: begin                               ALctr = 1'b0; SFTctr = 1'b1; OPctr = 3'b100; end
-        4'b0110: begin                                                            OPctr = 3'b010; end
-        4'b0111: begin                                                            OPctr = 3'b001; end
-        4'b1000: begin SUBctr = 1'b1;                                             OPctr = 3'b000; end
-        4'b1101: begin                               ALctr = 1'b1; SFTctr = 1'b1; OPctr = 3'b100; end
-        4'b1111: begin                                                            OPctr = 3'b101; end
+        4'b0000: begin SUBctr = 1'b0;                                             OPctr = 3'b000; end // auipc, addi, add, jal, jalr, lb, lh, lw, lbu, lhu, sb, sh, sw
+        4'b0001: begin                               ALctr = 1'b0; SFTctr = 1'b0; OPctr = 3'b100; end // sll, slli
+        4'b0010: begin SUBctr = 1'b1; SIGctr = 1'b1;                              OPctr = 3'b110; end // slt, slti, beq, bne, blt, bge
+        4'b0011: begin SUBctr = 1'b1; SIGctr = 1'b0;                              OPctr = 3'b110; end // sltu, sltui, bltu, bgeu
+        4'b0100: begin                                                            OPctr = 3'b011; end // xor, xori
+        4'b0101: begin                               ALctr = 1'b0; SFTctr = 1'b1; OPctr = 3'b100; end // srl, srli
+        4'b0110: begin                                                            OPctr = 3'b010; end // or, ori
+        4'b0111: begin                                                            OPctr = 3'b001; end // and, andi
+        4'b1000: begin SUBctr = 1'b1;                                             OPctr = 3'b000; end // sub
+        4'b1101: begin                               ALctr = 1'b1; SFTctr = 1'b1; OPctr = 3'b100; end // sra, srai
+        4'b1111: begin                                                            OPctr = 3'b101; end // lui
         default: begin end
     endcase
     
@@ -71,8 +71,8 @@ begin
     
     case(OPctr)
         3'b000: begin result = Add_Result; end
-        3'b001: begin result = dataa | datab; end
-        3'b010: begin result = dataa & datab; end
+        3'b001: begin result = dataa & datab; end // ref: table
+        3'b010: begin result = dataa | datab; end // ref: table
         3'b011: begin result = dataa ^ datab; end
         3'b100: begin result = Dout; end
         3'b101: begin result = datab; end

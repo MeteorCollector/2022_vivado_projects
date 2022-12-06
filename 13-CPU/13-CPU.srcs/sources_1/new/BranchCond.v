@@ -40,13 +40,13 @@ begin
                 1'b1: begin PCAsrc = 1'b1; PCBsrc = 1'b0; end
             endcase
         end
-        3'b001: begin 
+        3'b101: begin 
             case (Zero)
                 1'b0: begin PCAsrc = 1'b1; PCBsrc = 1'b0; end
                 1'b1: begin PCAsrc = 1'b0; PCBsrc = 1'b0; end
             endcase
         end
-        3'b010: begin 
+        3'b110: begin 
             case (Less)
                 1'b0: begin PCAsrc = 1'b0; PCBsrc = 1'b0; end
                 1'b1: begin PCAsrc = 1'b1; PCBsrc = 1'b0; end
