@@ -322,3 +322,62 @@ Running testbench
 ~~~ OK dataa=32'h55555555, datab=32'h00114514, ALUctr=4'b1111, result=32'h00114514, zero=0
 $stop called at time : 400 ns : File "D:/Projects/Vivado_Projects/12-ALU/12-ALU.srcs/sim_1/new/ALU32_sim.v" Line 105
 relaunch_sim: Time (s): cpu = 00:00:05 ; elapsed = 00:00:21 . Memory (MB): peak = 1075.613 ; gain = 0.000
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Projects/Vivado_Projects/12-ALU/12-ALU.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'alu_rv32_vlg_tst' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/Projects/Vivado_Projects/12-ALU/12-ALU.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj alu_rv32_vlg_tst_vlog.prj"
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1075.613 ; gain = 0.000
+INFO: [USF-XSim-69] 'compile' step finished in '7' seconds
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1075.613 ; gain = 0.000
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Projects/Vivado_Projects/12-ALU/12-ALU.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'D:/Projects/Vivado_Projects/12-ALU/12-ALU.sim/sim_1/behav/xsim'
+"xelab -wto e1da19df2c024bc585200d6f1092f9cf --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot alu_rv32_vlg_tst_behav xil_defaultlib.alu_rv32_vlg_tst xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto e1da19df2c024bc585200d6f1092f9cf --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot alu_rv32_vlg_tst_behav xil_defaultlib.alu_rv32_vlg_tst xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1075.613 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '7' seconds
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1075.613 ; gain = 0.000
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+Running testbench
+~~~ OK dataa=32'hffffffff, datab=32'h00000001, ALUctr=4'b0000, result=32'h00000000, zero=1
+~~~ OK dataa=32'h12345678, datab=32'h12345678, ALUctr=4'b0000, result=32'h2468acf0, zero=0
+~~~ OK dataa=32'h12345678, datab=32'h12345678, ALUctr=4'b1000, result=32'h00000000, zero=1
+~~~ OK dataa=32'h00000000, datab=32'h00000001, ALUctr=4'b1000, result=32'hffffffff, zero=0
+~~~ OK dataa=32'h55555555, datab=32'h00000001, ALUctr=4'b0001, result=32'haaaaaaaa, zero=0
+~~~ OK dataa=32'h12345678, datab=32'h00000014, ALUctr=4'b0001, result=32'h67800000, zero=0
+~~~ OK dataa=32'haaaaaaaa, datab=32'h00000005, ALUctr=4'b0101, result=32'h05555555, zero=0
+~~~ OK dataa=32'haaaaaaaa, datab=32'h00000005, ALUctr=4'b1101, result=32'hfd555555, zero=0
+~~~ OK dataa=32'hffffffff, datab=32'h00000001, ALUctr=4'b0010, result=32'h00000001, zero=0, less=1
+~~~ OK dataa=32'hffffffff, datab=32'h80000000, ALUctr=4'b0010, result=32'h00000000, zero=0, less=0
+~~~ OK dataa=32'hfffffff0, datab=32'hfffffff0, ALUctr=4'b0010, result=32'h00000000, zero=1, less=0
+~~~ OK dataa=32'hfffffff0, datab=32'hfffffff0, ALUctr=4'b0011, result=32'h00000000, zero=1, less=0
+~~~ OK dataa=32'h00010000, datab=32'h0ffffff0, ALUctr=4'b0011, result=32'h00000001, zero=0, less=1
+~~~ OK dataa=32'hfffffff0, datab=32'h00000000, ALUctr=4'b0011, result=32'h00000000, zero=0, less=0
+~~~ OK dataa=32'h00000001, datab=32'h0fffffff, ALUctr=4'b0011, result=32'h00000001, zero=0, less=1
+~~~ OK dataa=32'hf0000000, datab=32'hfffffff0, ALUctr=4'b0011, result=32'h00000001, zero=0, less=1
+~~~ OK dataa=32'h55555555, datab=32'h000055aa, ALUctr=4'b0100, result=32'h555500ff, zero=0
+~~~ OK dataa=32'h55555555, datab=32'h000055aa, ALUctr=4'b0110, result=32'h00005500, zero=0
+~~~ OK dataa=32'h55555555, datab=32'h000055aa, ALUctr=4'b0111, result=32'h555555ff, zero=0
+~~~ OK dataa=32'h55555555, datab=32'h00114514, ALUctr=4'b1111, result=32'h00114514, zero=0
+$stop called at time : 400 ns : File "D:/Projects/Vivado_Projects/12-ALU/12-ALU.srcs/sim_1/new/ALU32_sim.v" Line 105
+relaunch_sim: Time (s): cpu = 00:00:05 ; elapsed = 00:00:21 . Memory (MB): peak = 1075.613 ; gain = 0.000
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+close_sim: Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1075.613 ; gain = 0.000
+exit
+INFO: [Common 17-206] Exiting Vivado at Thu Dec 22 14:25:49 2022...

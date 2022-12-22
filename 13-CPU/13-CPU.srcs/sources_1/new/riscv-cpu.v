@@ -38,16 +38,18 @@ module rv32is(
     input clock,
     input reset,
     output [31:0] imemaddr,
-    output [31:0] imemdataout,
+    input  [31:0] imemdataout,
     output        imemclk,
     output [31:0] dmemaddr,
-    output [31:0] dmemdataout,
+    input  [31:0] dmemdataout,
     output [31:0] dmemdatain,
     output        dmemrdclk,
     output        dmemwrclk,
     output [2:0]  dmemop,
     output        dmemwe,
-    output [31:0] dbgdata,
+    output [31:0] dbgdata
+    
+    /*
     output [31:0] dbgresult,
     output [31:0] dpc,
     output [31:0] dnextpc,
@@ -69,6 +71,7 @@ module rv32is(
     output [31:0] dmem0,
     output [31:0] dmem1,
     output [31:0] dmem2
+    */
     );
 
 integer tick;
@@ -114,13 +117,13 @@ end
 
 always @(posedge    clock) begin CLK50MHZ = ~CLK50MHZ; end
 always @(posedge CLK50MHZ) begin CLK25MHZ = ~CLK25MHZ; end
-
+/*
 dmem instructions(.addr(PC),.dataout(Instr),.datain(32'h0),.rdclk(rdclk),.wrclk(1'b0),.memop(3'b010),.we(1'b0)
               ,.m0(imem0),.m1(imem1),.m2(imem2)
               );
-
+*/
 assign imemaddr = PC;
-assign imemdataout = Instr;
+assign Instr = imemdataout;
 assign imemclk = rdclk;
 
 d_reg32file myregfile(.busa(rs1),.busb(rs2),.busw(busW),.ra(Instr[19:15]),.rb(Instr[24:20]),.rw(Instr[11:7]),.clk(wrclk),.we(RegWr)
@@ -147,18 +150,19 @@ BranchCond BrCond(.Branch(Branch),.Less(Less),.Zero(Zero),.PCAsrc(PCAsrc),.PCBsr
 
 wire [31:0] DataOut;
 dmem datamem(.addr(Result),.dataout(DataOut),.datain(rs2),.rdclk(clk),.wrclk(~clk),.memop(MemOp),.we(MemWr)
-          ,.m0(dmem0),.m1(dmem1),.m2(dmem2)
+          //,.m0(dmem0),.m1(dmem1),.m2(dmem2)
            );
 assign busW = MemtoReg ? DataOut : Result;
 
 assign dmemaddr = Result;
-assign dmemdataout = DataOut;
+assign DataOut = dmemdataout;
 assign dmemdatain = rs2;
 assign dmemrdclk = clk;
 assign dmemwrclk = ~clk;
 assign dmemop = MemOp;
 assign dmemwe = MemWr;
 assign dbgdata = imm; //{Instr[31:4], 1'b0, clk, rdclk, wrclk};
+/*
 assign dpc = PC;
 assign dnextpc = NextPC;
 assign PCA = ALUA;
@@ -166,5 +170,5 @@ assign PCB = ALUB;
 assign PCASRC = ALUAsrc;
 assign PCBSRC = ALUBsrc; // mixed use
 assign dbgresult = Result;
-
+*/
 endmodule

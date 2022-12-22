@@ -2,10 +2,10 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Thu Dec 22 14:45:51 2022
-# Process ID: 15136
+# Start of session at: Thu Dec 22 14:17:52 2022
+# Process ID: 8180
 # Current directory: D:/Projects/Vivado_Projects/13-CPU-backup
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18476 D:\Projects\Vivado_Projects\13-CPU-backup\13-CPU-backup.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent21480 D:\Projects\Vivado_Projects\13-CPU-backup\13-CPU-backup.xpr
 # Log file: D:/Projects/Vivado_Projects/13-CPU-backup/vivado.log
 # Journal file: D:/Projects/Vivado_Projects/13-CPU-backup\vivado.jou
 #-----------------------------------------------------------
@@ -14,8 +14,6 @@ open_project D:/Projects/Vivado_Projects/13-CPU-backup/13-CPU-backup.xpr
 update_compile_order -fileset sources_1
 launch_simulation
 source cpu_batch_vlg_tst.tcl
+relaunch_sim
 run all
-launch_runs synth_1 -jobs 4
-wait_on_run synth_1
-add_files -norecurse {D:/Projects/Vivado_Projects/13-CPU-backup/testdmem.v D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v}
-update_compile_order -fileset sources_1
+close_sim

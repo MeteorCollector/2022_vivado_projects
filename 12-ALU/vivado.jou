@@ -20,3 +20,5 @@ launch_simulation
 source alu_rv32_vlg_tst.tcl
 relaunch_sim
 relaunch_sim
+relaunch_sim
+close_sim
