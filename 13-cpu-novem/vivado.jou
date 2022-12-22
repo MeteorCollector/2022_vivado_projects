@@ -1,0 +1,34 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu Dec 22 08:42:28 2022
+# Process ID: 15088
+# Current directory: D:/Projects/Vivado_Projects/13-cpu-novem
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent14612 D:\Projects\Vivado_Projects\13-cpu-novem\13-cpu-novem.xpr
+# Log file: D:/Projects/Vivado_Projects/13-cpu-novem/vivado.log
+# Journal file: D:/Projects/Vivado_Projects/13-cpu-novem\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+set_property is_enabled false [get_files  D:/Projects/Vivado_Projects/13-cpu-novem/cra8.v]
+launch_simulation
+update_compile_order -fileset sim_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/cra8.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/cra8.v
+launch_simulation
+launch_simulation
+source cpu_batch_vlg_tst.tcl
+update_compile_order -fileset sources_1
+relaunch_sim
+close_sim
+launch_simulation
+launch_simulation
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v
+add_files -norecurse D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/mem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/mem.v
