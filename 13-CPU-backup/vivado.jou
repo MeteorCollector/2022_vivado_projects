@@ -19,3 +19,23 @@ launch_runs synth_1 -jobs 4
 wait_on_run synth_1
 add_files -norecurse {D:/Projects/Vivado_Projects/13-CPU-backup/testdmem.v D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v}
 update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/Adder8.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/Adder8.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/cra8.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/cra8.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/mem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/mem.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/CLA8.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/CLA8.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/CLA4.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/CLA4.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/fa.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/fa.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/clu4.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/clu4.v
+close_sim
+launch_simulation
+reset_run synth_1
+launch_simulation
+source cpu_batch_vlg_tst.tcl
+run all
