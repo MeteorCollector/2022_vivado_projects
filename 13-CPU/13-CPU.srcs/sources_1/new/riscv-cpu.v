@@ -134,7 +134,8 @@ wire [31:0] PCadderA;
 wire [31:0] PCadderB;
 assign PCadderA = PCAsrc ? imm : 32'h00000004;
 assign PCadderB = PCBsrc ? rs1 : PC;
-Adder32 PCAdder(.f(NextPC),.OF(),.SF(),.ZF(),.CF(),.cout(),.x(PCadderA),.y(PCadderB),.sub(1'b0),.cin(1'b0));
+//Adder32 PCAdder(.f(NextPC),.OF(),.SF(),.ZF(),.CF(),.cout(),.x(PCadderA),.y(PCadderB),.sub(1'b0),.cin(1'b0));
+SimplifiedAdder PCAdder(.A(PCadderA),.B(PCadderB),.SUBctr(1'b0),.F(NextPC),.uless(),.sless(),.zero());
 
 wire [31:0] ALUA;
 wire [31:0] ALUB;

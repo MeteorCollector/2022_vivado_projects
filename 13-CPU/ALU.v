@@ -18,7 +18,24 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+module SimplifiedAdder(
+    input [31:0] A,
+    input [31:0] B,
+    input SUBctr,
+    output [31:0] F,
+    output uless,
+    output sless,
+    output zero
+);
+    wire [32:0] realB;
+    wire cout, OF;
+    assign realB = {1'b0, {32{SUBctr}} ^ B};
+    assign {cout, F} = realB + A + SUBctr;
+    assign OF = (A[31] == realB[31]) & (F[31] ^ A[31]);
+    assign uless = SUBctr ^ cout;
+    assign sless = OF ^ F[31];
+    assign zero = (F == 32'h0);
+endmodule
 
 module ALU (
 input [31:0] dataa,
@@ -35,6 +52,8 @@ wire Add_Carry;
 wire Add_Overflow;
 wire Add_Sign;
 wire Zero;
+wire uless;
+wire sless;
 
 wire [31:0] Dout;
 
@@ -65,8 +84,8 @@ begin
     endcase
     
     case(SIGctr)
-        1'b0: begin mux2 = Add_Carry; end
-        1'b1: begin mux2 = Add_Overflow ^ Add_Sign; end
+        1'b0: begin mux2 = uless; end
+        1'b1: begin mux2 = sless; end
     endcase
     
     case(OPctr)
@@ -84,9 +103,9 @@ begin
     less = mux2;
 end
 
-Adder32 my_adder(Add_Result, Add_Overflow, Add_Sign, Zero, Add_Carry, cout, dataa, datab, SUBctr, 1'b0);
+SimplifiedAdder my_adder(dataa, datab, SUBctr, Add_Result, uless, sless, Zero);
 assign ADD_a = dataa;
-assign ADD_b = SUBctr ? datab ^ 32'h00000000 : datab;
+assign ADD_b = datab;
 //ADDER_32 my_adder(.A(ADD_a), .B(ADD_b), .cin(SUBctr), .F(Add_Result), .OF(Add_Overflow), .SF(Add_Sign), .ZF(Zero), .CF(Add_Carry), .cout());
 
 barrelsft32 my_barrel(Dout, dataa, datab[4:0], ~SFTctr, ALctr);
