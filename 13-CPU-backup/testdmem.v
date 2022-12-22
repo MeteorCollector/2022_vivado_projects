@@ -23,7 +23,6 @@ module testdmem(
 
 	
 	reg [31:0] ram [32767:0];
-	//always@(posedge rdclock)
 	always@(*)
 	begin
 	   if(wren)
@@ -32,7 +31,7 @@ module testdmem(
 			q <= ram[rdaddress];
 	end
 	
-   assign tempin[7:0]   = (byteena_a[0])? data[7:0]  : tempout[7:0];
+	assign tempin[7:0]   = (byteena_a[0])? data[7:0]  : tempout[7:0];
    assign tempin[15:8]  = (byteena_a[1])? data[15:8] : tempout[15:8];
    assign tempin[23:16] = (byteena_a[2])? data[23:16]: tempout[23:16];
    assign tempin[31:24] = (byteena_a[3])? data[31:24]: tempout[31:24];

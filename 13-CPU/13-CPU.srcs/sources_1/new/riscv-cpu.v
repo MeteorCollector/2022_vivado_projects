@@ -149,9 +149,9 @@ ALU myALU(.dataa(ALUA),.datab(ALUB),.aluctr(ALUctr),.less(Less),.zero(Zero),.res
 BranchCond BrCond(.Branch(Branch),.Less(Less),.Zero(Zero),.PCAsrc(PCAsrc),.PCBsrc(PCBsrc));
 
 wire [31:0] DataOut;
-dmem datamem(.addr(Result),.dataout(DataOut),.datain(rs2),.rdclk(clk),.wrclk(~clk),.memop(MemOp),.we(MemWr)
+//dmem datamem(.addr(Result),.dataout(DataOut),.datain(rs2),.rdclk(clk),.wrclk(~clk),.memop(MemOp),.we(MemWr)
           //,.m0(dmem0),.m1(dmem1),.m2(dmem2)
-           );
+//           );
 assign busW = MemtoReg ? DataOut : Result;
 
 assign dmemaddr = Result;
