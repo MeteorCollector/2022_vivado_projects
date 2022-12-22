@@ -32,3 +32,58 @@ add_files -norecurse D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v
 update_compile_order -fileset sources_1
 export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/mem.v] -no_script -reset -force -quiet
 remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/mem.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/riscv-cpu.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/riscv-cpu.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/d_reg8file.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/d_reg8file.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/ContrGen.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/ContrGen.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/Adder8.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/Adder8.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/ALU.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/ALU.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/BranchCond.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/BranchCond.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/dmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/dmem.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/testmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/testmem.v
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/32barrel.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/32barrel.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/testdmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/testdmem.v
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/CLA4.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/CLA4.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/CLA8.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/CLA8.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/clu4.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/clu4.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/fa.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/fa.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/cpu_batch.v] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 D:/Projects/Vivado_Projects/13-cpu-novem/cpu_batch.v
+add_files -norecurse {D:/Projects/Vivado_Projects/13-cpu-novem/testdmem.v D:/Projects/Vivado_Projects/13-cpu-novem/riscv-cpu.v D:/Projects/Vivado_Projects/13-cpu-novem/ContrGen.v D:/Projects/Vivado_Projects/13-cpu-novem/testmem.v D:/Projects/Vivado_Projects/13-cpu-novem/d_reg8file.v D:/Projects/Vivado_Projects/13-cpu-novem/dmem.v D:/Projects/Vivado_Projects/13-cpu-novem/ALU.v D:/Projects/Vivado_Projects/13-cpu-novem/BranchCond.v D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v D:/Projects/Vivado_Projects/13-cpu-novem/32barrel.v}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse D:/Projects/Vivado_Projects/13-cpu-novem/cpu_batch.v
+update_compile_order -fileset sim_1
+update_compile_order -fileset sim_1
+launch_simulation
+add_files -norecurse D:/Projects/Vivado_Projects/13-cpu-novem/mem.v
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/mem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/mem.v
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation

@@ -584,3 +584,403 @@ add_files -norecurse D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v
 update_compile_order -fileset sources_1
 export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/mem.v] -no_script -reset -force -quiet
 remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/mem.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/riscv-cpu.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/riscv-cpu.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/d_reg8file.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/d_reg8file.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/ContrGen.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/ContrGen.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/Adder8.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/Adder8.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/ALU.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/ALU.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/BranchCond.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/BranchCond.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/dmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/dmem.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/testmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/testmem.v
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/32barrel.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/32barrel.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/testdmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/testdmem.v
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/CLA4.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/CLA4.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/CLA8.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/CLA8.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/clu4.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/clu4.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/fa.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/fa.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/cpu_batch.v] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 D:/Projects/Vivado_Projects/13-cpu-novem/cpu_batch.v
+add_files -norecurse {D:/Projects/Vivado_Projects/13-cpu-novem/testdmem.v D:/Projects/Vivado_Projects/13-cpu-novem/riscv-cpu.v D:/Projects/Vivado_Projects/13-cpu-novem/ContrGen.v D:/Projects/Vivado_Projects/13-cpu-novem/testmem.v D:/Projects/Vivado_Projects/13-cpu-novem/d_reg8file.v D:/Projects/Vivado_Projects/13-cpu-novem/dmem.v D:/Projects/Vivado_Projects/13-cpu-novem/ALU.v D:/Projects/Vivado_Projects/13-cpu-novem/BranchCond.v D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v D:/Projects/Vivado_Projects/13-cpu-novem/32barrel.v}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse D:/Projects/Vivado_Projects/13-cpu-novem/cpu_batch.v
+update_compile_order -fileset sim_1
+update_compile_order -fileset sim_1
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No such file or directory
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'cpu_batch_vlg_tst' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj cpu_batch_vlg_tst_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/32barrel.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module barrelsft32
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/ALU.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SimplifiedAdder
+INFO: [VRFC 10-311] analyzing module ALU
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/BranchCond.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module BranchCond
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/ContrGen.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ContrGen
+INFO: [VRFC 10-2458] undeclared symbol s7, assumed default net type wire [D:/Projects/Vivado_Projects/13-cpu-novem/ContrGen.v:52]
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/InstrToImm.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module InstrToImm
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/d_reg8file.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module d_reg32file
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/dmem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dmem
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/riscv-cpu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PCreg
+INFO: [VRFC 10-311] analyzing module rv32is
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/testdmem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module testdmem
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Projects/Vivado_Projects/13-cpu-novem/cpu_batch.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_batch_vlg_tst
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:00:06 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [USF-XSim-69] 'compile' step finished in '6' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+"xelab -wto 801e0ca4a96242e79284cc2033060931 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot cpu_batch_vlg_tst_behav xil_defaultlib.cpu_batch_vlg_tst xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 801e0ca4a96242e79284cc2033060931 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot cpu_batch_vlg_tst_behav xil_defaultlib.cpu_batch_vlg_tst xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+ERROR: [VRFC 10-3180] cannot find port 'm2' on this module [D:/Projects/Vivado_Projects/13-cpu-novem/riscv-cpu.v:119]
+ERROR: [VRFC 10-3180] cannot find port 'm2' on this module [D:/Projects/Vivado_Projects/13-cpu-novem/riscv-cpu.v:150]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:06 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '6' seconds
+INFO: [USF-XSim-99] Step results log file:'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+launch_simulation: Time (s): cpu = 00:00:02 ; elapsed = 00:00:13 . Memory (MB): peak = 1089.773 ; gain = 0.000
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+add_files -norecurse D:/Projects/Vivado_Projects/13-cpu-novem/mem.v
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-cpu-novem/mem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-cpu-novem/mem.v
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+INFO: [Common 17-14] Message 'filemgmt 56-199' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+update_compile_order -fileset sources_1
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'cpu_batch_vlg_tst' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj cpu_batch_vlg_tst_vlog.prj"
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+run_program: Time (s): cpu = 00:00:34 ; elapsed = 00:06:16 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [Common 17-344] 'run_program' was cancelled
+INFO: [Vivado 12-5357] 'compile' step aborted
+launch_simulation: Time (s): cpu = 00:00:35 ; elapsed = 00:06:17 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [Common 17-344] 'launch_simulation' was cancelled
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'cpu_batch_vlg_tst' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj cpu_batch_vlg_tst_vlog.prj"
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:06 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [Common 17-344] 'run_program' was cancelled
+INFO: [Vivado 12-5357] 'compile' step aborted
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:06 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [Common 17-344] 'launch_simulation' was cancelled
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\mem.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\cpu_batch.v:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [D:\Projects\Vivado_Projects\13-cpu-novem\riscv-cpu.v:]
+ERROR: [Common 17-180] Spawn failed: No error
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'cpu_batch_vlg_tst' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj cpu_batch_vlg_tst_vlog.prj"
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+run_program: Time (s): cpu = 00:00:02 ; elapsed = 00:00:06 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [Common 17-344] 'run_program' was cancelled
+INFO: [Vivado 12-5357] 'compile' step aborted
+launch_simulation: Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [Common 17-344] 'launch_simulation' was cancelled
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'cpu_batch_vlg_tst' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/Projects/Vivado_Projects/13-cpu-novem/13-cpu-novem.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj cpu_batch_vlg_tst_vlog.prj"
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+run_program: Time (s): cpu = 00:00:27 ; elapsed = 00:06:40 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [Common 17-344] 'run_program' was cancelled
+INFO: [Vivado 12-5357] 'compile' step aborted
+launch_simulation: Time (s): cpu = 00:00:28 ; elapsed = 00:06:40 . Memory (MB): peak = 1089.773 ; gain = 0.000
+INFO: [Common 17-344] 'launch_simulation' was cancelled
+exit
+INFO: [Common 17-206] Exiting Vivado at Thu Dec 22 14:16:40 2022...

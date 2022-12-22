@@ -739,3 +739,18 @@ dismissDialog("Relaunch Simulation"); // b
 // TclEventType: WAVEFORM_UPDATE_WAVEFORM
 // Elapsed time: 93 seconds
 selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ALU.v", 0); // m
+// Elapsed time: 66 seconds
+selectCodeEditor("ALU.v", 4, 37); // bP
+typeControlKey((HResource) null, "ALU.v", 'c'); // bP
+typeControlKey((HResource) null, "ALU.v", 'c'); // bP
+// Elapsed time: 37 seconds
+selectCodeEditor("ALU.v", 317, 168); // bP
+// Elapsed time: 57 seconds
+selectCodeEditor("ALU.v", 663, 62); // bP
+typeControlKey((HResource) null, "ALU.v", 'c'); // bP
+typeControlKey((HResource) null, "ALU.v", 'c'); // bP
+// Elapsed time: 100 seconds
+selectCodeEditor("ALU.v", 327, 193); // bP
+// Elapsed time: 126 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ALU32_sim.v", 1); // m
+// HMemoryUtils.trashcanNow. Engine heap size: 1,043 MB. GUI used memory: 78 MB. Current time: 12/22/22, 12:09:45 PM GMT+08:00

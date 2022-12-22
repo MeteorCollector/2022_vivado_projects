@@ -115,12 +115,9 @@ end
 always @(posedge    clock) begin CLK50MHZ = ~CLK50MHZ; end
 always @(posedge CLK50MHZ) begin CLK25MHZ = ~CLK25MHZ; end
 
-
 dmem instructions(.addr(PC),.dataout(Instr),.datain(32'h0),.rdclk(rdclk),.wrclk(1'b0),.memop(3'b010),.we(1'b0)
               ,.m0(imem0),.m1(imem1),.m2(imem2)
               );
-
-//testmem instructions(.address(PC),.clock(rdclk),.data(32'b0),.wren(1'b0),.q(Instr));
 
 assign imemaddr = PC;
 assign imemdataout = Instr;
