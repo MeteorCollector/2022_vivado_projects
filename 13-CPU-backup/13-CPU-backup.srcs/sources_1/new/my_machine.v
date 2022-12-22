@@ -20,13 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 `timescale 1 ns / 10 ps
-module MyMachine();
+module MyMachine(
+    input  [15:0] SW,
+    output [15:0] LED,
+    output [7:0] AN,
+    output [7:0] HEX,
+    input  BTNC
+);
 
 integer numcycles;  //number of cycles in test
 
 reg clk,reset;  //clk and reset signals
 
-reg[8*15:1] testcase; //name of testcase
+//reg[8*15:1] testcase; //name of testcase
 
 // CPU declaration
 
@@ -38,6 +44,10 @@ wire drdclk, dwrclk, dwe;
 wire [2:0]  dop;
 wire [31:0] cpudbgdata;
 
+always@(*)
+begin
+    clk = SW[0]; reset = BTNC;
+end
 
 
 //main CPU
