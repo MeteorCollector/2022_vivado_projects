@@ -36,7 +36,7 @@ module mymem( // without ip
     output [31:0] m2
 );
 
-reg [31:0] ram [32767:0];
+reg [31:0] ram [8191:0];
 reg [31:0] outtmp;
 wire [31:0] intmp;
 
