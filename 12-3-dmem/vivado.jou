@@ -1,0 +1,67 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Fri Dec 23 13:49:32 2022
+# Process ID: 14580
+# Current directory: D:/Projects/Vivado_Projects/12-3-dmem
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent21408 D:\Projects\Vivado_Projects\12-3-dmem\12-3-dmem.xpr
+# Log file: D:/Projects/Vivado_Projects/12-3-dmem/vivado.log
+# Journal file: D:/Projects/Vivado_Projects/12-3-dmem\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Projects/Vivado_Projects/12-3-dmem/12-3-dmem.xpr
+update_compile_order -fileset sources_1
+close_project
+create_project mem_ip D:/Projects/Vivado_Projects/mem_ip -part xc7a100tcsg324-1
+add_files -norecurse {D:/Projects/Vivado_Projects/13-CPU-backup/testdmem.v D:/Projects/Vivado_Projects/13-CPU-backup/dmem.v D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v
+launch_runs synth_1 -jobs 8
+wait_on_run synth_1
+ipx::package_project -root_dir D:/Projects/Vivado_Projects/my_ip_cores/dmem_module -vendor xilinx.com -library user -taxonomy /UserIP -import_files -set_current false
+ipx::unload_core d:/Projects/Vivado_Projects/my_ip_cores/dmem_module/component.xml
+ipx::edit_ip_in_project -upgrade true -name tmp_edit_project -directory D:/Projects/Vivado_Projects/my_ip_cores/dmem_module d:/Projects/Vivado_Projects/my_ip_cores/dmem_module/component.xml
+update_compile_order -fileset sources_1
+set_property core_revision 2 [ipx::current_core]
+ipx::update_source_project_archive -component [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::check_integrity [ipx::current_core]
+ipx::save_core [ipx::current_core]
+ipx::move_temp_component_back -component [ipx::current_core]
+close_project -delete
+set_property  ip_repo_paths  d:/Projects/Vivado_Projects/my_ip_cores/dmem_module [current_project]
+update_ip_catalog
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/dmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/dmem.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/testdmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/testdmem.v
+add_files -norecurse D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v
+update_compile_order -fileset sources_1
+ipx::package_project -root_dir D:/Projects/Vivado_Projects/my_ip_cores/imem_module -vendor xilinx.com -library user -taxonomy /UserIP -import_files -set_current false
+ipx::unload_core d:/Projects/Vivado_Projects/my_ip_cores/imem_module/component.xml
+ipx::edit_ip_in_project -upgrade true -name tmp_edit_project -directory D:/Projects/Vivado_Projects/my_ip_cores/imem_module d:/Projects/Vivado_Projects/my_ip_cores/imem_module/component.xml
+update_compile_order -fileset sources_1
+current_project mem_ip
+set_property previous_version_for_upgrade xilinx.com:user:testmem:1.0 [ipx::current_core]
+set_property core_revision 1 [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::check_integrity [ipx::current_core]
+ipx::save_core [ipx::current_core]
+current_project tmp_edit_project
+ipx::move_temp_component_back -component [ipx::current_core]
+close_project -delete
+set_property  ip_repo_paths  {d:/Projects/Vivado_Projects/my_ip_cores/imem_module d:/Projects/Vivado_Projects/my_ip_cores/dmem_module} [current_project]
+update_ip_catalog
+reset_run synth_1
+launch_runs synth_1 -jobs 8
+wait_on_run synth_1
+reset_run synth_1
+set_param general.maxThreads 8
+launch_runs synth_1 -jobs 8
+wait_on_run synth_1
+reset_run synth_1

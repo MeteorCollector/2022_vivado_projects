@@ -16,7 +16,7 @@ wire [31:0] daddr,ddataout,ddatain;
 wire drdclk, dwrclk, dwe;
 wire [2:0]  dop;
 wire [31:0] cpudbgdata;
-
+wire [31:0] a0data;
 
 
 //main CPU
@@ -24,11 +24,13 @@ rv32is mycpu(.clock(clk),
              .reset(reset), 
 				 .imemaddr(iaddr), .imemdataout(idataout), .imemclk(iclk), 
 				 .dmemaddr(daddr), .dmemdataout(ddataout), .dmemdatain(ddatain), .dmemrdclk(drdclk), .dmemwrclk(dwrclk), .dmemop(dop), .dmemwe(dwe), 
-				 .dbgdata(cpudbgdata));
+				 .dbgdata(cpudbgdata),
+				 .reg10(a0data)
+				 );
 
 				  
 //instruction memory, no writing
-testmem instructions(
+Instr_mem instructions(
 	.address(iaddr[17:2]),
 	.clock(iclk),
 	.data(32'b0),
@@ -75,7 +77,7 @@ endtask
 
 task loadtestcase;  //load intstructions to instruction mem
 	begin
-		$readmemh({testcase, ".hex"},instructions.ram);
+		//$readmemh({testcase, ".hex"},instructions.ram);
 		$display("~~~ Begin test case %s ~~~", testcase);
 	end
 endtask
@@ -184,8 +186,8 @@ endtask
 initial begin:TestBench
       #80
       // output the state of every instruction
-testcase = "rv32ui-p-simple";
-		run_riscv_test();
+        //testcase = "rv32ui-p-simple";
+		//run_riscv_test();
 		testcase = "rv32ui-p-add";
 		run_riscv_test();
 		testcase = "rv32ui-p-addi";

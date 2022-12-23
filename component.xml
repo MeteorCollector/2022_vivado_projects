@@ -411,14 +411,21 @@
       </xilinx:taxonomies>
       <xilinx:displayName>rv32is_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2022-12-23T01:32:07Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>2</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2022-12-23T04:35:09Z</xilinx:coreCreationDateTime>
+      <xilinx:tags>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6ebea4fc_ARCHIVE_LOCATION">d:/projects/vivado_projects</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2394f333_ARCHIVE_LOCATION">d:/projects/vivado_projects</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7f3963ef_ARCHIVE_LOCATION">d:/projects/vivado_projects</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7d19192b_ARCHIVE_LOCATION">d:/projects/vivado_projects</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b4c456c_ARCHIVE_LOCATION">d:/projects/vivado_projects</xilinx:tag>
+      </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2020.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="1025bb3e"/>
       <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="3e86920f"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="f4ac4bc9"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="68426451"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="a38b81e9"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>

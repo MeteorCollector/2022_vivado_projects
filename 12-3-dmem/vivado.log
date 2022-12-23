@@ -1,0 +1,118 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Fri Dec 23 13:49:32 2022
+# Process ID: 14580
+# Current directory: D:/Projects/Vivado_Projects/12-3-dmem
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent21408 D:\Projects\Vivado_Projects\12-3-dmem\12-3-dmem.xpr
+# Log file: D:/Projects/Vivado_Projects/12-3-dmem/vivado.log
+# Journal file: D:/Projects/Vivado_Projects/12-3-dmem\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Projects/Vivado_Projects/12-3-dmem/12-3-dmem.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
+open_project: Time (s): cpu = 00:00:59 ; elapsed = 00:00:29 . Memory (MB): peak = 1088.797 ; gain = 0.000
+update_compile_order -fileset sources_1
+close_project
+create_project mem_ip D:/Projects/Vivado_Projects/mem_ip -part xc7a100tcsg324-1
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
+create_project: Time (s): cpu = 00:00:25 ; elapsed = 00:00:14 . Memory (MB): peak = 1088.797 ; gain = 0.000
+add_files -norecurse {D:/Projects/Vivado_Projects/13-CPU-backup/testdmem.v D:/Projects/Vivado_Projects/13-CPU-backup/dmem.v D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v
+launch_runs synth_1 -jobs 8
+[Fri Dec 23 14:28:28 2022] Launched synth_1...
+Run output will be captured here: D:/Projects/Vivado_Projects/mem_ip/mem_ip.runs/synth_1/runme.log
+ipx::package_project -root_dir D:/Projects/Vivado_Projects/my_ip_cores/dmem_module -vendor xilinx.com -library user -taxonomy /UserIP -import_files -set_current false
+INFO: [IP_Flow 19-2181] Payment Required is not set for this core.
+INFO: [IP_Flow 19-2187] The Product Guide file is missing.
+ipx::unload_core d:/Projects/Vivado_Projects/my_ip_cores/dmem_module/component.xml
+ipx::edit_ip_in_project -upgrade true -name tmp_edit_project -directory D:/Projects/Vivado_Projects/my_ip_cores/dmem_module d:/Projects/Vivado_Projects/my_ip_cores/dmem_module/component.xml
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
+create_project: Time (s): cpu = 00:00:26 ; elapsed = 00:00:16 . Memory (MB): peak = 1088.797 ; gain = 0.000
+INFO: [IP_Flow 19-795] Syncing license key meta-data
+ipx::edit_ip_in_project: Time (s): cpu = 00:00:35 ; elapsed = 00:00:21 . Memory (MB): peak = 1088.797 ; gain = 0.000
+update_compile_order -fileset sources_1
+set_property core_revision 2 [ipx::current_core]
+ipx::update_source_project_archive -component [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::check_integrity [ipx::current_core]
+INFO: [IP_Flow 19-2181] Payment Required is not set for this core.
+INFO: [IP_Flow 19-2187] The Product Guide file is missing.
+INFO: [Ipptcl 7-1486] check_integrity: Integrity check passed.
+ipx::save_core [ipx::current_core]
+ipx::move_temp_component_back -component [ipx::current_core]
+close_project -delete
+set_property  ip_repo_paths  d:/Projects/Vivado_Projects/my_ip_cores/dmem_module [current_project]
+update_ip_catalog
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/Projects/Vivado_Projects/my_ip_cores/dmem_module'.
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/dmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/dmem.v
+export_ip_user_files -of_objects  [get_files D:/Projects/Vivado_Projects/13-CPU-backup/testdmem.v] -no_script -reset -force -quiet
+remove_files  D:/Projects/Vivado_Projects/13-CPU-backup/testdmem.v
+add_files -norecurse D:/Projects/Vivado_Projects/13-CPU-backup/testmem.v
+update_compile_order -fileset sources_1
+ipx::package_project -root_dir D:/Projects/Vivado_Projects/my_ip_cores/imem_module -vendor xilinx.com -library user -taxonomy /UserIP -import_files -set_current false
+INFO: [IP_Flow 19-5107] Inferred bus interface 'clock' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+WARNING: [IP_Flow 19-5661] Bus Interface 'clock' does not have any bus interfaces associated with it.
+INFO: [IP_Flow 19-2181] Payment Required is not set for this core.
+INFO: [IP_Flow 19-2187] The Product Guide file is missing.
+ipx::unload_core d:/Projects/Vivado_Projects/my_ip_cores/imem_module/component.xml
+ipx::edit_ip_in_project -upgrade true -name tmp_edit_project -directory D:/Projects/Vivado_Projects/my_ip_cores/imem_module d:/Projects/Vivado_Projects/my_ip_cores/imem_module/component.xml
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
+create_project: Time (s): cpu = 00:00:28 ; elapsed = 00:00:24 . Memory (MB): peak = 1114.297 ; gain = 2.504
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/Projects/Vivado_Projects/my_ip_cores/dmem_module'.
+INFO: [IP_Flow 19-795] Syncing license key meta-data
+ipx::edit_ip_in_project: Time (s): cpu = 00:00:35 ; elapsed = 00:00:30 . Memory (MB): peak = 1116.367 ; gain = 4.574
+update_compile_order -fileset sources_1
+current_project mem_ip
+set_property previous_version_for_upgrade xilinx.com:user:testmem:1.0 [ipx::current_core]
+set_property core_revision 1 [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::check_integrity [ipx::current_core]
+WARNING: [IP_Flow 19-5661] Bus Interface 'clock' does not have any bus interfaces associated with it.
+INFO: [IP_Flow 19-2181] Payment Required is not set for this core.
+INFO: [IP_Flow 19-2187] The Product Guide file is missing.
+INFO: [Ipptcl 7-1486] check_integrity: Integrity check passed.
+ipx::save_core [ipx::current_core]
+current_project tmp_edit_project
+ipx::move_temp_component_back -component [ipx::current_core]
+close_project -delete
+set_property  ip_repo_paths  {d:/Projects/Vivado_Projects/my_ip_cores/imem_module d:/Projects/Vivado_Projects/my_ip_cores/dmem_module} [current_project]
+update_ip_catalog
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/Projects/Vivado_Projects/my_ip_cores/imem_module'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/Projects/Vivado_Projects/my_ip_cores/dmem_module'.
+reset_run synth_1
+launch_runs synth_1 -jobs 8
+[Fri Dec 23 14:44:19 2022] Launched synth_1...
+Run output will be captured here: D:/Projects/Vivado_Projects/mem_ip/mem_ip.runs/synth_1/runme.log
+reset_run synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory D:/Projects/Vivado_Projects/mem_ip/mem_ip.runs/synth_1
+
+set_param general.maxThreads 8
+8
+launch_runs synth_1 -jobs 8
+[Fri Dec 23 15:01:57 2022] Launched synth_1...
+Run output will be captured here: D:/Projects/Vivado_Projects/mem_ip/mem_ip.runs/synth_1/runme.log
+reset_run synth_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Fri Dec 23 17:45:59 2022...
