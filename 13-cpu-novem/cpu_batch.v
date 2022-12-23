@@ -16,14 +16,6 @@ wire [31:0] daddr,ddataout,ddatain;
 wire drdclk, dwrclk, dwe;
 wire [2:0]  dop;
 wire [31:0] cpudbgdata;
-wire [31:0] dbgresult;
-wire [31:0] dpc;
-wire [31:0] dnextpc;
-wire [31:0] PCA,PCB,PCASRC,PCBSRC;
-
-wire [31:0] x1,x2,x3,x4;
-wire [31:0] imem0,imem1,imem2;
-wire [31:0] dmem0,dmem1,dmem2;
 
 
 
@@ -32,34 +24,27 @@ rv32is mycpu(.clock(clk),
              .reset(reset), 
 				 .imemaddr(iaddr), .imemdataout(idataout), .imemclk(iclk), 
 				 .dmemaddr(daddr), .dmemdataout(ddataout), .dmemdatain(ddatain), .dmemrdclk(drdclk), .dmemwrclk(dwrclk), .dmemop(dop), .dmemwe(dwe), 
-				 .dbgdata(cpudbgdata), .dbgresult(dbgresult), .dpc(dpc), .dnextpc(dnextpc), .PCA(PCA), .PCB(PCB), .PCASRC(PCASRC), .PCBSRC(PCBSRC)
-			    ,.x1(x1), .x2(x2), .x3(x3), .x4(x4),
-			     .imem0(imem0), .imem1(imem1), .imem2(imem2),
-			     .dmem0(dmem0), .dmem1(dmem1), .dmem2(dmem2)
-				 );
+				 .dbgdata(cpudbgdata));
 
-/*
+				  
 //instruction memory, no writing
-dmem instructions(
-	.addr({16'h0000, iaddr[17:2]}),
-	.dataout(idataout),
-	.datain(32'b0),
-	.rdclk(iclk),
-	.wrclk(~iclk),
-	.memop(3'b010),
-	.we(1'b0)
-	);
+testmem instructions(
+	.address(iaddr[17:2]),
+	.clock(iclk),
+	.data(32'b0),
+	.wren(1'b0),
+	.q(idataout));
 	
 
 //data memory	
 dmem datamem(.addr(daddr), 
              .dataout(ddataout), 
-			 .datain(ddatain), 
-			 .rdclk(drdclk), 
-			 .wrclk(dwrclk), 
-			 .memop(dop), 
-			 .we(dwe));
-*/
+				 .datain(ddatain), 
+				 .rdclk(drdclk), 
+				 .wrclk(dwrclk), 
+				 .memop(dop), 
+				 .we(dwe));
+
 //useful tasks
 task step;  //step for one cycle ends 1ns AFTER the posedge of the next cycle
 	begin
@@ -90,7 +75,7 @@ endtask
 
 task loadtestcase;  //load intstructions to instruction mem
 	begin
-		$readmemh({testcase, ".hex"},mycpu.instructions.memblk.ram);
+		$readmemh({testcase, ".hex"},instructions.ram);
 		$display("~~~ Begin test case %s ~~~", testcase);
 	end
 endtask
@@ -119,7 +104,7 @@ task checkmem;//check registers
 	reg [14:0] dmemaddr;
 	begin
 	    dmemaddr=inputaddr[16:2];
-	    debugdata=mycpu.datamem.memblk.ram[dmemaddr]; 
+	    debugdata=datamem.mymem.ram[dmemaddr]; 
 		 if(debugdata==results)
 		 	begin
 				$display("~~~ OK: end of cycle %d mem addr= %h need to be %h, get %h", numcycles-1, inputaddr, results, debugdata);
@@ -162,33 +147,33 @@ endtask
 task checkmagnum;
     begin
 	    if(numcycles>=maxcycles)
-		begin
+		 begin
 		   $display("~~~ Error:test case %s does not terminate!", testcase);
-		end
-		else if(mycpu.myregfile.regs[10]==32'hc0ffee)
-		begin
-		   $display("~~~ OK:test case %s finshed OK at cycle %3d.", testcase, numcycles-1);
-		end
-		else if(mycpu.myregfile.regs[10]==32'hdeaddead)
-		begin
+		 end
+		 else if(mycpu.myregfile.regs[10]==32'hc0ffee)
+		    begin
+		       $display("~~~ OK:test case %s finshed OK at cycle %3d.", testcase, numcycles-1);
+		    end
+		 else if(mycpu.myregfile.regs[10]==32'hdeaddead)
+		 begin
 		   $display("~~~ ERROR:test case %s finshed with error in cycle %3d.", testcase, numcycles-1);
-		end
-		else
-		begin
-		   $display("~~~ ERROR:test case %s unknown error in cycle %3d.", testcase, numcycles-1);
-		end
+		 end
+		 else
+		 begin
+		    $display("~~~ ERROR:test case %s unknown error in cycle %3d.", testcase, numcycles-1);
+		 end
 	 end
 endtask
 
 task loaddatamem;
     begin
-	     $readmemh({testcase, "_d.hex"},mycpu.datamem.memblk.ram);
+	     $readmemh({testcase, "_d.hex"},datamem.mymem.ram);
 	 end
 endtask
 
 task run_riscv_test;
     begin
-	    loadtestcase();
+	   loadtestcase();
 		loaddatamem();
 		resetcpu();
 		run();
@@ -199,18 +184,18 @@ endtask
 initial begin:TestBench
       #80
       // output the state of every instruction
-        
-        testcase = "rv32ui-p-simple";
-		run_riscv_test();
-		testcase = "rv32ui-p-add";
-		run_riscv_test();
+//testcase = "rv32ui-p-simple";
+		//run_riscv_test();
+		//testcase = "rv32ui-p-add";
+		//run_riscv_test();
+		/*
 		testcase = "rv32ui-p-addi";
 		run_riscv_test();
 		testcase = "rv32ui-p-and";
 		run_riscv_test();
 		testcase = "rv32ui-p-andi";
 		run_riscv_test();
-	    testcase = "rv32ui-p-auipc";
+	   testcase = "rv32ui-p-auipc";
 		run_riscv_test();
 		testcase = "rv32ui-p-beq";
 		run_riscv_test();
@@ -244,12 +229,10 @@ initial begin:TestBench
 		run_riscv_test();
 		testcase = "rv32ui-p-ori";
 		run_riscv_test();
-		
 		testcase = "rv32ui-p-sb";
 		run_riscv_test();
 		testcase = "rv32ui-p-sh";
 		run_riscv_test();
-		
 		testcase = "rv32ui-p-sll";
 		run_riscv_test();
 		testcase = "rv32ui-p-slli";
@@ -272,15 +255,15 @@ initial begin:TestBench
 		run_riscv_test();
 		testcase = "rv32ui-p-sub";
 		run_riscv_test();
-		
+		*/
 		testcase = "rv32ui-p-sw";
 		run_riscv_test();
-		
+		/*
 		testcase = "rv32ui-p-xor";
 		run_riscv_test();
 		testcase = "rv32ui-p-xori";
 		run_riscv_test();	
-		
+		*/
 		$stop;
 		
 end

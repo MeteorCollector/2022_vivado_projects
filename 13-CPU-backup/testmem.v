@@ -5,8 +5,9 @@ module Instr_mem(
     input wren,
     output [31:0] q
     );
-    blk_mem_instr instr_mem(.addra(address),.clka(clock),.dina(data),
-            .douta(q), .ena(1'b1), .wea(wren));
+    
+    blk_mem_instr instr_mem(.addra(address),.clka(clock),.dina(32'h0),
+            .douta(q), .wea(1'b0));
 endmodule
 /*
 module testmem(

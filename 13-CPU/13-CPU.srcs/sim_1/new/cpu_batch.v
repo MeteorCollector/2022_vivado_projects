@@ -188,10 +188,12 @@ initial begin:TestBench
       // output the state of every instruction
         //testcase = "rv32ui-p-simple";
 		//run_riscv_test();
-		testcase = "rv32ui-p-add";
-		run_riscv_test();
-		testcase = "rv32ui-p-addi";
-		run_riscv_test();
+		//testcase = "rv32ui-p-add";
+		//run_riscv_test();
+		
+		//testcase = "rv32ui-p-addi";
+		//run_riscv_test();
+		/*
 		testcase = "rv32ui-p-and";
 		run_riscv_test();
 		testcase = "rv32ui-p-andi";
@@ -256,12 +258,16 @@ initial begin:TestBench
 		run_riscv_test();
 		testcase = "rv32ui-p-sub";
 		run_riscv_test();
+		*/
 		testcase = "rv32ui-p-sw";
 		run_riscv_test();
+		/*
 		testcase = "rv32ui-p-xor";
 		run_riscv_test();
 		testcase = "rv32ui-p-xori";
 		run_riscv_test();	
+		
+		*/
 		$stop;
 		
 end

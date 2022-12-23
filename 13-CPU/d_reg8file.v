@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module d_reg32file (busa,busb,busw,ra,rb,rw,clk,we,x1,x2,x3,x4);
+module d_reg32file (busa,busb,busw,ra,rb,rw,clk,we,a0,x2,x3,x4);
 //端口声明
 output [31:0] busa;
 output [31:0] busb;
@@ -29,7 +29,7 @@ input  [4:0] ra; //在读取时作为读入端口A的地址ra，在写入时作为写入端口地址rw
 input  [4:0] rb;
 input  [4:0] rw;
 input  clk, we;
-output [31:0] x1;
+output [31:0] a0;
 output [31:0] x2;
 output [31:0] x3;
 output [31:0] x4;
@@ -39,7 +39,7 @@ reg   [31:0] regs [31:0];
 assign x1 = regs[4];
 assign x2 = regs[5];
 assign x3 = regs[6];
-assign x4 = regs[7]; // attention!
+assign a0 = regs[10]; // attention!
 
 assign busa = regs[ra];
 assign busb = regs[rb];

@@ -23,7 +23,7 @@ module testdmem(
 
 	
 	reg [31:0] ram [32767:0];
-	always@(posedge rdclock)
+	always@(*)
 	begin
 	   if(wren)
 			tempout<=ram[wraddress];
