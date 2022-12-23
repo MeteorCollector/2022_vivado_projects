@@ -24,7 +24,6 @@ module MyMachine(
     input  [15:0] SW,
     output [15:0] LED,
     output [7:0] AN,
-    output [7:0] HEX,
     input  BTNC
 );
 
