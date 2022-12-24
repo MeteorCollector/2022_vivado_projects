@@ -37,9 +37,11 @@ module MyMachine(
 );
 
 // clocks and controls
-wire clk,reset;  //clk and reset signals
-wire CK25MHZ;
-clk_wiz_0 clk25(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(CLK25MHZ));
+wire clk, reset;  //clk and reset signals
+wire CLK25MHZ;
+wire CLK50MHZ;
+clk_wiz_0 CLK25(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(CLK25MHZ));
+clk50 CLK50(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[1]),.clk_out1(CLK50MHZ));
 assign reset = SW[0];
 assign clk = CLK25MHZ;
 
@@ -88,6 +90,14 @@ dmem datamem(.addr(daddr),
 				 .memop(dop), 
 				 .we(dwe));
 				 
+//vga part
 
+vga_char_ram mybuf(.addra(char_addr),
+               .clka(~clk_50m),
+               .ena(1'b1),
+               .dina(char_buf_data),
+               .wea(char_wr),
+               .douta(char_out)
+);// should clk flip? wea = 1, write; otherwise read
 
 endmodule
