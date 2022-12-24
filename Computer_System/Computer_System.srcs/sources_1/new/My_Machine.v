@@ -21,7 +21,6 @@
 
 `timescale 1 ns / 10 ps
 module MyMachine(
-    input [3:0] KEY,
     input CLK100MHZ,  
     input [15:0] SW,
     output [15:0] LED,
@@ -39,13 +38,16 @@ module MyMachine(
 
 integer numcycles;  //number of cycles in test
 
-reg clk,reset;  //clk and reset signals
+wire clk,reset;  //clk and reset signals
+// clocks and controls
+wire CK25MHZ;
+clk_wiz_0 clk25(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(CLK25MHZ));
 
 //reg[8*15:1] testcase; //name of testcase
 
 // CPU declaration
 
-// signals
+// signals from cpu
 wire [31:0] iaddr,idataout;
 wire iclk;
 wire [31:0] daddr,ddataout,ddatain;
@@ -54,10 +56,8 @@ wire [2:0]  dop;
 wire [31:0] cpudbgdata;
 wire [31:0] reg10;
 
-always@(*)
-begin
-    clk = SW[0]; reset = BTNC;
-end
+assign reset = SW[0];
+assign clk = CLK25MHZ;
 
 // hex
 seg7decimal sevenSeg (
@@ -94,7 +94,5 @@ dmem datamem(.addr(daddr),
 				 .wrclk(dwrclk), 
 				 .memop(dop), 
 				 .we(dwe));
-
-
 
 endmodule
