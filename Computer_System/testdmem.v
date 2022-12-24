@@ -23,6 +23,12 @@ module testdmem(
 
 	
 	reg [31:0] ram [32767:0];
+	
+	initial
+    begin
+        $readmemh("D:/Projects/Vivado_Projects/Computer_System/testbench_coe/rv32ui-p-sw_d.hex",ram);
+    end
+	
 	always@(*)
 	begin
 	   if(wren)

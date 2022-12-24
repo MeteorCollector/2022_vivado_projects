@@ -36,14 +36,12 @@ module MyMachine(
     output  VGA_VS
 );
 
-integer numcycles;  //number of cycles in test
-
-wire clk,reset;  //clk and reset signals
 // clocks and controls
+wire clk,reset;  //clk and reset signals
 wire CK25MHZ;
 clk_wiz_0 clk25(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(CLK25MHZ));
-
-//reg[8*15:1] testcase; //name of testcase
+assign reset = SW[0];
+assign clk = CLK25MHZ;
 
 // CPU declaration
 
@@ -55,9 +53,6 @@ wire drdclk, dwrclk, dwe;
 wire [2:0]  dop;
 wire [31:0] cpudbgdata;
 wire [31:0] reg10;
-
-assign reset = SW[0];
-assign clk = CLK25MHZ;
 
 // hex
 seg7decimal sevenSeg (
@@ -75,7 +70,6 @@ rv32is mycpu(.clock(clk),
 				 .dmemaddr(daddr), .dmemdataout(ddataout), .dmemdatain(ddatain), .dmemrdclk(drdclk), .dmemwrclk(dwrclk), .dmemop(dop), .dmemwe(dwe), 
 				 .dbgdata(cpudbgdata),
 				 .reg10(reg10));
-
 				  
 //instruction memory, no writing
 imem instructions(
@@ -84,7 +78,6 @@ imem instructions(
 	.data(32'b0),
 	.wren(1'b0),
 	.q(idataout));
-	
 
 //data memory	
 dmem datamem(.addr(daddr), 
@@ -94,5 +87,7 @@ dmem datamem(.addr(daddr),
 				 .wrclk(dwrclk), 
 				 .memop(dop), 
 				 .we(dwe));
+				 
+
 
 endmodule
