@@ -115,6 +115,6 @@ module vga_ctrl(
 
     assign vga_r = valid ? vga_data[11:8]:4'h0;
     assign vga_g = valid ? vga_data[7:4]:4'h0;
-    assign vga_b = valid? vga_data[3:0]:4'h0;
+    assign vga_b = valid ? vga_data[3:0]:4'h0;
 
 endmodule

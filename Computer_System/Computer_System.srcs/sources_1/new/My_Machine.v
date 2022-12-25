@@ -56,20 +56,11 @@ wire [2:0]  dop;
 wire [31:0] cpudbgdata;
 wire [31:0] reg10;
 
-// hex
-seg7decimal sevenSeg (
-.x(reg10),
-.clk(CLK100MHZ),
-.seg(HEX[6:0]),
-.an(AN[7:0]),
-.dp(dp) 
-);
-
 //main CPU
 rv32is mycpu(.clock(clk), 
              .reset(reset), 
 				 .imemaddr(iaddr), .imemdataout(idataout), .imemclk(iclk), 
-				 .dmemaddr(daddr), .dmemdataout(ddataout), .dmemdatain(ddatain), .dmemrdclk(drdclk), .dmemwrclk(dwrclk), .dmemop(dop), .dmemwe(dwe), 
+				 .dmemaddr(daddr), .dmemdataout(ddata), .dmemdatain(ddatain), .dmemrdclk(drdclk), .dmemwrclk(dwrclk), .dmemop(dop), .dmemwe(dwe), 
 				 .dbgdata(cpudbgdata),
 				 .reg10(reg10));
 				  
@@ -88,16 +79,48 @@ dmem datamem(.addr(daddr),
 				 .rdclk(drdclk), 
 				 .wrclk(dwrclk), 
 				 .memop(dop), 
-				 .we(dwe));
+				 .we(ddatawe));
 				 
 //vga part
+wire [14:0] char_rd_addr;
+wire [14:0] char_cpu_addr;
+wire [7:0]  char_out;
+wire [7:0]  char_cpu_in;
+wire [7:0]  char_cpu_out;
+wire        vga_we;
 
-vga_char_ram mybuf(.addra(char_addr),
-               .clka(~clk_50m),
-               .ena(1'b1),
-               .dina(char_buf_data),
-               .wea(char_wr),
-               .douta(char_out)
-);// should clk flip? wea = 1, write; otherwise read
+vga my_vga(.clk_25m(CLK25MHZ),.clk_50m(CLK50MHZ),.SW(SW),.BTNC(BTNC),.VGA_R(VGA_R),.VGA_G(VGA_G),.VGA_B(VGA_B),
+           .char_rd_addr(char_rd_addr),.char_out(char_out),.VGA_HS(VGA_HS),.VGA_VS(VGA_VS)
+           );
+
+vga_char_ram vga_ram(.clka(~clk_50m),.ena(1'b1),.wea(1'b0),.addra(char_rd_addr),.dina(8'h0),.douta(char_out),
+                     .clkb(clk),.enb(1'b1),.web(vga_we),.addrb(char_cpu_addr),.dinb(char_cpu_in),.doutb(char_cpu_out)
+                     );
+
+wire [31:0] key_dataout;
+wire        kwe;
+wire [31:0] keydbgdata;
+key_ctrl keyboard_device(.kdataout(key_dataout),.frontaddr(daddr[14:0]),.frontdata(ddatain[7:0]),
+                         .rdclk(drdclk),.memop(dop),.memwe(kwe),
+                         .keydbgdata(keydbgdata),.clk_50m(CLK50MHZ),
+                         .PS2_CLK(PS2_CLK),.PS2_DATA(PS2_DATA),.BTNC(BTNC)
+                         );
+
+assign ddatawe = (daddr[31:20] == 12'h001) ? dwe : 1'b0;
+assign vga_we  = (daddr[31:20] == 12'h002) ? dwe : 1'b0;
+assign kwe     = (daddr[31:20] == 12'h003) ? dwe : 1'b0;
+assign char_cpu_addr = daddr[14:0];
+assign char_cpu_in   = ddatain[7:0];
+
+assign ddata   = (daddr[31:20] == 12'h001) ? ddataout : (daddr[31:20] == 12'h002) ? {24'h000000, char_cpu_out} : (daddr[31:20] == 12'h003) ? key_dataout : 32'h00000000;
+
+// hex
+seg7decimal sevenSeg (
+.x(keydbgdata),
+.clk(CLK100MHZ),
+.seg(HEX[6:0]),
+.an(AN[7:0]),
+.dp(dp) 
+);
 
 endmodule

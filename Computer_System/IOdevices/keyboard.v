@@ -18,24 +18,29 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-module key_ctrl(kdataout, rdclk, memop, memwe, keydbgdata, clk_50m);
+module key_ctrl(kdataout, frontaddr, frontdata, rdclk, memop, memwe, keydbgdata, clk_50m, PS2_CLK, PS2_DATA, BTNC);
     output [31:0] kdataout;
+    input  [14:0] frontaddr;
+    input  [7:0]  frontdata;
     input         rdclk;
     input  [2:0]  memop;
     input         memwe;
     output [31:0] keydbgdata;
     input         clk_50m;
+    input         PS2_CLK;
+    input         PS2_DATA;
+    input         BTNC;
     
-reg  [14:0] frontaddr;
 reg  [14:0] endaddr;
 wire [7:0]  bufout;
 wire        we;
 wire [7:0]  push_data;
-integer max_addr = 16'h3fff;
+integer max_addr = 15'h0ff;
+//assign we = memwe;
 
 initial
 begin
-    frontaddr = 15'h0; endaddr = 15'h0;
+    endaddr = 15'h0;
 end
 
 assign kdataout = {24'h000000, bufout};
@@ -49,19 +54,20 @@ begin
         else begin endaddr = endaddr + 1'b1; end 
     end
 end
-
+/*
 always @(posedge rdclk)
 begin 
-    if (we) 
+    if (memwe && (frontaddr <= endaddr)) // warning: buffer will overflow, i tend to maintain the front in software.
     begin 
         if (frontaddr >= max_addr) 
         begin frontaddr = 15'h0; end 
         else begin frontaddr = frontaddr + 1'b1; end 
     end
 end
-
-keyboard my_keyboard(.clk_50m(clk_50m),.keydbgdata(keydbgdata),.push_front(we),.data(push_data));
-key_buffer_ram key_ram(.clka(rdclk),.ena(1'b1),.wea(1'b0),.addra(frontaddr),.dina(8'h0),.douta(bufout),
+*/
+keyboard my_keyboard(.clk_50m(clk_50m),.keydbgdata(keydbgdata),.push_front(we),.data(push_data),
+                     .BTNC(BTNC),.PS2_CLK(PS2_CLK),.PS2_DATA(PS2_DATA));
+key_buffer_ram key_ram(.clka(rdclk),.ena(1'b1),.wea(memwe),.addra(frontaddr),.dina(frontdata),.douta(bufout),
                        .clkb(clk_50m),.enb(1'b1),.web(we),.addrb(endaddr),.dinb(push_data),.doutb()
                        );
     
@@ -71,7 +77,10 @@ module keyboard(
     input         clk_50m,
     output [31:0] keydbgdata,
     output        push_front,
-    output [7:0]  data
+    output [7:0]  data,
+    input         BTNC,
+    input         PS2_CLK,
+    input         PS2_DATA
 );
 
 reg        nextdata_n;

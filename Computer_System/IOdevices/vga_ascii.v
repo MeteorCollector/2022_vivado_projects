@@ -43,7 +43,7 @@ module vga_ascii(
     
     initial
     begin
-        $readmemh("D:/Projects/Vivado_Projects/10-2-vgachar/vga_font.txt", myfont, 0, 4095);
+        $readmemh("D:/Projects/Vivado_Projects/Computer_System/IOdevices/vga_font.txt", myfont, 0, 4095);
         basecolor = 6'd0;
         
         colorpool[0] = 12'h00f;

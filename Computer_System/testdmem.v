@@ -26,7 +26,7 @@ module testdmem(
 	
 	initial
     begin
-        $readmemh("D:/Projects/Vivado_Projects/Computer_System/testbench_coe/rv32ui-p-sw_d.hex",ram);
+        $readmemh("D:/Projects/Vivado_Projects/Computer_System/softwarefiles/main_d.hex",ram);
     end
 	
 	always@(*)
