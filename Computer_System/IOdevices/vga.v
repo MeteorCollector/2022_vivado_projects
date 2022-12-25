@@ -28,7 +28,7 @@ module vga(
     output [3:0] VGA_R,
     output [3:0] VGA_G,
     output [3:0] VGA_B,
-    output [14:0] char_rd_addr,
+    output [15:0] char_rd_addr,
     input  [7:0]  char_out,
     output  VGA_HS,
     output  VGA_VS
@@ -65,7 +65,7 @@ assign VGA_SYNC_N = 1'b0;
 vga_ascii ascii(clk_50m, SW[0], valid, vga_data, char_out, h_font, v_font, cursor, clk_1s, SW[1], h_char, v_char);// checkout if valid is flipped
 //char_buf mybuf(.addra(char_addr),.clka(~clk_50m),.ena(1'b1),.dina(char_buf_data),.wea(char_wr),.douta(char_out));// should clk flip? wea = 1, write; otherwise read
 
-assign char_rd_addr = {3'b000, h_char, v_char};
+assign char_rd_addr = {4'b0000, v_char, h_char};
 //assign cursor = (h_char == h_cur) & (v_char == v_cur);// & clk_cur;
 
 endmodule

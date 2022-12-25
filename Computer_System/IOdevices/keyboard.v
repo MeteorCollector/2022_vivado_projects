@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module key_ctrl(kdataout, frontaddr, frontdata, rdclk, memop, memwe, keydbgdata, clk_50m, PS2_CLK, PS2_DATA, BTNC);
     output [31:0] kdataout;
-    input  [14:0] frontaddr;
+    input  [15:0] frontaddr;
     input  [7:0]  frontdata;
     input         rdclk;
     input  [2:0]  memop;
@@ -31,16 +31,16 @@ module key_ctrl(kdataout, frontaddr, frontdata, rdclk, memop, memwe, keydbgdata,
     input         PS2_DATA;
     input         BTNC;
     
-reg  [14:0] endaddr;
+reg  [15:0] endaddr;
 wire [7:0]  bufout;
 wire        we;
 wire [7:0]  push_data;
-integer max_addr = 15'h0ff;
+integer max_addr = 16'h00ff;
 //assign we = memwe;
 
 initial
 begin
-    endaddr = 15'h0;
+    endaddr = 16'h0000;
 end
 
 assign kdataout = {24'h000000, bufout};
@@ -50,7 +50,7 @@ begin
     if (push_data) 
     begin 
         if (endaddr >= max_addr) 
-        begin endaddr = 15'h0; end 
+        begin endaddr = 16'h0000; end 
         else begin endaddr = endaddr + 1'b1; end 
     end
 end

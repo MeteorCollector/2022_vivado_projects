@@ -1,7 +1,7 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Sat Dec 24 19:31:34 2022
+// Date        : Sun Dec 25 17:50:38 2022
 // Host        : MSI running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               d:/Projects/Vivado_Projects/Computer_System/Computer_System.gen/sources_1/ip/clk50/clk50_sim_netlist.v
@@ -23,7 +23,7 @@ module clk50
   output locked;
   input clk_in1;
 
-  (* IBUF_LOW_PWR *) wire clk_in1;
+  wire clk_in1;
   wire clk_out1;
   wire locked;
   wire reset;
@@ -47,7 +47,6 @@ module clk50_clk50_clk_wiz
   input clk_in1;
 
   wire clk_in1;
-  wire clk_in1_clk50;
   wire clk_out1;
   wire clk_out1_clk50;
   wire clkfbout_buf_clk50;
@@ -75,15 +74,6 @@ module clk50_clk50_clk_wiz
   BUFG clkf_buf
        (.I(clkfbout_clk50),
         .O(clkfbout_buf_clk50));
-  (* BOX_TYPE = "PRIMITIVE" *) 
-  (* CAPACITANCE = "DONT_CARE" *) 
-  (* IBUF_DELAY_VALUE = "0" *) 
-  (* IFD_DELAY_VALUE = "AUTO" *) 
-  IBUF #(
-    .IOSTANDARD("DEFAULT")) 
-    clkin1_ibufg
-       (.I(clk_in1),
-        .O(clk_in1_clk50));
   (* BOX_TYPE = "PRIMITIVE" *) 
   BUFG clkout1_buf
        (.I(clk_out1_clk50),
@@ -143,7 +133,7 @@ module clk50_clk50_clk_wiz
         .CLKFBOUT(clkfbout_clk50),
         .CLKFBOUTB(NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED),
         .CLKFBSTOPPED(NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED),
-        .CLKIN1(clk_in1_clk50),
+        .CLKIN1(clk_in1),
         .CLKIN2(1'b0),
         .CLKINSEL(1'b1),
         .CLKINSTOPPED(NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED),

@@ -82,8 +82,8 @@ dmem datamem(.addr(daddr),
 				 .we(ddatawe));
 				 
 //vga part
-wire [14:0] char_rd_addr;
-wire [14:0] char_cpu_addr;
+wire [15:0] char_rd_addr;
+wire [15:0] char_cpu_addr;
 wire [7:0]  char_out;
 wire [7:0]  char_cpu_in;
 wire [7:0]  char_cpu_out;
@@ -93,14 +93,14 @@ vga my_vga(.clk_25m(CLK25MHZ),.clk_50m(CLK50MHZ),.SW(SW),.BTNC(BTNC),.VGA_R(VGA_
            .char_rd_addr(char_rd_addr),.char_out(char_out),.VGA_HS(VGA_HS),.VGA_VS(VGA_VS)
            );
 
-vga_char_ram vga_ram(.clka(~clk_50m),.ena(1'b1),.wea(1'b0),.addra(char_rd_addr),.dina(8'h0),.douta(char_out),
-                     .clkb(clk),.enb(1'b1),.web(vga_we),.addrb(char_cpu_addr),.dinb(char_cpu_in),.doutb(char_cpu_out)
+vga_char_ram vga_ram(.clka(~CLK50MHZ),.ena(1'b1),.wea(1'b0),.addra(char_rd_addr),.dina(8'h0),.douta(char_out), // for vga output
+                     .clkb(drdclk),.enb(1'b1),.web(vga_we),.addrb(daddr[15:0]),.dinb(ddatain[7:0]),.doutb(char_cpu_out) // for cpu accessment
                      );
 
 wire [31:0] key_dataout;
 wire        kwe;
 wire [31:0] keydbgdata;
-key_ctrl keyboard_device(.kdataout(key_dataout),.frontaddr(daddr[14:0]),.frontdata(ddatain[7:0]),
+key_ctrl keyboard_device(.kdataout(key_dataout),.frontaddr(daddr[15:0]),.frontdata(ddatain[7:0]),
                          .rdclk(drdclk),.memop(dop),.memwe(kwe),
                          .keydbgdata(keydbgdata),.clk_50m(CLK50MHZ),
                          .PS2_CLK(PS2_CLK),.PS2_DATA(PS2_DATA),.BTNC(BTNC)
@@ -109,14 +109,12 @@ key_ctrl keyboard_device(.kdataout(key_dataout),.frontaddr(daddr[14:0]),.frontda
 assign ddatawe = (daddr[31:20] == 12'h001) ? dwe : 1'b0;
 assign vga_we  = (daddr[31:20] == 12'h002) ? dwe : 1'b0;
 assign kwe     = (daddr[31:20] == 12'h003) ? dwe : 1'b0;
-assign char_cpu_addr = daddr[14:0];
-assign char_cpu_in   = ddatain[7:0];
 
 assign ddata   = (daddr[31:20] == 12'h001) ? ddataout : (daddr[31:20] == 12'h002) ? {24'h000000, char_cpu_out} : (daddr[31:20] == 12'h003) ? key_dataout : 32'h00000000;
 
 // hex
 seg7decimal sevenSeg (
-.x(keydbgdata),
+.x(idataout),
 .clk(CLK100MHZ),
 .seg(HEX[6:0]),
 .an(AN[7:0]),
