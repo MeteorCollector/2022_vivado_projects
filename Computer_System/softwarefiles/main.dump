@@ -26,11 +26,11 @@ Disassembly of section .text:
   40:	33c000ef          	jal	ra,37c <vga_init>
   44:	00100517          	auipc	a0,0x100
   48:	fbc50513          	addi	a0,a0,-68 # 100000 <hello>
-  4c:	7ac000ef          	jal	ra,7f8 <putstr>
+  4c:	7b4000ef          	jal	ra,800 <putstr>
   50:	250000ef          	jal	ra,2a0 <wait_keyboard>
   54:	00050793          	mv	a5,a0
   58:	00078513          	mv	a0,a5
-  5c:	5bc000ef          	jal	ra,618 <putch>
+  5c:	5c4000ef          	jal	ra,620 <putch>
   60:	ff1ff06f          	j	50 <main+0x20>
 
 00000064 <__mulsi3>:
@@ -295,7 +295,7 @@ Disassembly of section .text:
  434:	02812623          	sw	s0,44(sp)
  438:	03010413          	addi	s0,sp,48
  43c:	fe042623          	sw	zero,-20(s0)
- 440:	0b00006f          	j	4f0 <roll_up+0xc0>
+ 440:	0b80006f          	j	4f8 <roll_up+0xc8>
  444:	fec42783          	lw	a5,-20(s0)
  448:	00178793          	addi	a5,a5,1
  44c:	00100717          	auipc	a4,0x100
@@ -310,7 +310,7 @@ Disassembly of section .text:
  470:	00f687b3          	add	a5,a3,a5
  474:	00e7a023          	sw	a4,0(a5)
  478:	fe042423          	sw	zero,-24(s0)
- 47c:	05c0006f          	j	4d8 <roll_up+0xa8>
+ 47c:	0640006f          	j	4e0 <roll_up+0xb0>
  480:	fec42783          	lw	a5,-20(s0)
  484:	00779713          	slli	a4,a5,0x7
  488:	002007b7          	lui	a5,0x200
@@ -327,242 +327,244 @@ Disassembly of section .text:
  4b4:	00f707b3          	add	a5,a4,a5
  4b8:	fcf42c23          	sw	a5,-40(s0)
  4bc:	fd842783          	lw	a5,-40(s0)
- 4c0:	0007c703          	lbu	a4,0(a5) # 200000 <_end+0xff800>
- 4c4:	fdc42783          	lw	a5,-36(s0)
- 4c8:	00e78023          	sb	a4,0(a5)
- 4cc:	fe842783          	lw	a5,-24(s0)
- 4d0:	00178793          	addi	a5,a5,1
- 4d4:	fef42423          	sw	a5,-24(s0)
- 4d8:	fe842703          	lw	a4,-24(s0)
- 4dc:	04500793          	li	a5,69
- 4e0:	fae7d0e3          	bge	a5,a4,480 <roll_up+0x50>
- 4e4:	fec42783          	lw	a5,-20(s0)
- 4e8:	00178793          	addi	a5,a5,1
- 4ec:	fef42623          	sw	a5,-20(s0)
- 4f0:	fec42703          	lw	a4,-20(s0)
- 4f4:	01c00793          	li	a5,28
- 4f8:	f4e7d6e3          	bge	a5,a4,444 <roll_up+0x14>
- 4fc:	fe042223          	sw	zero,-28(s0)
- 500:	02c0006f          	j	52c <roll_up+0xfc>
- 504:	fe442703          	lw	a4,-28(s0)
- 508:	002017b7          	lui	a5,0x201
- 50c:	e8078793          	addi	a5,a5,-384 # 200e80 <_end+0x100680>
- 510:	00f707b3          	add	a5,a4,a5
- 514:	fef42023          	sw	a5,-32(s0)
- 518:	fe042783          	lw	a5,-32(s0)
- 51c:	00078023          	sb	zero,0(a5)
- 520:	fe442783          	lw	a5,-28(s0)
- 524:	00178793          	addi	a5,a5,1
- 528:	fef42223          	sw	a5,-28(s0)
- 52c:	fe442703          	lw	a4,-28(s0)
- 530:	04500793          	li	a5,69
- 534:	fce7d8e3          	bge	a5,a4,504 <roll_up+0xd4>
- 538:	00000013          	nop
- 53c:	00000013          	nop
- 540:	02c12403          	lw	s0,44(sp)
- 544:	03010113          	addi	sp,sp,48
- 548:	00008067          	ret
+ 4c0:	0007c783          	lbu	a5,0(a5) # 200000 <_end+0xff800>
+ 4c4:	fcf40ba3          	sb	a5,-41(s0)
+ 4c8:	fdc42783          	lw	a5,-36(s0)
+ 4cc:	fd744703          	lbu	a4,-41(s0)
+ 4d0:	00e78023          	sb	a4,0(a5)
+ 4d4:	fe842783          	lw	a5,-24(s0)
+ 4d8:	00178793          	addi	a5,a5,1
+ 4dc:	fef42423          	sw	a5,-24(s0)
+ 4e0:	fe842703          	lw	a4,-24(s0)
+ 4e4:	04500793          	li	a5,69
+ 4e8:	f8e7dce3          	bge	a5,a4,480 <roll_up+0x50>
+ 4ec:	fec42783          	lw	a5,-20(s0)
+ 4f0:	00178793          	addi	a5,a5,1
+ 4f4:	fef42623          	sw	a5,-20(s0)
+ 4f8:	fec42703          	lw	a4,-20(s0)
+ 4fc:	01c00793          	li	a5,28
+ 500:	f4e7d2e3          	bge	a5,a4,444 <roll_up+0x14>
+ 504:	fe042223          	sw	zero,-28(s0)
+ 508:	02c0006f          	j	534 <roll_up+0x104>
+ 50c:	fe442703          	lw	a4,-28(s0)
+ 510:	002017b7          	lui	a5,0x201
+ 514:	e8078793          	addi	a5,a5,-384 # 200e80 <_end+0x100680>
+ 518:	00f707b3          	add	a5,a4,a5
+ 51c:	fef42023          	sw	a5,-32(s0)
+ 520:	fe042783          	lw	a5,-32(s0)
+ 524:	00078023          	sb	zero,0(a5)
+ 528:	fe442783          	lw	a5,-28(s0)
+ 52c:	00178793          	addi	a5,a5,1
+ 530:	fef42223          	sw	a5,-28(s0)
+ 534:	fe442703          	lw	a4,-28(s0)
+ 538:	04500793          	li	a5,69
+ 53c:	fce7d8e3          	bge	a5,a4,50c <roll_up+0xdc>
+ 540:	00000013          	nop
+ 544:	00000013          	nop
+ 548:	02c12403          	lw	s0,44(sp)
+ 54c:	03010113          	addi	sp,sp,48
+ 550:	00008067          	ret
 
-0000054c <new_line>:
- 54c:	ff010113          	addi	sp,sp,-16
- 550:	00112623          	sw	ra,12(sp)
- 554:	00812423          	sw	s0,8(sp)
- 558:	01010413          	addi	s0,sp,16
- 55c:	00100797          	auipc	a5,0x100
- 560:	b7c78793          	addi	a5,a5,-1156 # 1000d8 <vga_line>
- 564:	0007a703          	lw	a4,0(a5)
- 568:	01c00793          	li	a5,28
- 56c:	04e7d263          	bge	a5,a4,5b0 <new_line+0x64>
- 570:	00100797          	auipc	a5,0x100
- 574:	b6878793          	addi	a5,a5,-1176 # 1000d8 <vga_line>
- 578:	0007a783          	lw	a5,0(a5)
- 57c:	00100717          	auipc	a4,0x100
- 580:	b6070713          	addi	a4,a4,-1184 # 1000dc <vga_ch>
- 584:	00072703          	lw	a4,0(a4)
- 588:	00100697          	auipc	a3,0x100
- 58c:	ad868693          	addi	a3,a3,-1320 # 100060 <charcnt>
- 590:	00279793          	slli	a5,a5,0x2
- 594:	00f687b3          	add	a5,a3,a5
- 598:	00e7a023          	sw	a4,0(a5)
- 59c:	e95ff0ef          	jal	ra,430 <roll_up>
- 5a0:	00100797          	auipc	a5,0x100
- 5a4:	b3c78793          	addi	a5,a5,-1220 # 1000dc <vga_ch>
- 5a8:	0007a023          	sw	zero,0(a5)
- 5ac:	05c0006f          	j	608 <new_line+0xbc>
- 5b0:	00100797          	auipc	a5,0x100
- 5b4:	b2878793          	addi	a5,a5,-1240 # 1000d8 <vga_line>
- 5b8:	0007a783          	lw	a5,0(a5)
- 5bc:	00100717          	auipc	a4,0x100
- 5c0:	b2070713          	addi	a4,a4,-1248 # 1000dc <vga_ch>
- 5c4:	00072703          	lw	a4,0(a4)
- 5c8:	00100697          	auipc	a3,0x100
- 5cc:	a9868693          	addi	a3,a3,-1384 # 100060 <charcnt>
- 5d0:	00279793          	slli	a5,a5,0x2
- 5d4:	00f687b3          	add	a5,a3,a5
- 5d8:	00e7a023          	sw	a4,0(a5)
- 5dc:	00100797          	auipc	a5,0x100
- 5e0:	afc78793          	addi	a5,a5,-1284 # 1000d8 <vga_line>
- 5e4:	0007a783          	lw	a5,0(a5)
- 5e8:	00178713          	addi	a4,a5,1
- 5ec:	00100797          	auipc	a5,0x100
- 5f0:	aec78793          	addi	a5,a5,-1300 # 1000d8 <vga_line>
- 5f4:	00e7a023          	sw	a4,0(a5)
- 5f8:	00100797          	auipc	a5,0x100
- 5fc:	ae478793          	addi	a5,a5,-1308 # 1000dc <vga_ch>
- 600:	0007a023          	sw	zero,0(a5)
- 604:	00000013          	nop
- 608:	00c12083          	lw	ra,12(sp)
- 60c:	00812403          	lw	s0,8(sp)
- 610:	01010113          	addi	sp,sp,16
- 614:	00008067          	ret
+00000554 <new_line>:
+ 554:	ff010113          	addi	sp,sp,-16
+ 558:	00112623          	sw	ra,12(sp)
+ 55c:	00812423          	sw	s0,8(sp)
+ 560:	01010413          	addi	s0,sp,16
+ 564:	00100797          	auipc	a5,0x100
+ 568:	b7478793          	addi	a5,a5,-1164 # 1000d8 <vga_line>
+ 56c:	0007a703          	lw	a4,0(a5)
+ 570:	01c00793          	li	a5,28
+ 574:	04e7d263          	bge	a5,a4,5b8 <new_line+0x64>
+ 578:	00100797          	auipc	a5,0x100
+ 57c:	b6078793          	addi	a5,a5,-1184 # 1000d8 <vga_line>
+ 580:	0007a783          	lw	a5,0(a5)
+ 584:	00100717          	auipc	a4,0x100
+ 588:	b5870713          	addi	a4,a4,-1192 # 1000dc <vga_ch>
+ 58c:	00072703          	lw	a4,0(a4)
+ 590:	00100697          	auipc	a3,0x100
+ 594:	ad068693          	addi	a3,a3,-1328 # 100060 <charcnt>
+ 598:	00279793          	slli	a5,a5,0x2
+ 59c:	00f687b3          	add	a5,a3,a5
+ 5a0:	00e7a023          	sw	a4,0(a5)
+ 5a4:	e8dff0ef          	jal	ra,430 <roll_up>
+ 5a8:	00100797          	auipc	a5,0x100
+ 5ac:	b3478793          	addi	a5,a5,-1228 # 1000dc <vga_ch>
+ 5b0:	0007a023          	sw	zero,0(a5)
+ 5b4:	05c0006f          	j	610 <new_line+0xbc>
+ 5b8:	00100797          	auipc	a5,0x100
+ 5bc:	b2078793          	addi	a5,a5,-1248 # 1000d8 <vga_line>
+ 5c0:	0007a783          	lw	a5,0(a5)
+ 5c4:	00100717          	auipc	a4,0x100
+ 5c8:	b1870713          	addi	a4,a4,-1256 # 1000dc <vga_ch>
+ 5cc:	00072703          	lw	a4,0(a4)
+ 5d0:	00100697          	auipc	a3,0x100
+ 5d4:	a9068693          	addi	a3,a3,-1392 # 100060 <charcnt>
+ 5d8:	00279793          	slli	a5,a5,0x2
+ 5dc:	00f687b3          	add	a5,a3,a5
+ 5e0:	00e7a023          	sw	a4,0(a5)
+ 5e4:	00100797          	auipc	a5,0x100
+ 5e8:	af478793          	addi	a5,a5,-1292 # 1000d8 <vga_line>
+ 5ec:	0007a783          	lw	a5,0(a5)
+ 5f0:	00178713          	addi	a4,a5,1
+ 5f4:	00100797          	auipc	a5,0x100
+ 5f8:	ae478793          	addi	a5,a5,-1308 # 1000d8 <vga_line>
+ 5fc:	00e7a023          	sw	a4,0(a5)
+ 600:	00100797          	auipc	a5,0x100
+ 604:	adc78793          	addi	a5,a5,-1316 # 1000dc <vga_ch>
+ 608:	0007a023          	sw	zero,0(a5)
+ 60c:	00000013          	nop
+ 610:	00c12083          	lw	ra,12(sp)
+ 614:	00812403          	lw	s0,8(sp)
+ 618:	01010113          	addi	sp,sp,16
+ 61c:	00008067          	ret
 
-00000618 <putch>:
- 618:	fe010113          	addi	sp,sp,-32
- 61c:	00112e23          	sw	ra,28(sp)
- 620:	00812c23          	sw	s0,24(sp)
- 624:	02010413          	addi	s0,sp,32
- 628:	00050793          	mv	a5,a0
- 62c:	fef407a3          	sb	a5,-17(s0)
- 630:	fef44703          	lbu	a4,-17(s0)
- 634:	00800793          	li	a5,8
- 638:	0ef71c63          	bne	a4,a5,730 <putch+0x118>
- 63c:	00100797          	auipc	a5,0x100
- 640:	aa078793          	addi	a5,a5,-1376 # 1000dc <vga_ch>
- 644:	0007a783          	lw	a5,0(a5)
- 648:	08079a63          	bnez	a5,6dc <putch+0xc4>
- 64c:	00100797          	auipc	a5,0x100
- 650:	a8c78793          	addi	a5,a5,-1396 # 1000d8 <vga_line>
- 654:	0007a783          	lw	a5,0(a5)
- 658:	18f05263          	blez	a5,7dc <putch+0x1c4>
- 65c:	00100797          	auipc	a5,0x100
- 660:	a7c78793          	addi	a5,a5,-1412 # 1000d8 <vga_line>
- 664:	0007a783          	lw	a5,0(a5)
- 668:	fff78713          	addi	a4,a5,-1
- 66c:	00100797          	auipc	a5,0x100
- 670:	a6c78793          	addi	a5,a5,-1428 # 1000d8 <vga_line>
- 674:	00e7a023          	sw	a4,0(a5)
- 678:	00100797          	auipc	a5,0x100
- 67c:	a6078793          	addi	a5,a5,-1440 # 1000d8 <vga_line>
- 680:	0007a783          	lw	a5,0(a5)
- 684:	00100717          	auipc	a4,0x100
- 688:	9dc70713          	addi	a4,a4,-1572 # 100060 <charcnt>
- 68c:	00279793          	slli	a5,a5,0x2
- 690:	00f707b3          	add	a5,a4,a5
- 694:	0007a703          	lw	a4,0(a5)
- 698:	00100797          	auipc	a5,0x100
- 69c:	a4478793          	addi	a5,a5,-1468 # 1000dc <vga_ch>
- 6a0:	00e7a023          	sw	a4,0(a5)
- 6a4:	00100797          	auipc	a5,0x100
- 6a8:	9b878793          	addi	a5,a5,-1608 # 10005c <vga_start>
- 6ac:	0007a783          	lw	a5,0(a5)
- 6b0:	00100717          	auipc	a4,0x100
- 6b4:	a2870713          	addi	a4,a4,-1496 # 1000d8 <vga_line>
- 6b8:	00072703          	lw	a4,0(a4)
- 6bc:	00771693          	slli	a3,a4,0x7
- 6c0:	00100717          	auipc	a4,0x100
- 6c4:	a1c70713          	addi	a4,a4,-1508 # 1000dc <vga_ch>
- 6c8:	00072703          	lw	a4,0(a4)
- 6cc:	00e68733          	add	a4,a3,a4
- 6d0:	00e787b3          	add	a5,a5,a4
- 6d4:	00078023          	sb	zero,0(a5)
- 6d8:	1040006f          	j	7dc <putch+0x1c4>
- 6dc:	00100797          	auipc	a5,0x100
- 6e0:	a0078793          	addi	a5,a5,-1536 # 1000dc <vga_ch>
- 6e4:	0007a783          	lw	a5,0(a5)
- 6e8:	fff78713          	addi	a4,a5,-1
- 6ec:	00100797          	auipc	a5,0x100
- 6f0:	9f078793          	addi	a5,a5,-1552 # 1000dc <vga_ch>
- 6f4:	00e7a023          	sw	a4,0(a5)
- 6f8:	00100797          	auipc	a5,0x100
- 6fc:	96478793          	addi	a5,a5,-1692 # 10005c <vga_start>
- 700:	0007a783          	lw	a5,0(a5)
- 704:	00100717          	auipc	a4,0x100
- 708:	9d470713          	addi	a4,a4,-1580 # 1000d8 <vga_line>
- 70c:	00072703          	lw	a4,0(a4)
- 710:	00771693          	slli	a3,a4,0x7
- 714:	00100717          	auipc	a4,0x100
- 718:	9c870713          	addi	a4,a4,-1592 # 1000dc <vga_ch>
- 71c:	00072703          	lw	a4,0(a4)
- 720:	00e68733          	add	a4,a3,a4
- 724:	00e787b3          	add	a5,a5,a4
- 728:	00078023          	sb	zero,0(a5)
- 72c:	0b00006f          	j	7dc <putch+0x1c4>
- 730:	fef44703          	lbu	a4,-17(s0)
- 734:	00a00793          	li	a5,10
- 738:	00f70863          	beq	a4,a5,748 <putch+0x130>
- 73c:	fef44703          	lbu	a4,-17(s0)
- 740:	00d00793          	li	a5,13
- 744:	00f71663          	bne	a4,a5,750 <putch+0x138>
- 748:	e05ff0ef          	jal	ra,54c <new_line>
- 74c:	09c0006f          	j	7e8 <putch+0x1d0>
- 750:	00100797          	auipc	a5,0x100
- 754:	90c78793          	addi	a5,a5,-1780 # 10005c <vga_start>
- 758:	0007a783          	lw	a5,0(a5)
- 75c:	00100717          	auipc	a4,0x100
- 760:	97c70713          	addi	a4,a4,-1668 # 1000d8 <vga_line>
- 764:	00072703          	lw	a4,0(a4)
- 768:	00771693          	slli	a3,a4,0x7
- 76c:	00100717          	auipc	a4,0x100
- 770:	97070713          	addi	a4,a4,-1680 # 1000dc <vga_ch>
- 774:	00072703          	lw	a4,0(a4)
- 778:	00e68733          	add	a4,a3,a4
- 77c:	00e787b3          	add	a5,a5,a4
- 780:	fef44703          	lbu	a4,-17(s0)
- 784:	00e78023          	sb	a4,0(a5)
- 788:	00100797          	auipc	a5,0x100
- 78c:	95478793          	addi	a5,a5,-1708 # 1000dc <vga_ch>
- 790:	0007a783          	lw	a5,0(a5)
- 794:	00178713          	addi	a4,a5,1
- 798:	00100797          	auipc	a5,0x100
- 79c:	94478793          	addi	a5,a5,-1724 # 1000dc <vga_ch>
- 7a0:	00e7a023          	sw	a4,0(a5)
- 7a4:	00100797          	auipc	a5,0x100
- 7a8:	93878793          	addi	a5,a5,-1736 # 1000dc <vga_ch>
- 7ac:	0007a703          	lw	a4,0(a5)
- 7b0:	04500793          	li	a5,69
- 7b4:	02e7d863          	bge	a5,a4,7e4 <putch+0x1cc>
- 7b8:	00100797          	auipc	a5,0x100
- 7bc:	92478793          	addi	a5,a5,-1756 # 1000dc <vga_ch>
- 7c0:	0007a783          	lw	a5,0(a5)
- 7c4:	fff78713          	addi	a4,a5,-1
- 7c8:	00100797          	auipc	a5,0x100
- 7cc:	91478793          	addi	a5,a5,-1772 # 1000dc <vga_ch>
- 7d0:	00e7a023          	sw	a4,0(a5)
- 7d4:	d79ff0ef          	jal	ra,54c <new_line>
- 7d8:	00c0006f          	j	7e4 <putch+0x1cc>
- 7dc:	00000013          	nop
- 7e0:	0080006f          	j	7e8 <putch+0x1d0>
+00000620 <putch>:
+ 620:	fe010113          	addi	sp,sp,-32
+ 624:	00112e23          	sw	ra,28(sp)
+ 628:	00812c23          	sw	s0,24(sp)
+ 62c:	02010413          	addi	s0,sp,32
+ 630:	00050793          	mv	a5,a0
+ 634:	fef407a3          	sb	a5,-17(s0)
+ 638:	fef44703          	lbu	a4,-17(s0)
+ 63c:	00800793          	li	a5,8
+ 640:	0ef71c63          	bne	a4,a5,738 <putch+0x118>
+ 644:	00100797          	auipc	a5,0x100
+ 648:	a9878793          	addi	a5,a5,-1384 # 1000dc <vga_ch>
+ 64c:	0007a783          	lw	a5,0(a5)
+ 650:	08079a63          	bnez	a5,6e4 <putch+0xc4>
+ 654:	00100797          	auipc	a5,0x100
+ 658:	a8478793          	addi	a5,a5,-1404 # 1000d8 <vga_line>
+ 65c:	0007a783          	lw	a5,0(a5)
+ 660:	18f05263          	blez	a5,7e4 <putch+0x1c4>
+ 664:	00100797          	auipc	a5,0x100
+ 668:	a7478793          	addi	a5,a5,-1420 # 1000d8 <vga_line>
+ 66c:	0007a783          	lw	a5,0(a5)
+ 670:	fff78713          	addi	a4,a5,-1
+ 674:	00100797          	auipc	a5,0x100
+ 678:	a6478793          	addi	a5,a5,-1436 # 1000d8 <vga_line>
+ 67c:	00e7a023          	sw	a4,0(a5)
+ 680:	00100797          	auipc	a5,0x100
+ 684:	a5878793          	addi	a5,a5,-1448 # 1000d8 <vga_line>
+ 688:	0007a783          	lw	a5,0(a5)
+ 68c:	00100717          	auipc	a4,0x100
+ 690:	9d470713          	addi	a4,a4,-1580 # 100060 <charcnt>
+ 694:	00279793          	slli	a5,a5,0x2
+ 698:	00f707b3          	add	a5,a4,a5
+ 69c:	0007a703          	lw	a4,0(a5)
+ 6a0:	00100797          	auipc	a5,0x100
+ 6a4:	a3c78793          	addi	a5,a5,-1476 # 1000dc <vga_ch>
+ 6a8:	00e7a023          	sw	a4,0(a5)
+ 6ac:	00100797          	auipc	a5,0x100
+ 6b0:	9b078793          	addi	a5,a5,-1616 # 10005c <vga_start>
+ 6b4:	0007a783          	lw	a5,0(a5)
+ 6b8:	00100717          	auipc	a4,0x100
+ 6bc:	a2070713          	addi	a4,a4,-1504 # 1000d8 <vga_line>
+ 6c0:	00072703          	lw	a4,0(a4)
+ 6c4:	00771693          	slli	a3,a4,0x7
+ 6c8:	00100717          	auipc	a4,0x100
+ 6cc:	a1470713          	addi	a4,a4,-1516 # 1000dc <vga_ch>
+ 6d0:	00072703          	lw	a4,0(a4)
+ 6d4:	00e68733          	add	a4,a3,a4
+ 6d8:	00e787b3          	add	a5,a5,a4
+ 6dc:	00078023          	sb	zero,0(a5)
+ 6e0:	1040006f          	j	7e4 <putch+0x1c4>
+ 6e4:	00100797          	auipc	a5,0x100
+ 6e8:	9f878793          	addi	a5,a5,-1544 # 1000dc <vga_ch>
+ 6ec:	0007a783          	lw	a5,0(a5)
+ 6f0:	fff78713          	addi	a4,a5,-1
+ 6f4:	00100797          	auipc	a5,0x100
+ 6f8:	9e878793          	addi	a5,a5,-1560 # 1000dc <vga_ch>
+ 6fc:	00e7a023          	sw	a4,0(a5)
+ 700:	00100797          	auipc	a5,0x100
+ 704:	95c78793          	addi	a5,a5,-1700 # 10005c <vga_start>
+ 708:	0007a783          	lw	a5,0(a5)
+ 70c:	00100717          	auipc	a4,0x100
+ 710:	9cc70713          	addi	a4,a4,-1588 # 1000d8 <vga_line>
+ 714:	00072703          	lw	a4,0(a4)
+ 718:	00771693          	slli	a3,a4,0x7
+ 71c:	00100717          	auipc	a4,0x100
+ 720:	9c070713          	addi	a4,a4,-1600 # 1000dc <vga_ch>
+ 724:	00072703          	lw	a4,0(a4)
+ 728:	00e68733          	add	a4,a3,a4
+ 72c:	00e787b3          	add	a5,a5,a4
+ 730:	00078023          	sb	zero,0(a5)
+ 734:	0b00006f          	j	7e4 <putch+0x1c4>
+ 738:	fef44703          	lbu	a4,-17(s0)
+ 73c:	00a00793          	li	a5,10
+ 740:	00f70863          	beq	a4,a5,750 <putch+0x130>
+ 744:	fef44703          	lbu	a4,-17(s0)
+ 748:	00d00793          	li	a5,13
+ 74c:	00f71663          	bne	a4,a5,758 <putch+0x138>
+ 750:	e05ff0ef          	jal	ra,554 <new_line>
+ 754:	09c0006f          	j	7f0 <putch+0x1d0>
+ 758:	00100797          	auipc	a5,0x100
+ 75c:	90478793          	addi	a5,a5,-1788 # 10005c <vga_start>
+ 760:	0007a783          	lw	a5,0(a5)
+ 764:	00100717          	auipc	a4,0x100
+ 768:	97470713          	addi	a4,a4,-1676 # 1000d8 <vga_line>
+ 76c:	00072703          	lw	a4,0(a4)
+ 770:	00771693          	slli	a3,a4,0x7
+ 774:	00100717          	auipc	a4,0x100
+ 778:	96870713          	addi	a4,a4,-1688 # 1000dc <vga_ch>
+ 77c:	00072703          	lw	a4,0(a4)
+ 780:	00e68733          	add	a4,a3,a4
+ 784:	00e787b3          	add	a5,a5,a4
+ 788:	fef44703          	lbu	a4,-17(s0)
+ 78c:	00e78023          	sb	a4,0(a5)
+ 790:	00100797          	auipc	a5,0x100
+ 794:	94c78793          	addi	a5,a5,-1716 # 1000dc <vga_ch>
+ 798:	0007a783          	lw	a5,0(a5)
+ 79c:	00178713          	addi	a4,a5,1
+ 7a0:	00100797          	auipc	a5,0x100
+ 7a4:	93c78793          	addi	a5,a5,-1732 # 1000dc <vga_ch>
+ 7a8:	00e7a023          	sw	a4,0(a5)
+ 7ac:	00100797          	auipc	a5,0x100
+ 7b0:	93078793          	addi	a5,a5,-1744 # 1000dc <vga_ch>
+ 7b4:	0007a703          	lw	a4,0(a5)
+ 7b8:	04500793          	li	a5,69
+ 7bc:	02e7d863          	bge	a5,a4,7ec <putch+0x1cc>
+ 7c0:	00100797          	auipc	a5,0x100
+ 7c4:	91c78793          	addi	a5,a5,-1764 # 1000dc <vga_ch>
+ 7c8:	0007a783          	lw	a5,0(a5)
+ 7cc:	fff78713          	addi	a4,a5,-1
+ 7d0:	00100797          	auipc	a5,0x100
+ 7d4:	90c78793          	addi	a5,a5,-1780 # 1000dc <vga_ch>
+ 7d8:	00e7a023          	sw	a4,0(a5)
+ 7dc:	d79ff0ef          	jal	ra,554 <new_line>
+ 7e0:	00c0006f          	j	7ec <putch+0x1cc>
  7e4:	00000013          	nop
- 7e8:	01c12083          	lw	ra,28(sp)
- 7ec:	01812403          	lw	s0,24(sp)
- 7f0:	02010113          	addi	sp,sp,32
- 7f4:	00008067          	ret
+ 7e8:	0080006f          	j	7f0 <putch+0x1d0>
+ 7ec:	00000013          	nop
+ 7f0:	01c12083          	lw	ra,28(sp)
+ 7f4:	01812403          	lw	s0,24(sp)
+ 7f8:	02010113          	addi	sp,sp,32
+ 7fc:	00008067          	ret
 
-000007f8 <putstr>:
- 7f8:	fd010113          	addi	sp,sp,-48
- 7fc:	02112623          	sw	ra,44(sp)
- 800:	02812423          	sw	s0,40(sp)
- 804:	03010413          	addi	s0,sp,48
- 808:	fca42e23          	sw	a0,-36(s0)
- 80c:	fdc42783          	lw	a5,-36(s0)
- 810:	fef42623          	sw	a5,-20(s0)
- 814:	0200006f          	j	834 <putstr+0x3c>
- 818:	fec42783          	lw	a5,-20(s0)
- 81c:	0007c783          	lbu	a5,0(a5)
- 820:	00078513          	mv	a0,a5
- 824:	df5ff0ef          	jal	ra,618 <putch>
- 828:	fec42783          	lw	a5,-20(s0)
- 82c:	00178793          	addi	a5,a5,1
- 830:	fef42623          	sw	a5,-20(s0)
- 834:	fec42783          	lw	a5,-20(s0)
- 838:	0007c783          	lbu	a5,0(a5)
- 83c:	fc079ee3          	bnez	a5,818 <putstr+0x20>
- 840:	00000013          	nop
- 844:	00000013          	nop
- 848:	02c12083          	lw	ra,44(sp)
- 84c:	02812403          	lw	s0,40(sp)
- 850:	03010113          	addi	sp,sp,48
- 854:	00008067          	ret
+00000800 <putstr>:
+ 800:	fd010113          	addi	sp,sp,-48
+ 804:	02112623          	sw	ra,44(sp)
+ 808:	02812423          	sw	s0,40(sp)
+ 80c:	03010413          	addi	s0,sp,48
+ 810:	fca42e23          	sw	a0,-36(s0)
+ 814:	fdc42783          	lw	a5,-36(s0)
+ 818:	fef42623          	sw	a5,-20(s0)
+ 81c:	0200006f          	j	83c <putstr+0x3c>
+ 820:	fec42783          	lw	a5,-20(s0)
+ 824:	0007c783          	lbu	a5,0(a5)
+ 828:	00078513          	mv	a0,a5
+ 82c:	df5ff0ef          	jal	ra,620 <putch>
+ 830:	fec42783          	lw	a5,-20(s0)
+ 834:	00178793          	addi	a5,a5,1
+ 838:	fef42623          	sw	a5,-20(s0)
+ 83c:	fec42783          	lw	a5,-20(s0)
+ 840:	0007c783          	lbu	a5,0(a5)
+ 844:	fc079ee3          	bnez	a5,820 <putstr+0x20>
+ 848:	00000013          	nop
+ 84c:	00000013          	nop
+ 850:	02c12083          	lw	ra,44(sp)
+ 854:	02812403          	lw	s0,40(sp)
+ 858:	03010113          	addi	sp,sp,48
+ 85c:	00008067          	ret
 
 Disassembly of section .data:
 

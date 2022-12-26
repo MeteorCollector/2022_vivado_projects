@@ -145,17 +145,19 @@ wire [31:0] char_cpu_out;
 wire [31:0] vga_ram_out;
 wire        vga_we;
 wire [3:0]  vga_web;
+wire        char_clk;
 
 vga my_vga(.clk_25m(CLK25MHZ),.clk_50m(CLK50MHZ),.SW(SW),.BTNC(BTNC),.VGA_R(VGA_R),.VGA_G(VGA_G),.VGA_B(VGA_B),
            .char_rd_addr(char_rd_addr),.char_out(char_out),.VGA_HS(VGA_HS),.VGA_VS(VGA_VS)
            );
 
 vga_char_ram vga_ram(.clka(~CLK50MHZ),.ena(1'b1),.wea(1'b0),.addra(char_rd_addr),.dina(8'h0),.douta(char_out), // for vga output
-                     .clkb(dwrclk),.enb(1'b1),.web(vga_web),.addrb(daddr[15:2]),.dinb(char_cpu_in),.doutb(char_cpu_out) // for cpu accessment
+                     .clkb(char_clk),.enb(1'b1),.web(vga_web),.addrb(daddr[15:2]),.dinb(char_cpu_in),.doutb(char_cpu_out) // for cpu accessment
                      );
                      
 IOconverter cpu_to_vga(.addr(daddr),.dwordout(char_cpu_out),.datain(ddatain),.rdclk(drdclk),.wrclk(dwrclk),.memop(dop),
-                       .we(vga_we),.realdataout(vga_ram_out),.realdatain(char_cpu_in),.wmask(vga_web)
+                       .we(vga_we),.realdataout(vga_ram_out),.realdatain(char_cpu_in),.wmask(vga_web),
+                       .rdclkout(),.wrclkout(char_clk)
                       );
 
 always@(posedge vga_we)

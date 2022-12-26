@@ -26,7 +26,8 @@ void roll_up() {
         {
           char* dst = (char*)(VGA_START + (i << 7) + j);
           char* src = (char*)(VGA_START + ((i + 1) << 7) + j);
-          *dst = *src;
+          char content = *src;
+          *dst = content;
         }
     }
     for (int j = 0; j < VGA_MAXCOL; j++)
