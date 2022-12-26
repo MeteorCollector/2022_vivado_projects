@@ -81,8 +81,6 @@ module rv32is(
     );
 
 integer tick;
-reg CLK50MHZ;
-reg CLK25MHZ;
 wire clk;
 wire rdclk;
 wire wrclk;
@@ -118,14 +116,6 @@ assign mtor  = MemtoReg; //
 assign clk = clock; // single step. to be mmodified in real application.
 assign rdclk = clk;
 assign wrclk = ~clk;
-
-initial
-begin
-    CLK50MHZ = 1'b0; CLK25MHZ = 1'b0;
-end
-
-always @(posedge    clock) begin CLK50MHZ = ~CLK50MHZ; end
-always @(posedge CLK50MHZ) begin CLK25MHZ = ~CLK25MHZ; end
 /*
 dmem instructions(.addr(PC),.dataout(Instr),.datain(32'h0),.rdclk(rdclk),.wrclk(1'b0),.memop(3'b010),.we(1'b0)
               ,.m0(imem0),.m1(imem1),.m2(imem2)

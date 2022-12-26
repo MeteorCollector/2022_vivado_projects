@@ -1,4 +1,4 @@
-module IOconverter(addr, dwordout, datain, rdclk, wrclk, memop, we, realdataout, realdatain, wmask);
+module IOconverter(addr, dwordout, datain, rdclk, wrclk, memop, we, realdataout, realdatain, wmask, rdclkout, wrclkout);
     input  [31:0] addr;
 	input  [31:0] dwordout;
 	input  [31:0] datain;
@@ -9,6 +9,10 @@ module IOconverter(addr, dwordout, datain, rdclk, wrclk, memop, we, realdataout,
 	output reg [31:0] realdataout;
 	output [31:0] realdatain;
 	output reg [3:0] wmask;
+	output rdclkout;
+	output wrclkout;
+	assign rdclkout = rdclk;
+	assign wrclkout = wrclk;
 	
 	wire [7:0] byteout;
 	wire [15:0] wordout;

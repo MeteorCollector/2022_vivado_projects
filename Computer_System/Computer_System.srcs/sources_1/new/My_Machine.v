@@ -20,6 +20,37 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 `timescale 1 ns / 10 ps
+module clkgen(
+   input clkin, input rst, input clken, output reg clkout);
+    parameter clk_freq=10000;
+    parameter countlimit=50000000/clk_freq-1; 
+   reg[31:0] clkcount;
+   initial
+   begin clkcount=32'd0; clkout=1'b0; end
+   always @ (posedge clkin) 
+    if(rst)
+     begin
+        clkcount<=0;
+        clkout<=1'b0;
+     end
+    else
+    begin
+     if(clken)
+        begin
+            if(clkcount>=countlimit)
+             begin
+                clkcount<=32'd0;
+                clkout<=~clkout;
+             end
+             else
+             begin
+                clkcount<=clkcount+1;
+
+             end
+         end
+     end  
+endmodule
+
 module MyMachine(
     input CLK100MHZ,  
     input [15:0] SW,
@@ -55,10 +86,11 @@ wire clk, reset;  //clk and reset signals
 wire CLK25MHZ;
 wire CLK50MHZ;
 wire CLKCPU;
-sys_clk CLKMODULE(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(CLK25MHZ),.clk_out2(CLK50MHZ),.clk_out3(CLKCPU));
-
+sys_clk CLKMODULE(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(LED[0]),.clk_out1(CLK50MHZ),.clk_out2(CLK25MHZ));
+//cpu_clk CPUCLK(.clk_in1(CLK100MHZ),.reset(SW[0]),.locked(),.clk_out1(CLKCPU));
+clkgen cpu_clk_generator(.clkin(CLK100MHZ),.rst(SW[0]),.clken(1'b1),.clkout(CLKCPU));
 assign reset = SW[0];
-assign clk = CLKCPU; // remember to modify!
+//assign clk = CLKCPU; // remember to modify!
 
 // CPU declaration
 
@@ -80,7 +112,7 @@ wire        zero;
 wire        memtoreg;
 
 //main CPU
-rv32is mycpu(.clock(clk), 
+rv32is mycpu(.clock(CLKCPU), 
              .reset(reset), 
 				 .imemaddr(iaddr), .imemdataout(idataout), .imemclk(iclk), 
 				 .dmemaddr(daddr), .dmemdataout(ddata), .dmemdatain(ddatain), .dmemrdclk(drdclk), .dmemwrclk(dwrclk), .dmemop(dop), .dmemwe(dwe), 

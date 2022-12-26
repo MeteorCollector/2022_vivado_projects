@@ -14,7 +14,7 @@ void vga_init(){
     {
         charcnt[i] = 0;
         for(int j=0;j<VGA_MAXCOL;j++)
-            vga_start[(i << 7) + j] = '.'; // for debugging
+            vga_start[(i << 7) + j] = 0; // for debugging
     }
 }
 
@@ -23,10 +23,17 @@ void roll_up() {
     {
         charcnt[i] = charcnt[i + 1];
         for (int j = 0; j < VGA_MAXCOL; j++)
-            vga_start[(i << 7) + j] = vga_start[((i + 1) << 7) + j];
+        {
+          char* dst = (char*)(VGA_START + (i << 7) + j);
+          char* src = (char*)(VGA_START + ((i + 1) << 7) + j);
+          *dst = *src;
+        }
     }
     for (int j = 0; j < VGA_MAXCOL; j++)
-        vga_start[((VGA_MAXLINE - 1) << 7) + j] = 0;
+    {
+      char* dst = (char*)(VGA_START + ((VGA_MAXLINE - 1) << 7) + j);
+      *dst = 0;
+    }
 }
 
 void new_line() {
