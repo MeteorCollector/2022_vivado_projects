@@ -12,3 +12,4 @@ void putch(char ch);
 void vga_init(void);
 
 char wait_keyboard(void);
+char get_keyboard(void);

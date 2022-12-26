@@ -48,7 +48,12 @@ module rv32is(
     output [2:0]  dmemop,
     output        dmemwe,
     output [31:0] dbgdata,
-    output [31:0] reg10
+    output [31:0] reg10,
+    output [31:0] a4,
+    output [31:0] a5,
+    output        lsign,
+    output        zsign,
+    output        mtor
     
     /*
     output [31:0] dbgresult,
@@ -107,6 +112,9 @@ wire        Less;
 wire        Zero;
 wire [31:0] Result;
 
+assign lsign = Less; //
+assign zsign = Zero; //
+assign mtor  = MemtoReg; //
 assign clk = clock; // single step. to be mmodified in real application.
 assign rdclk = clk;
 assign wrclk = ~clk;
@@ -128,7 +136,7 @@ assign Instr = imemdataout;
 assign imemclk = rdclk;
 
 d_reg32file myregfile(.busa(rs1),.busb(rs2),.busw(busW),.ra(Instr[19:15]),.rb(Instr[24:20]),.rw(Instr[11:7]),.clk(wrclk),.we(RegWr)
-                      ,.a0(reg10)
+                      ,.a0(reg10),.a4(a4),.a5(a5)
                       );
 InstrToImm InToTmm(.instr(Instr),.ExtOp(ExtOp),.imm(imm));
 ContrGen CGen(.instr(Instr),.ExtOp(ExtOp),.RegWr(RegWr),.ALUAsrc(ALUAsrc),.ALUBsrc(ALUBsrc),.ALUctr(ALUctr),.Branch(Branch),.MemtoReg(MemtoReg),.MemWr(MemWr),.MemOp(MemOp));

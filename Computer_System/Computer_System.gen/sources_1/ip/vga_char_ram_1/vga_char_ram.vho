@@ -62,10 +62,10 @@ COMPONENT vga_char_ram
     douta : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
     clkb : IN STD_LOGIC;
     enb : IN STD_LOGIC;
-    web : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    addrb : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    dinb : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-    doutb : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+    web : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+    addrb : IN STD_LOGIC_VECTOR(13 DOWNTO 0);
+    dinb : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    doutb : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
   );
 END COMPONENT;
 -- COMP_TAG_END ------ End COMPONENT Declaration ------------

@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module d_reg32file (busa,busb,busw,ra,rb,rw,clk,we,a0);
+module d_reg32file (busa,busb,busw,ra,rb,rw,clk,we,a0,a4,a5);
 //¶Ë¿ÚÉùÃ÷
 output [31:0] busa;
 output [31:0] busb;
@@ -30,10 +30,14 @@ input  [4:0] rb;
 input  [4:0] rw;
 input  clk, we;
 output [31:0] a0;
+output [31:0] a4;
+output [31:0] a5;
 
 reg   [31:0] regs [31:0];
 
-assign a0 = regs[10];
+assign a0 = regs[0];
+assign a4 = regs[14];
+assign a5 = regs[15];
 
 assign busa = regs[ra];
 assign busb = regs[rb];
@@ -46,7 +50,7 @@ begin
      1'b1: begin if (rw != 5'b00000) 
                  begin 
                     regs[rw] = busw; 
-                    //$display("wrote %h to register %h", busw, rw); 
+                    $display("wrote %h to register %h", busw, rw); 
                  end 
            end // $0 always 0.
      1'b0: begin end

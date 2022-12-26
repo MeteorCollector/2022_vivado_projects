@@ -1,7 +1,7 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-// Date        : Sun Dec 25 18:48:01 2022
+// Date        : Sun Dec 25 19:49:58 2022
 // Host        : MSI running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               d:/Projects/Vivado_Projects/Computer_System/Computer_System.gen/sources_1/ip/vga_char_ram_1/vga_char_ram_stub.v
@@ -16,7 +16,7 @@
 (* x_core_info = "blk_mem_gen_v8_4_4,Vivado 2020.2" *)
 module vga_char_ram(clka, ena, wea, addra, dina, douta, clkb, enb, web, addrb, 
   dinb, doutb)
-/* synthesis syn_black_box black_box_pad_pin="clka,ena,wea[0:0],addra[15:0],dina[7:0],douta[7:0],clkb,enb,web[0:0],addrb[15:0],dinb[7:0],doutb[7:0]" */;
+/* synthesis syn_black_box black_box_pad_pin="clka,ena,wea[0:0],addra[15:0],dina[7:0],douta[7:0],clkb,enb,web[3:0],addrb[13:0],dinb[31:0],doutb[31:0]" */;
   input clka;
   input ena;
   input [0:0]wea;
@@ -25,8 +25,8 @@ module vga_char_ram(clka, ena, wea, addra, dina, douta, clkb, enb, web, addrb,
   output [7:0]douta;
   input clkb;
   input enb;
-  input [0:0]web;
-  input [15:0]addrb;
-  input [7:0]dinb;
-  output [7:0]doutb;
+  input [3:0]web;
+  input [13:0]addrb;
+  input [31:0]dinb;
+  output [31:0]doutb;
 endmodule

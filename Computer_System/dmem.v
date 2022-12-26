@@ -1,3 +1,81 @@
+module IOconverter(addr, dwordout, datain, rdclk, wrclk, memop, we, realdataout, realdatain, wmask);
+    input  [31:0] addr;
+	input  [31:0] dwordout;
+	input  [31:0] datain;
+	input  rdclk;
+	input  wrclk;
+	input  [2:0] memop;
+	input  we;
+	output reg [31:0] realdataout;
+	output [31:0] realdatain;
+	output reg [3:0] wmask;
+	
+	wire [7:0] byteout;
+	wire [15:0] wordout;
+ 
+
+assign realdatain = (memop[1:0]==2'b00)?{4{datain[7:0]}}:((memop[1:0]==2'b10)?datain:{2{datain[15:0]}}); //lb: same for all four, lh:copy twice; lw:copy
+
+assign wordout = (addr[1]==1'b1)? dwordout[31:16] : dwordout[15:0];
+
+assign byteout = (addr[1]==1'b1)? ((addr[0]==1'b1)? dwordout[31:24]:dwordout[23:16]):((addr[0]==1'b1)? dwordout[15:8]:dwordout[7:0]);
+
+
+always @(*)
+begin
+  case(memop)
+  3'b000: //lb
+     realdataout = { {24{byteout[7]}}, byteout};
+  3'b001: //lh
+     realdataout = { {16{wordout[15]}}, wordout};
+  3'b010: //lw
+     realdataout = dwordout;
+  3'b100: //lbu
+     realdataout = { 24'b0, byteout};
+  3'b101: //lhu
+     realdataout = { 16'b0, wordout};
+  default:
+     realdataout = dwordout;
+  endcase
+end
+
+always@(*)
+begin
+	if(we==1'b1)
+	begin
+		case(memop)
+			3'b000://sb
+			begin
+				wmask[0]=(addr[1:0]==2'b00)?1'b1:1'b0;
+				wmask[1]=(addr[1:0]==2'b01)?1'b1:1'b0;
+				wmask[2]=(addr[1:0]==2'b10)?1'b1:1'b0;
+				wmask[3]=(addr[1:0]==2'b11)?1'b1:1'b0;
+			end
+			3'b001://sh
+			begin
+				wmask[0]=(addr[1]==1'b0)?1'b1:1'b0;
+				wmask[1]=(addr[1]==1'b0)?1'b1:1'b0;
+				wmask[2]=(addr[1]==1'b1)?1'b1:1'b0;
+				wmask[3]=(addr[1]==1'b1)?1'b1:1'b0;
+			end		
+			3'b010://sw
+			begin
+				wmask=4'b1111;
+			end
+			default:
+			begin
+				wmask=4'b0000;
+			end
+		endcase
+	end
+	else
+	begin
+	   wmask=4'b0000;
+	end
+end
+endmodule
+
+
 module dmem(addr, dataout, datain, rdclk, wrclk, memop, we);
 	input  [31:0] addr;
 	output reg [31:0] dataout;

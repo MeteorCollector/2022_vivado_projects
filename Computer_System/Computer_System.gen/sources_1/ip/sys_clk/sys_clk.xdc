@@ -1,5 +1,5 @@
 
-# file: clk_wiz_0_late.xdc
+# file: sys_clk.xdc
 # 
 # (c) Copyright 2008 - 2013 Xilinx, Inc. All rights reserved.
 # 
@@ -48,6 +48,13 @@
 # PART OF THIS FILE AT ALL TIMES.
 # 
 
+# Input clock periods. These duplicate the values entered for the
+# input clocks. You can use these to time your system. If required
+# commented constraints can be used in the top level xdc 
+#----------------------------------------------------------------
+# Connect to input port when clock capable pin is selected for input
+create_clock -period 10.000 [get_ports clk_in1]
+set_input_jitter [get_clocks -of_objects [get_ports clk_in1]] 0.1
 
 
-
+set_property PHASESHIFT_MODE WAVEFORM [get_cells -hierarchical *adv*]

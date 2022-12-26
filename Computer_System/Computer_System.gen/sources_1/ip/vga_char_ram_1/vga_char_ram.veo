@@ -63,10 +63,10 @@ vga_char_ram your_instance_name (
   .douta(douta),  // output wire [7 : 0] douta
   .clkb(clkb),    // input wire clkb
   .enb(enb),      // input wire enb
-  .web(web),      // input wire [0 : 0] web
-  .addrb(addrb),  // input wire [15 : 0] addrb
-  .dinb(dinb),    // input wire [7 : 0] dinb
-  .doutb(doutb)  // output wire [7 : 0] doutb
+  .web(web),      // input wire [3 : 0] web
+  .addrb(addrb),  // input wire [13 : 0] addrb
+  .dinb(dinb),    // input wire [31 : 0] dinb
+  .doutb(doutb)  // output wire [31 : 0] doutb
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 

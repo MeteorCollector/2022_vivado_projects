@@ -20,7 +20,7 @@ int main()
     putstr(hello);
     while (1)
     {
-        putch(wait_keyboard);
+        putch(wait_keyboard());
     };
     return 0;
 }
