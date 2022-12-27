@@ -8,6 +8,7 @@
 
 void putstr(char* str);
 void putch(char ch);
+void bufputch(char ch);
 
 void vga_init(void);
 
