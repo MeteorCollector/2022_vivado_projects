@@ -156,8 +156,8 @@ begin
     end
 end
 
-assign is_shift = (new_key & (key_currentdata == 8'h12));
-assign uppercase = is_shift & capslock;
+assign is_shift = (key_currentdata == 8'h12);
+assign uppercase = is_shift | capslock;
 
 always @(posedge clk_50m)
 begin
@@ -175,8 +175,8 @@ begin
                 else if (key_currentdata == 8'h14) begin end // ctrl
                 else if (key_currentdata == 8'h11) begin end // alt
                 else if (key_currentdata == 8'h77) begin end // numlock
-                else if (key_currentdata == 8'h66) begin end// backspace
-                else if (key_currentdata == 8'h5A) begin end// enter
+                else if (key_currentdata == 8'h66) begin end // backspace
+                else if (key_currentdata == 8'h5A) begin end // enter
                 //else // normal situation
                 begin
                    char_buf_data <= key_ascii;

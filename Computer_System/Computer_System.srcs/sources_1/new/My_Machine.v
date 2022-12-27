@@ -22,7 +22,7 @@
 `timescale 1 ns / 10 ps
 module clkgen(
    input clkin, input rst, input clken, output reg clkout);
-    parameter clk_freq=10000;
+    parameter clk_freq=10000000;
     parameter countlimit=50000000/clk_freq-1; 
    reg[31:0] clkcount;
    initial
@@ -79,7 +79,7 @@ task step;  //step for one cycle ends 1ns AFTER the posedge of the next cycle
 	end
 endtask
 
-initial begin numcycles = 0; while (numcycles < 32'd65535) begin step(); end $stop; end
+initial begin numcycles = 0; while (numcycles < 32'd262143) begin step(); end $stop; end
 */
 // clocks and controls
 wire clk, reset;  //clk and reset signals
@@ -112,7 +112,7 @@ wire        zero;
 wire        memtoreg;
 
 //main CPU
-rv32is mycpu(.clock(CLKCPU), 
+rv32is mycpu(.clock(CLKCPU), // attention!!!
              .reset(reset), 
 				 .imemaddr(iaddr), .imemdataout(idataout), .imemclk(iclk), 
 				 .dmemaddr(daddr), .dmemdataout(ddata), .dmemdatain(ddatain), .dmemrdclk(drdclk), .dmemwrclk(dwrclk), .dmemop(dop), .dmemwe(dwe), 
@@ -179,7 +179,7 @@ assign ddatawe = (daddr[31:20] == 12'h001) ? dwe : 1'b0;
 assign vga_we  = (daddr[31:20] == 12'h002) ? dwe : 1'b0;
 assign kwe     = (daddr[31:20] == 12'h003) ? dwe : 1'b0;
 
-assign ddata   = (daddr[31:20] == 12'h001) ? ddataout : (daddr[31:20] == 12'h002) ? {24'h000000, char_cpu_out} : (daddr[31:20] == 12'h003) ? vga_ram_out : 32'h00000000;
+assign ddata   = (daddr[31:20] == 12'h001) ? ddataout : (daddr[31:20] == 12'h002) ? {24'h000000, char_cpu_out} : (daddr[31:20] == 12'h003) ? key_dataout : 32'h00000000;
 
 assign LED[2] = ddatawe;
 assign LED[3] = vga_we;
