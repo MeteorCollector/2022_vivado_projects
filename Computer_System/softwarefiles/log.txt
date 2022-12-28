@@ -1,0 +1,410 @@
+Script started on 2022-12-28 04:46:32+0000
+exp@njufpgalab:~/tests/software$ make
+riscv32-unknown-elf-gcc -c -static -mcmodel=medany -fvisibility=hidden -Tsections.ld -nostdlib -nolibc -nostartfiles -Wall -Wextra -Wconversion -pedantic -Wcast-qual -Wcast-align -Wwrite-strings  mul.c -o mul.o
+riscv32-unknown-elf-gcc -c -static -mcmodel=medany -fvisibility=hidden -Tsections.ld -nostdlib -nolibc -nostartfiles -Wall -Wextra -Wconversion -pedantic -Wcast-qual -Wcast-align -Wwrite-strings  stdlib.c -o stdlib.o
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kstdlib.c:1[m[K:
+[01m[Ksys.h:32:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_ch[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   32 | static int [01;35m[Kvga_ch[m[K = 0;
+      |            [01;35m[K^~~~~~[m[K
+[01m[Ksys.h:31:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_line[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   31 | static int [01;35m[Kvga_line[m[K = 0;
+      |            [01;35m[K^~~~~~~~[m[K
+[01m[Ksys.h:30:13:[m[K [01;35m[Kwarning: [m[K'[01m[Kbackup_screen[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   30 | static char [01;35m[Kbackup_screen[m[K[VGA_MAXLINE][VGA_MAXCOL]; // avoid reading from vga ram.
+      |             [01;35m[K^~~~~~~~~~~~~[m[K
+riscv32-unknown-elf-gcc -c -static -mcmodel=medany -fvisibility=hidden -Tsections.ld -nostdlib -nolibc -nostartfiles -Wall -Wextra -Wconversion -pedantic -Wcast-qual -Wcast-align -Wwrite-strings  string.c -o string.o
+[01m[Kstring.c:[m[K In function '[01m[Kstrlen[m[K':
+[01m[Kstring.c:8:10:[m[K [01;35m[Kwarning: [m[Kconversion to '[01m[Ksize_t[m[K' {aka '[01m[Kunsigned int[m[K'} from '[01m[Kint[m[K' may change the sign of the result [[01;35m[K-Wsign-conversion[m[K]
+    8 |   return [01;35m[Kret[m[K;
+      |          [01;35m[K^~~[m[K
+[01m[Kstring.c:[m[K In function '[01m[Kmemcpy[m[K':
+[01m[Kstring.c:95:15:[m[K [01;35m[Kwarning: [m[Kcast discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wcast-qual[m[K]
+   95 |   char *src = [01;35m[K([m[Kchar *)in;
+      |               [01;35m[K^[m[K
+[01m[Kstring.c:[m[K In function '[01m[Kmemcmp[m[K':
+[01m[Kstring.c:106:14:[m[K [01;35m[Kwarning: [m[Kcast discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wcast-qual[m[K]
+  106 |   char *p1 = [01;35m[K([m[Kchar*) s1;
+      |              [01;35m[K^[m[K
+[01m[Kstring.c:107:14:[m[K [01;35m[Kwarning: [m[Kcast discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wcast-qual[m[K]
+  107 |   char *p2 = [01;35m[K([m[Kchar*) s2;
+      |              [01;35m[K^[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kstring.c:1[m[K:
+At top level:
+[01m[Ksys.h:32:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_ch[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   32 | static int [01;35m[Kvga_ch[m[K = 0;
+      |            [01;35m[K^~~~~~[m[K
+[01m[Ksys.h:31:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_line[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   31 | static int [01;35m[Kvga_line[m[K = 0;
+      |            [01;35m[K^~~~~~~~[m[K
+[01m[Ksys.h:30:13:[m[K [01;35m[Kwarning: [m[K'[01m[Kbackup_screen[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   30 | static char [01;35m[Kbackup_screen[m[K[VGA_MAXLINE][VGA_MAXCOL]; // avoid reading from vga ram.
+      |             [01;35m[K^~~~~~~~~~~~~[m[K
+riscv32-unknown-elf-gcc -c -static -mcmodel=medany -fvisibility=hidden -Tsections.ld -nostdlib -nolibc -nostartfiles -Wall -Wextra -Wconversion -pedantic -Wcast-qual -Wcast-align -Wwrite-strings  terminal.c -o terminal.o
+[01m[Kterminal.c:[m[K In function '[01m[Kcmd_sleep[m[K':
+[01m[Kterminal.c:51:10:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Kinput[m[K' [[01;35m[K-Wunused-variable[m[K]
+   51 |     char [01;35m[Kinput[m[K = 0;
+      |          [01;35m[K^~~~~[m[K
+[01m[Kterminal.c:49:28:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Kargs[m[K' [[01;35m[K-Wunused-parameter[m[K]
+   49 | static int cmd_sleep([01;35m[Kchar* args[m[K)
+      |                      [01;35m[K~~~~~~^~~~[m[K
+[01m[Kterminal.c:[m[K In function '[01m[Kdraw_graphic[m[K':
+[01m[Kterminal.c:96:12:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+   96 |     putstr([01;35m[K"Your Length: "[m[K);
+      |            [01;35m[K^~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:95:9:[m[K [01;35m[Kwarning: [m[Kunused variable '[01m[Klen[m[K' [[01;35m[K-Wunused-variable[m[K]
+   95 |     int [01;35m[Klen[m[K = itoa(snake_len, buf, 10);
+      |         [01;35m[K^~~[m[K
+[01m[Kterminal.c:[m[K In function '[01m[Kcmd_game[m[K':
+[01m[Kterminal.c:149:12:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  149 |     putstr([01;35m[K"Welcome by GLUTTONOUS SNAKES by syq.\nPlease select a difficulty to start: Easy [1] [2] [3] [4] [5] Difficult\nEnter \'q\' to quit."[m[K);
+      |            [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:179:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  179 |             putstr([01;35m[K"Game Over!\nYour final length = "[m[K);
+      |                    [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:181:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  181 |             putstr([01;35m[K".\n"[m[K);
+      |                    [01;35m[K^~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:200:24:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  200 |                 putstr([01;35m[K"Game Over!\nYour final length = "[m[K);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:202:24:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  202 |                 putstr([01;35m[K".\n"[m[K);
+      |                        [01;35m[K^~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:153:9:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Klen[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+  153 |     int [01;35m[Klen[m[K = 0;
+      |         [01;35m[K^~~[m[K
+[01m[Kterminal.c:147:27:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Kargs[m[K' [[01;35m[K-Wunused-parameter[m[K]
+  147 | static int cmd_game([01;35m[Kchar* args[m[K)
+      |                     [01;35m[K~~~~~~^~~~[m[K
+[01m[Kterminal.c:[m[K In function '[01m[Kcmd_timer[m[K':
+[01m[Kterminal.c:228:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  228 |             putstr([01;35m[K"[timer] "[m[K);
+      |                    [01;35m[K^~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:231:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  231 |             putstr([01;35m[K"h "[m[K);
+      |                    [01;35m[K^~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:234:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  234 |             putstr([01;35m[K"m "[m[K);
+      |                    [01;35m[K^~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:237:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  237 |             putstr([01;35m[K"s "[m[K);
+      |                    [01;35m[K^~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:240:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  240 |             putstr([01;35m[K" since booted.\nEnter \'q\' to quit timer.\n"[m[K);
+      |                    [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:217:9:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Klen[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+  217 |     int [01;35m[Klen[m[K = 0;
+      |         [01;35m[K^~~[m[K
+[01m[Kterminal.c:211:28:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Kargs[m[K' [[01;35m[K-Wunused-parameter[m[K]
+  211 | static int cmd_timer([01;35m[Kchar* args[m[K)
+      |                      [01;35m[K~~~~~~^~~~[m[K
+[01m[Kterminal.c:[m[K In function '[01m[Krl_gets[m[K':
+[01m[Kterminal.c:264:9:[m[K [01;35m[Kwarning: [m[Kthe address of '[01m[Kline_read[m[K' will always evaluate as '[01m[Ktrue[m[K' [[01;35m[K-Waddress[m[K]
+  264 |     if ([01;35m[Kline_read[m[K) {
+      |         [01;35m[K^~~~~~~~~[m[K
+[01m[Kterminal.c:268:12:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  268 |     putstr([01;35m[K"user@syqterminal: "[m[K);
+      |            [01;35m[K^~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:[m[K In function '[01m[Kcmd_hello[m[K':
+[01m[Kterminal.c:275:12:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  275 |     putstr([01;35m[K"Hello World!\n"[m[K);
+      |            [01;35m[K^~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:274:28:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Kargs[m[K' [[01;35m[K-Wunused-parameter[m[K]
+  274 | static int cmd_hello([01;35m[Kchar* args[m[K) {
+      |                      [01;35m[K~~~~~~^~~~[m[K
+[01m[Kterminal.c:[m[K In function '[01m[Kcmd_fib[m[K':
+[01m[Kterminal.c:305:31:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  305 |         if (idx < 0) { putstr([01;35m[K"error: index can not be negative.\n"[m[K); return 0; }
+      |                               [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:306:32:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  306 |         if (idx > 46) { putstr([01;35m[K"error: result out of range \'int\'.\n"[m[K); return 0; }
+      |                                [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:315:31:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  315 |         if (idx < 0) { putstr([01;35m[K"error: index can not be negative.\n"[m[K); return 0; }
+      |                               [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:316:32:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  316 |         if (idx > 46) { putstr([01;35m[K"error: result out of range \'int\'.\n"[m[K); return 0; }
+      |                                [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:319:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  319 |             putstr([01;35m[K"["[m[K);
+      |                    [01;35m[K^~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:322:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  322 |             putstr([01;35m[K"]    "[m[K);
+      |                    [01;35m[K^~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:330:16:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  330 |         putstr([01;35m[K"Unknown argument \'"[m[K);
+      |                [01;35m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:332:16:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  332 |         putstr([01;35m[K"\'.\n"[m[K);
+      |                [01;35m[K^~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:300:9:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Klen[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+  300 |     int [01;35m[Klen[m[K = 0;
+      |         [01;35m[K^~~[m[K
+[01m[Kterminal.c:[m[K In function '[01m[Kcmd_smile[m[K':
+[01m[Kterminal.c:339:12:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  339 |     putstr([01;35m[K"(  = w = )\n"[m[K);
+      |            [01;35m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:338:28:[m[K [01;35m[Kwarning: [m[Kunused parameter '[01m[Kargs[m[K' [[01;35m[K-Wunused-parameter[m[K]
+  338 | static int cmd_smile([01;35m[Kchar* args[m[K) {
+      |                      [01;35m[K~~~~~~^~~~[m[K
+[01m[Kterminal.c:[m[K In function '[01m[Kcmd_help[m[K':
+[01m[Kterminal.c:377:32:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  377 |             putstr([01;35m[Kcmd_table[i].name[m[K);
+      |                    [01;35m[K~~~~~~~~~~~~^~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:378:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  378 |             putstr([01;35m[K" - "[m[K);
+      |                    [01;35m[K^~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:379:32:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  379 |             putstr([01;35m[Kcmd_table[i].description[m[K);
+      |                    [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:386:36:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  386 |                 putstr([01;35m[Kcmd_table[i].name[m[K);
+      |                        [01;35m[K~~~~~~~~~~~~^~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:387:24:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  387 |                 putstr([01;35m[K" - "[m[K);
+      |                        [01;35m[K^~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:388:36:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  388 |                 putstr([01;35m[Kcmd_table[i].description[m[K);
+      |                        [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:393:16:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  393 |         putstr([01;35m[K"help: Unknown command \'"[m[K);
+      |                [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:395:16:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  395 |         putstr([01;35m[K"\'.\n"[m[K);
+      |                [01;35m[K^~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:[m[K In function '[01m[Ksdb_mainloop[m[K':
+[01m[Kterminal.c:423:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  423 |             putstr([01;35m[K"Unknown command \'"[m[K);
+      |                    [01;35m[K^~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+[01m[Kterminal.c:425:20:[m[K [01;35m[Kwarning: [m[Kpassing argument 1 of '[01m[Kputstr[m[K' discards '[01m[Kconst[m[K' qualifier from pointer target type [[01;35m[K-Wdiscarded-qualifiers[m[K]
+  425 |             putstr([01;35m[K"\'. Type \'help\' for valid commands.\n"[m[K);
+      |                    [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kklib.h:7[m[K,
+                 from [01m[Kterminal.c:2[m[K:
+[01m[Ksys.h:17:19:[m[K [01;36m[Knote: [m[Kexpected '[01m[Kchar *[m[K' but argument is of type '[01m[Kconst char *[m[K'
+   17 | void putstr([01;36m[Kchar* str[m[K);
+      |             [01;36m[K~~~~~~^~~[m[K
+At top level:
+[01m[Ksys.h:32:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_ch[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   32 | static int [01;35m[Kvga_ch[m[K = 0;
+      |            [01;35m[K^~~~~~[m[K
+[01m[Ksys.h:31:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_line[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   31 | static int [01;35m[Kvga_line[m[K = 0;
+      |            [01;35m[K^~~~~~~~[m[K
+riscv32-unknown-elf-gcc -c -static -mcmodel=medany -fvisibility=hidden -Tsections.ld -nostdlib -nolibc -nostartfiles -Wall -Wextra -Wconversion -pedantic -Wcast-qual -Wcast-align -Wwrite-strings  main.c -o main.o
+[01m[Kmain.c:4:12:[m[K [01;35m[Kwarning: [m[K'[01m[Ktick[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+    4 | static int [01;35m[Ktick[m[K = 0;
+      |            [01;35m[K^~~~[m[K
+In file included from [01m[Kmain.c:1[m[K:
+[01m[Ksys.h:32:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_ch[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   32 | static int [01;35m[Kvga_ch[m[K = 0;
+      |            [01;35m[K^~~~~~[m[K
+[01m[Ksys.h:31:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_line[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   31 | static int [01;35m[Kvga_line[m[K = 0;
+      |            [01;35m[K^~~~~~~~[m[K
+[01m[Ksys.h:30:13:[m[K [01;35m[Kwarning: [m[K'[01m[Kbackup_screen[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   30 | static char [01;35m[Kbackup_screen[m[K[VGA_MAXLINE][VGA_MAXCOL]; // avoid reading from vga ram.
+      |             [01;35m[K^~~~~~~~~~~~~[m[K
+riscv32-unknown-elf-gcc -c -static -mcmodel=medany -fvisibility=hidden -Tsections.ld -nostdlib -nolibc -nostartfiles -Wall -Wextra -Wconversion -pedantic -Wcast-qual -Wcast-align -Wwrite-strings  kbd.c -o kbd.o
+[01m[Kkbd.c:[m[K In function '[01m[Kget_keyboard[m[K':
+[01m[Kkbd.c:45:10:[m[K [01;35m[Kwarning: [m[Kvariable '[01m[Kret[m[K' set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   45 |     char [01;35m[Kret[m[K;
+      |          [01;35m[K^~~[m[K
+In file included from [01m[Kkbd.c:1[m[K:
+At top level:
+[01m[Ksys.h:32:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_ch[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   32 | static int [01;35m[Kvga_ch[m[K = 0;
+      |            [01;35m[K^~~~~~[m[K
+[01m[Ksys.h:31:12:[m[K [01;35m[Kwarning: [m[K'[01m[Kvga_line[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   31 | static int [01;35m[Kvga_line[m[K = 0;
+      |            [01;35m[K^~~~~~~~[m[K
+[01m[Ksys.h:30:13:[m[K [01;35m[Kwarning: [m[K'[01m[Kbackup_screen[m[K' defined but not used [[01;35m[K-Wunused-variable[m[K]
+   30 | static char [01;35m[Kbackup_screen[m[K[VGA_MAXLINE][VGA_MAXCOL]; // avoid reading from vga ram.
+      |             [01;35m[K^~~~~~~~~~~~~[m[K
+riscv32-unknown-elf-gcc -c -static -mcmodel=medany -fvisibility=hidden -Tsections.ld -nostdlib -nolibc -nostartfiles -Wall -Wextra -Wconversion -pedantic -Wcast-qual -Wcast-align -Wwrite-strings  sys.c -o sys.o
+riscv32-unknown-elf-gcc -c -static -mcmodel=medany -fvisibility=hidden -Tsections.ld -nostdlib -nolibc -nostartfiles -Wall -Wextra -Wconversion -pedantic -Wcast-qual -Wcast-align -Wwrite-strings  stdio.c -o stdio.o
+[01m[Kstdio.c:1:[m[K [01;35m[Kwarning: [m[KISO C forbids an empty translation unit [[01;35m[K-Wpedantic[m[K]
+riscv32-unknown-elf-gcc  -static -mcmodel=medany -fvisibility=hidden -Tsections.ld -nostdlib -nolibc -nostartfiles -Wall -Wextra -Wconversion -pedantic -Wcast-qual -Wcast-align -Wwrite-strings -e entry mul.o stdlib.o string.o terminal.o main.o kbd.o sys.o stdio.o -o main.elf
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: stdlib.o: in function `.L24':
+stdlib.c:(.text+0x2e0): undefined reference to `__modsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: stdlib.o: in function `.L0 ':
+stdlib.c:(.text+0x318): undefined reference to `__divsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.o: in function `.L15':
+terminal.c:(.text+0x280): undefined reference to `__divsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.c:(.text+0x2a8): undefined reference to `__divsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.o: in function `.L0 ':
+terminal.c:(.text+0x554): undefined reference to `__modsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.o: in function `.L35':
+terminal.c:(.text+0x580): undefined reference to `__modsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.o: in function `.L0 ':
+terminal.c:(.text+0xcb0): undefined reference to `__divsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.c:(.text+0xd9c): undefined reference to `__divsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.o: in function `cmd_timer':
+terminal.c:(.text+0xdd0): undefined reference to `__divsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.c:(.text+0xe00): undefined reference to `__divsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.c:(.text+0xe4c): undefined reference to `__divsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.c:(.text+0xe98): undefined reference to `__modsi3'
+/opt/riscv/lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/bin/ld: terminal.c:(.text+0xee8): undefined reference to `__modsi3'
+collect2: error: ld returned 1 exit status
+Makefile:21: recipe for target 'main.elf' failed
+make: *** [main.elf] Error 1
+exp@njufpgalab:~/tests/software$ exit
+
+Script done on 2022-12-28 04:46:35+0000

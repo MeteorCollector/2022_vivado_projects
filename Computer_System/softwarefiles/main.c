@@ -1,7 +1,8 @@
 #include "sys.h"
+#include "terminal.h"
 
-
-char hello[]="Hello World 2022 (  = w = )\nContratulations! Displayed successfully.\nNow try typing:\n";
+static int tick = 0;
+char hello[]="Hello World 2022 (  = w = )\nCongratulations! Displayed successfully.\nNow try typing:\n";
 
 int main();
 
@@ -17,10 +18,8 @@ int main()
 {
     vga_init();
   
-    putstr(hello);
-    while (1)
-    {
-        putch(wait_keyboard());
-    };
+    //putstr(hello);
+    
+    ternimal_loop();
     return 0;
 }
