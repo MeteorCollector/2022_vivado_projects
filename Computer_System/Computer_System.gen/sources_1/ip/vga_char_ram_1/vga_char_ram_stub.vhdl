@@ -1,7 +1,7 @@
 -- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
--- Date        : Sun Dec 25 19:49:58 2022
+-- Date        : Wed Dec 28 20:40:21 2022
 -- Host        : MSI running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
 --               d:/Projects/Vivado_Projects/Computer_System/Computer_System.gen/sources_1/ip/vga_char_ram_1/vga_char_ram_stub.vhdl

@@ -19,7 +19,7 @@ void putch(char ch);
 void bufputch(char ch);
 void show_cursor(void);
 void roll_up(void);
-void refresh_screen(void);
+static void refresh_screen(void);
 
 void vga_init(void);
 int ternimal_loop(void);
@@ -28,7 +28,7 @@ char wait_keyboard(void);
 char get_keyboard(void);
 int wait_line(char* buf);
 
-static char backup_screen[VGA_MAXLINE][VGA_MAXCOL]; // avoid reading from vga ram.
+static char backup_screen[VGA_MAXLINE][VGA_MAXCOL] = { 0 }; // avoid reading from vga ram.
 static int vga_line = 0;
 static int vga_ch = 0;
 

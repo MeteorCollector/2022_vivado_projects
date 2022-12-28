@@ -1,12 +1,10 @@
 #include "sys.h"
 
-char* vga_start = (char*) VGA_START;
-
-
 int charcnt[VGA_MAXLINE];
 
 static uint32_t flip_interval = 300;
 static uint32_t tick_last = 0;
+char* vga_start = (char*) VGA_START;
 
 void show_cursor()
 {
@@ -31,7 +29,7 @@ void vga_init() {
     }
 }
 
-void refresh_screen() {
+static void refresh_screen() {
   vga_line = 0;
   vga_ch = 0;
   for (int i = 0; i < VGA_MAXLINE; i++)

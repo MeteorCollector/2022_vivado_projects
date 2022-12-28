@@ -4,12 +4,17 @@ static char* queue_front = (char*) KBD_START;
 
 int wait_line(char* buf)
 {
+    char* vga_start = (char*) VGA_START;
     int len = 0;
     while (1)
     {
         char ch = get_keyboard();
         if (ch)
         {
+            if (ch == 10 || ch == 13 || ch == 8)
+            {
+                vga_start[(vga_line << 7) + vga_ch] = 0;
+            }
             putch(ch);
             if (ch == 10 || ch == 13) { 
                 buf[len] = 0;

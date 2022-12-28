@@ -4,6 +4,34 @@
 #define MAXFIB 50
 uint32_t time_elapsed;
 int fib[MAXFIB];
+static char __backup_screen[VGA_MAXLINE][VGA_MAXCOL] = { 0 };
+static int __vga_line = 0;
+static int __vga_ch = 0;
+
+void __bufputch(char ch)
+{
+    char* __vga_start = (char*) VGA_START;
+    __vga_start[(__vga_line << 7) + __vga_ch] = ch;
+    backup_screen[__vga_line][__vga_ch] = ch;
+    __vga_ch++;
+    if(__vga_ch >= VGA_MAXCOL) { 
+      __vga_ch--; 
+      __vga_line = (__vga_line >= VGA_MAXLINE - 1) ? VGA_MAXLINE - 1 : __vga_line + 1;
+      __vga_ch = 0;
+    }
+    return;
+}
+
+static void __refresh_screen()
+{
+    __vga_line = 0;
+    __vga_ch = 0;
+    for (int i = 0; i < VGA_MAXLINE; i++)
+        for (int j = 0; j < VGA_MAXCOL; j++)
+            __bufputch(__backup_screen[i][j]);
+    __vga_line = 0;
+    __vga_ch = 0;
+}
 
 //-------------------------------------------------- logo part -------------------------
 #define logo_width 49
@@ -37,11 +65,11 @@ void logo_step()
     logo_y += logo_ydir;
     for (int i = 0; i < VGA_MAXLINE; i++)
         for (int j = 0; j < VGA_MAXCOL; j++)
-            backup_screen[i][j] = ' ';
+            __backup_screen[i][j] = ' ';
     for (int i = 0; i < logo_height; i++)
         for (int j = 0; j < logo_width; j++)
-            backup_screen[i + logo_y][j + logo_x] = logo[i][j];
-    refresh_screen();
+            __backup_screen[i + logo_y][j + logo_x] = logo[i][j];
+    __refresh_screen();
 }
 
 static int cmd_sleep(char* args)
@@ -83,15 +111,14 @@ static void draw_graphic()
     int map_y = (VGA_MAXLINE - map_h) >> 1;
     for (int i = 0; i < VGA_MAXLINE; i++)
         for (int j = 0; j < VGA_MAXCOL; j++)
-            backup_screen[i][j] = '.';
+            __backup_screen[i][j] = '.';
     for (int i = 0; i < map_h; i++)
         for (int j = 0; j < map_w; j++)
-            backup_screen[i + map_y][j + map_x] = map[i][j] < 0 ? '#' : map[i][j] > 0 ? '0' : ' ';
-    backup_screen[food_y + map_y][food_x + map_x] = '*';
-    refresh_screen();
+            __backup_screen[i + map_y][j + map_x] = map[i][j] < 0 ? '#' : map[i][j] > 0 ? '0' : ' ';
+    __backup_screen[food_y + map_y][food_x + map_x] = '*';
+    __refresh_screen();
     char buf[32];
     int len = itoa(snake_len, buf, 10);
-    putstr("Your Length: ");
     putstr(buf);
 }
 
@@ -227,7 +254,7 @@ static int cmd_timer(char* args)
             len = itoa(second / (uint32_t)3600, buf, 10);
             putstr(buf);
             putstr("h ");
-            len = itoa(second / (uint32_t)60, buf, 10);
+            len = itoa((second / (uint32_t)60) % (uint32_t)60, buf, 10);
             putstr(buf);
             putstr("m ");
             len = itoa(second % (uint32_t)60, buf, 10);
