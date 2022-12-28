@@ -83,9 +83,9 @@ static int cmd_sleep(char* args)
             vga_init();
             return 0;
         }
-        if (*(uint32_t*)TIMER_START / (uint32_t)20 > tick)
+        if (*(uint32_t*)TIMER_START / (uint32_t)40 > tick)
         {
-            tick = *(uint32_t*)TIMER_START / (uint32_t)20;
+            tick = *(uint32_t*)TIMER_START / (uint32_t)40;
             logo_step();
         }
     }
@@ -117,9 +117,6 @@ static void draw_graphic()
             __backup_screen[i + map_y][j + map_x] = map[i][j] < 0 ? '#' : map[i][j] > 0 ? '0' : ' ';
     __backup_screen[food_y + map_y][food_x + map_x] = '*';
     __refresh_screen();
-    char buf[32];
-    int len = itoa(snake_len, buf, 10);
-    putstr(buf);
 }
 
 static void new_food()

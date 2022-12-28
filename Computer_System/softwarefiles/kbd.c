@@ -8,13 +8,9 @@ int wait_line(char* buf)
     int len = 0;
     while (1)
     {
-        char ch = get_keyboard();
+        char ch = wait_keyboard();
         if (ch)
         {
-            if (ch == 10 || ch == 13 || ch == 8)
-            {
-                vga_start[(vga_line << 7) + vga_ch] = 0;
-            }
             putch(ch);
             if (ch == 10 || ch == 13) { 
                 buf[len] = 0;
@@ -27,7 +23,7 @@ int wait_line(char* buf)
             }
             else { buf[len] = ch; len++; }
         }
-        else { show_cursor(); }
+        //else { show_cursor(); }
     }
     buf[len] = 0;
     len++;
