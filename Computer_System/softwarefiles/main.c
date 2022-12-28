@@ -1,6 +1,4 @@
 #include "sys.h"
-#include "terminal.h"
-
 static int tick = 0;
 char hello[]="Hello World 2022 (  = w = )\nCongratulations! Displayed successfully.\nNow try typing:\n";
 

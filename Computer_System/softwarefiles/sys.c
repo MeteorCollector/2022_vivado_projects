@@ -5,16 +5,16 @@ char* vga_start = (char*) VGA_START;
 
 int charcnt[VGA_MAXLINE];
 
-static int flip_interval = 300;
-static int tick_last = 0;
+static uint32_t flip_interval = 300;
+static uint32_t tick_last = 0;
 
 void show_cursor()
 {
-   int tick_current = *(int*)TIMER_START;
+   uint32_t tick_current = *(uint32_t*)TIMER_START / flip_interval;
    if (tick_current <= tick_last) return;
-   int rem = tick_current % 2;
+   uint32_t rem = tick_current & 0x00000001;
    if (rem == 0) { vga_start[(vga_line << 7) + vga_line] = '_'; }
-   else if (rem == (flip_interval >> 1)) { vga_start[(vga_line << 7) + vga_line] = backup_screen[vga_line][vga_ch]; }
+   else { vga_start[(vga_line << 7) + vga_line] = backup_screen[vga_line][vga_ch]; }
 }
 
 void vga_init() {

@@ -1,4 +1,3 @@
-#include "klib.h"
 #include "sys.h"
 
 size_t strlen(const char *s) {

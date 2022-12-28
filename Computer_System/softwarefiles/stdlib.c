@@ -1,12 +1,11 @@
-#include "klib.h"
+#include "sys.h"
 
-#if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 static unsigned long int next = 1;
 
 int rand(void) {
   // RAND_MAX assumed to be 32767
   next = next * 1103515245 + 12345;
-  return (unsigned int)(next/65536) % 32768;
+  return (unsigned int)(next/(uint32_t)65536) % (uint32_t)32768;
 }
 
 void srand(unsigned int seed) {
@@ -27,21 +26,12 @@ int atoi(const char* nptr) {
   return x;
 }
 
-int itoa(int n, char c[32], int radix) {
+int itoa(uint32_t n, char c[32], uint32_t radix) {
   for (int i = 0; i < 32; i++) { c[i] = '\0'; }
   //char arr[32], *tmp = arr;
   static const char digit[] = "0123456789abcdef";
-  static const char int_min[] = "-2147483648";
   char *ptr = c;
-  if (n == -2147483648) {
-    for (int i = 0; i < 11; i++) {
-      c[i] = int_min[i];
-    }
-    return 11; 
-  }
-  bool sign =  (n >= 0);
   
-  if (!sign) { *ptr++ = '-'; n = -n; }// negative
   if (n < radix) { *ptr++ = digit[n]; *ptr = '\0'; }
   else {
     char tmp[32];
@@ -54,5 +44,3 @@ int itoa(int n, char c[32], int radix) {
   return ptr - c;
 }
 
-
-#endif

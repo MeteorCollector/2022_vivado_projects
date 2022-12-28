@@ -1,5 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include "klib.h"
 #include "sys.h"
 
 #define MAXBUF 128
@@ -49,7 +47,7 @@ void logo_step()
 static int cmd_sleep(char* args)
 {
     char input = 0;
-    int tick = 0;
+    uint32_t tick = 0;
     while (1)
     {
         if (get_keyboard())
@@ -57,9 +55,9 @@ static int cmd_sleep(char* args)
             vga_init();
             return 0;
         }
-        if (*(int*)TIMER_START / 20 > tick)
+        if (*(uint32_t*)TIMER_START / (uint32_t)20 > tick)
         {
-            tick = *(int*)TIMER_START / 20;
+            tick = *(uint32_t*)TIMER_START / (uint32_t)20;
             logo_step();
         }
     }
@@ -68,7 +66,7 @@ static int cmd_sleep(char* args)
 
 //-----------------------------------------------------------------------------------------------------------------
 
-static int difficulty[5] = { 1000, 500, 150, 125, 50 };
+static uint32_t difficulty[5] = { 1000, 500, 150, 125, 50 };
 static int snake_dir, snake_x, snake_y, snake_len;
 #define map_h 28
 #define map_w 40
@@ -81,8 +79,8 @@ static bool ignore_next = false;
 
 static void draw_graphic()
 {
-    int map_x = (VGA_MAXCOL - map_w) / 2;
-    int map_y = (VGA_MAXLINE - map_h) / 2;
+    int map_x = (VGA_MAXCOL - map_w) << 1;
+    int map_y = (VGA_MAXLINE - map_h) << 1;
     for (int i = 0; i < VGA_MAXLINE; i++)
         for (int j = 0; j < VGA_MAXCOL; j++)
             backup_screen[i][j] = '.';
@@ -103,8 +101,8 @@ static void new_food()
     food_y = 0;
     while (map[food_x][food_y] != 0)
     {
-        food_x = rand() % (map_w - 2) + 1;
-        food_y = rand() % (map_h - 2) + 1;
+        food_x = (uint32_t)rand() % (uint32_t)(map_w - 2) + 1;
+        food_y = (uint32_t)rand() % (uint32_t)(map_h - 2) + 1;
     }
 }
 
@@ -113,8 +111,8 @@ static void init_game()
     for (int i = 0; i < map_h; i++)
         for (int j = 0; j < map_w; j++)
             map[i][j] = (i == 0 || i == map_h - 1 || j == 0 || j == map_w - 1) ? -1 : 0;
-    snake_x = map_w / 2;
-    snake_y = map_h / 2;
+    snake_x = map_w << 1;
+    snake_y = map_h << 1;
     snake_len = 3;
     snake_dir = 3;
     ignore_next = false;
@@ -152,7 +150,7 @@ static int cmd_game(char* args)
     int level = 1;
     int len = 0;
     bool selected = false;
-    int tick = 0;
+    uint32_t tick = 0;
     while (!selected)
     {
         input = wait_keyboard();
@@ -190,7 +188,7 @@ static int cmd_game(char* args)
         case 'D': snake_dir = 3; break;
         default: break;
         }
-        int current_tick = *(int*)TIMER_START / difficulty[level];
+        uint32_t current_tick = *(uint32_t*)TIMER_START / difficulty[level];
         if (current_tick > tick)
         {
             tick = current_tick;
@@ -210,32 +208,32 @@ static int cmd_game(char* args)
 //-----------------------------------------------------------------------------------------------------------------
 static int cmd_timer(char* args)
 {
-    int frame = 20;
+    uint32_t frame = 20;
     char input = 0;
-    int tick = 0;
+    uint32_t tick = 0;
     char buf[32];
     int len = 0;
     while (1)
     {
         input = get_keyboard();
         if (input == 'q') { return 0; }
-        int current_tick = *(int*)TIMER_START / frame;
+        uint32_t current_tick = *(uint32_t*)TIMER_START / frame;
         if (current_tick > tick)
         {
             tick = current_tick;
-            int second = *(int*)TIMER_START / 1000;
+            uint32_t second = *(uint32_t*)TIMER_START / (uint32_t)1000;
             vga_init();
             putstr("[timer] ");
-            len = itoa(second / 3600, buf, 10);
+            len = itoa(second / (uint32_t)3600, buf, 10);
             putstr(buf);
             putstr("h ");
-            len = itoa(second / 60, buf, 10);
+            len = itoa(second / (uint32_t)60, buf, 10);
             putstr(buf);
             putstr("m ");
-            len = itoa(second % 60, buf, 10);
+            len = itoa(second % (uint32_t)60, buf, 10);
             putstr(buf);
             putstr("s ");
-            len = itoa(*(int*)TIMER_START % 1000, buf, 10);
+            len = itoa(*(uint32_t*)TIMER_START % (uint32_t)1000, buf, 10);
             putstr(buf);
             putstr(" since booted.\nEnter \'q\' to quit timer.\n");
         }
