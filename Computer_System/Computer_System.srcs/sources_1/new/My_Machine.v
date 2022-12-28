@@ -51,6 +51,62 @@ module clkgen(
      end  
 endmodule
 
+module mstimer(
+       input clkin, input rst, input rdclk, input [31:0] addr, input [2:0] memop, output reg [31:0] dataout
+               );
+    parameter clk_freq=1000;
+    parameter countlimit=50000000/clk_freq-1; 
+    reg  [31:0] clkcount;
+    wire [15:0] wordout;
+    wire [7:0]  byteout;
+    reg  [31:0] mem;
+    
+    initial
+    begin clkcount=32'd0; dataout=1'b0; end
+    
+    assign wordout = (addr[1]==1'b1)? mem[31:16]:mem[15:0];
+    assign byteout = (addr[1]==1'b1)? ((addr[0]==1'b1)? mem[31:24]:mem[23:16]):((addr[0]==1'b1)? mem[15:8]:mem[7:0]);
+
+    always @(*)
+        begin
+            case(memop)
+            3'b000: //lb
+                dataout = { {24{byteout[7]}}, byteout};
+            3'b001: //lh
+                dataout = { {16{wordout[15]}}, wordout};
+            3'b010: //lw
+                dataout = mem;
+            3'b100: //lbu
+                dataout = { 24'b0, byteout};
+            3'b101: //lhu
+                dataout = { 16'b0, wordout};
+            default:
+                dataout = mem;
+            endcase
+        end
+   
+    always @ (posedge clkin) 
+    if(rst)
+    begin
+        clkcount<=32'd0;
+        mem<=1'b0;
+    end
+    else
+    begin
+        begin
+            if(clkcount>=countlimit)
+            begin
+                clkcount<=32'd0;
+                mem <= mem + 1;
+            end
+            else
+            begin
+                clkcount<=clkcount+1;
+            end
+        end  
+    end
+endmodule
+
 module MyMachine(
     input CLK100MHZ,  
     input [15:0] SW,
@@ -174,12 +230,15 @@ key_ctrl keyboard_device(.kdataout(key_dataout),.frontaddr(daddr[15:0]),.frontda
                          .keydbgdata(keydbgdata),.clk_50m(CLK50MHZ),
                          .PS2_CLK(PS2_CLK),.PS2_DATA(PS2_DATA),.BTNC(BTNC)
                          );
+                         
+wire [31:0] timer_dataout;
+mstimer sys_timer(.clkin(CLK100MHZ),.rst(reset),.rdclk(drdclk),.addr(daddr),.memop(dop),.dataout(timer_dataout));
 
 assign ddatawe = (daddr[31:20] == 12'h001) ? dwe : 1'b0;
 assign vga_we  = (daddr[31:20] == 12'h002) ? dwe : 1'b0;
 assign kwe     = (daddr[31:20] == 12'h003) ? dwe : 1'b0;
 
-assign ddata   = (daddr[31:20] == 12'h001) ? ddataout : (daddr[31:20] == 12'h002) ? {24'h000000, char_cpu_out} : (daddr[31:20] == 12'h003) ? key_dataout : 32'h00000000;
+assign ddata   = (daddr[31:20] == 12'h001) ? ddataout : (daddr[31:20] == 12'h002) ? {24'h000000, char_cpu_out} : (daddr[31:20] == 12'h003) ? key_dataout : (daddr[31:20] == 12'h004) ? timer_dataout : 32'h00000000;
 
 assign LED[2] = ddatawe;
 assign LED[3] = vga_we;

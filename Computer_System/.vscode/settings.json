@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "cstdlib": "c",
+        "system_error": "c",
+        "klib-macros.h": "c",
+        "cmath": "c",
+        "random": "c",
+        "xlocnum": "c",
+        "xutility": "c"
+    }
+}
