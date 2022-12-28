@@ -202,14 +202,14 @@ static int cmd_game(char* args)
             putstr(buf);
             putstr(".\n");
         return 0;
-        case 'w': snake_dir = 0; break;
-        case 's': snake_dir = 1; break;
-        case 'a': snake_dir = 2; break;
-        case 'd': snake_dir = 3; break;
-        case 'W': snake_dir = 0; break;
-        case 'S': snake_dir = 1; break;
-        case 'A': snake_dir = 2; break;
-        case 'D': snake_dir = 3; break;
+        case 'w': if (snake_dir != 1) { snake_dir = 0; } break;
+        case 's': if (snake_dir != 0) { snake_dir = 1; } break;
+        case 'a': if (snake_dir != 3) { snake_dir = 2; } break;
+        case 'd': if (snake_dir != 2) { snake_dir = 3; } break;
+        case 'W': if (snake_dir != 1) { snake_dir = 0; } break;
+        case 'S': if (snake_dir != 0) { snake_dir = 1; } break;
+        case 'A': if (snake_dir != 3) { snake_dir = 2; } break;
+        case 'D': if (snake_dir != 2) { snake_dir = 3; } break;
         default: break;
         }
         uint32_t current_tick = *(uint32_t*)TIMER_START / difficulty[level];
