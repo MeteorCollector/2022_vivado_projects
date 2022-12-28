@@ -55,7 +55,7 @@ module mstimer(
        input clkin, input rst, input rdclk, input [31:0] addr, input [2:0] memop, output reg [31:0] dataout
                );
     parameter clk_freq=1000;
-    parameter countlimit=50000000/clk_freq-1; 
+    parameter countlimit=100000000/clk_freq-1; 
     reg  [31:0] clkcount;
     wire [15:0] wordout;
     wire [7:0]  byteout;

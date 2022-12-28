@@ -7,19 +7,22 @@ int wait_line(char* buf)
     int len = 0;
     while (1)
     {
-        show_cursor();
-        char ch = wait_keyboard();
-        putch(ch);
-        if (ch == 10 || ch == 13) { 
-            buf[len] = 0;
-            len++;
-            return len; 
-        }
-        else if (ch == 8)// backspace
+        char ch = get_keyboard();
+        if (ch)
         {
-            if (len > 0) { buf[len] = 0; len--; }
+            putch(ch);
+            if (ch == 10 || ch == 13) { 
+                buf[len] = 0;
+                len++;
+                return len; 
+            }
+            else if (ch == 8)// backspace
+            {
+                if (len > 0) { buf[len] = 0; len--; }
+            }
+            else { buf[len] = ch; len++; }
         }
-        else { buf[len] = ch; len++; }
+        else { show_cursor(); }
     }
     buf[len] = 0;
     len++;
@@ -43,15 +46,10 @@ char wait_keyboard()
 char get_keyboard()
 {
     char ret;
-    char *ptr = (char*) KBD_START;
-    while (ptr <= (char*) KBD_END) { 
-        if (*ptr != 0) 
-        {
-            ret = *ptr;
-            *ptr = 0;
-            return *ptr; 
-        }
-        ptr++;
-    }
-    return 0;
+    int i = 0;
+    int searchlimit = (KBD_END - KBD_START) << 1;
+    while (*queue_front == 0 && i < searchlimit) { ptrmov(); i++; }
+    ret = *queue_front;
+    *queue_front = 0;
+    return ret;
 }

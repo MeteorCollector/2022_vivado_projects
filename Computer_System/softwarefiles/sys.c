@@ -13,8 +13,8 @@ void show_cursor()
    uint32_t tick_current = *(uint32_t*)TIMER_START / flip_interval;
    if (tick_current <= tick_last) return;
    uint32_t rem = tick_current & 0x00000001;
-   if (rem == 0) { vga_start[(vga_line << 7) + vga_line] = '_'; }
-   else { vga_start[(vga_line << 7) + vga_line] = backup_screen[vga_line][vga_ch]; }
+   if (rem == 0) { vga_start[(vga_line << 7) + vga_ch] = '_'; }
+   else { vga_start[(vga_line << 7) + vga_ch] = backup_screen[vga_line][vga_ch]; }
 }
 
 void vga_init() {

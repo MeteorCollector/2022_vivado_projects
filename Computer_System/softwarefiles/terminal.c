@@ -79,8 +79,8 @@ static bool ignore_next = false;
 
 static void draw_graphic()
 {
-    int map_x = (VGA_MAXCOL - map_w) << 1;
-    int map_y = (VGA_MAXLINE - map_h) << 1;
+    int map_x = (VGA_MAXCOL - map_w) >> 1;
+    int map_y = (VGA_MAXLINE - map_h) >> 1;
     for (int i = 0; i < VGA_MAXLINE; i++)
         for (int j = 0; j < VGA_MAXCOL; j++)
             backup_screen[i][j] = '.';
@@ -99,7 +99,7 @@ static void new_food()
 {
     food_x = 0;
     food_y = 0;
-    while (map[food_x][food_y] != 0)
+    while (map[food_y][food_x] != 0)
     {
         food_x = (uint32_t)rand() % (uint32_t)(map_w - 2) + 1;
         food_y = (uint32_t)rand() % (uint32_t)(map_h - 2) + 1;
@@ -111,8 +111,8 @@ static void init_game()
     for (int i = 0; i < map_h; i++)
         for (int j = 0; j < map_w; j++)
             map[i][j] = (i == 0 || i == map_h - 1 || j == 0 || j == map_w - 1) ? -1 : 0;
-    snake_x = map_w << 1;
-    snake_y = map_h << 1;
+    snake_x = map_w >> 1;
+    snake_y = map_h >> 1;
     snake_len = 3;
     snake_dir = 3;
     ignore_next = false;
@@ -144,7 +144,7 @@ static int game_step()
 
 static int cmd_game(char* args)
 {
-    putstr("Welcome by GLUTTONOUS SNAKES by syq.\nPlease select a difficulty to start: Easy [1] [2] [3] [4] [5] Difficult\nEnter \'q\' to quit.");
+    putstr("Welcome by GLUTTONOUS SNAKES by syq.\nPlease select a difficulty to start: Easy [1] [2] [3] [4] [5] Difficult\nEnter \'q\' to quit.\n");
     char input = 0;
     char buf[32];
     int level = 1;
